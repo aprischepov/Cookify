@@ -14,6 +14,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1993F0102A2F6D4300207E14 /* Jost-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Jost-Medium.ttf"; path = "../../../../../Desktop/Jost-Medium.ttf"; sourceTree = "<group>"; };
+		1993F0112A2F6D4300207E14 /* Jost-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Jost-Regular.ttf"; path = "../../../../../Desktop/Jost-Regular.ttf"; sourceTree = "<group>"; };
+		1993F0122A2F6D4300207E14 /* Jost-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Jost-Light.ttf"; path = "../../../../../Desktop/Jost-Light.ttf"; sourceTree = "<group>"; };
+		1993F0132A2F6D4300207E14 /* Cookie-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Cookie-Regular.ttf"; path = "../../../../../Desktop/Cookie-Regular.ttf"; sourceTree = "<group>"; };
+		1993F0142A2F6D4300207E14 /* Jost-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Jost-Bold.ttf"; path = "../../../../../Desktop/Jost-Bold.ttf"; sourceTree = "<group>"; };
+		1993F0152A2F6DFF00207E14 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		19AF8A772A06768100388F8F /* Cookify.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cookify.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		19AF8A7A2A06768100388F8F /* CookifyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CookifyApp.swift; sourceTree = "<group>"; };
 		19AF8A7C2A06768100388F8F /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -32,6 +38,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1993F00F2A2F6D2900207E14 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				1993F0132A2F6D4300207E14 /* Cookie-Regular.ttf */,
+				1993F0142A2F6D4300207E14 /* Jost-Bold.ttf */,
+				1993F0122A2F6D4300207E14 /* Jost-Light.ttf */,
+				1993F0102A2F6D4300207E14 /* Jost-Medium.ttf */,
+				1993F0112A2F6D4300207E14 /* Jost-Regular.ttf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
 		19AF8A6E2A06768100388F8F = {
 			isa = PBXGroup;
 			children = (
@@ -51,6 +69,8 @@
 		19AF8A792A06768100388F8F /* Cookify */ = {
 			isa = PBXGroup;
 			children = (
+				1993F0152A2F6DFF00207E14 /* Info.plist */,
+				1993F00F2A2F6D2900207E14 /* Fonts */,
 				19AF8A7A2A06768100388F8F /* CookifyApp.swift */,
 				19AF8A7C2A06768100388F8F /* ContentView.swift */,
 				19AF8A7E2A06768500388F8F /* Assets.xcassets */,
@@ -270,6 +290,7 @@
 				DEVELOPMENT_TEAM = C4QZKCN6PP;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Cookify/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -299,6 +320,7 @@
 				DEVELOPMENT_TEAM = C4QZKCN6PP;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Cookify/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
