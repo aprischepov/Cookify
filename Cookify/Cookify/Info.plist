@@ -10,5 +10,12 @@
 		<string>Jost-Medium.ttf</string>
 		<string>Jost-Bold.ttf</string>
 	</array>
+	<key>UIApplicationSceneManifest</key>
+	<dict>
+		<key>UIApplicationSupportsMultipleScenes</key>
+		<true/>
+		<key>UISceneConfigurations</key>
+		<dict/>
+	</dict>
 </dict>
 </plist>
