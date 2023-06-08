@@ -7,7 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1980C0082A31F91D00F95A72 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1980C0072A31F91D00F95A72 /* CustomButton.swift */; };
+		1983161D2A2FB4CE00F03959 /* OnboardingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1983161C2A2FB4CE00F03959 /* OnboardingModel.swift */; };
+		198F1C562A2FBCE900AF53D0 /* OnboardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 198F1C552A2FBCE900AF53D0 /* OnboardingViewModel.swift */; };
 		1993F0172A2F753600207E14 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1993F0162A2F753600207E14 /* Launch Screen.storyboard */; };
+		19943BC82A2FA197009E9BCC /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19943BC72A2FA197009E9BCC /* OnboardingView.swift */; };
+		19943BCB2A2FA2A6009E9BCC /* Extension + Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19943BCA2A2FA2A6009E9BCC /* Extension + Font.swift */; };
+		199747422A31EE44004D657C /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 199747412A31EE44004D657C /* SignInView.swift */; };
+		19AF33442A30F73500DD252D /* Extension + Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19AF33432A30F73500DD252D /* Extension + Color.swift */; };
 		19AF8A7B2A06768100388F8F /* CookifyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19AF8A7A2A06768100388F8F /* CookifyApp.swift */; };
 		19AF8A7D2A06768100388F8F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19AF8A7C2A06768100388F8F /* ContentView.swift */; };
 		19AF8A7F2A06768500388F8F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 19AF8A7E2A06768500388F8F /* Assets.xcassets */; };
@@ -15,13 +22,20 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1980C0072A31F91D00F95A72 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
+		1983161C2A2FB4CE00F03959 /* OnboardingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingModel.swift; sourceTree = "<group>"; };
+		198F1C552A2FBCE900AF53D0 /* OnboardingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewModel.swift; sourceTree = "<group>"; };
 		1993F0102A2F6D4300207E14 /* Jost-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Jost-Medium.ttf"; path = "../../../../../Desktop/Jost-Medium.ttf"; sourceTree = "<group>"; };
 		1993F0112A2F6D4300207E14 /* Jost-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Jost-Regular.ttf"; path = "../../../../../Desktop/Jost-Regular.ttf"; sourceTree = "<group>"; };
 		1993F0122A2F6D4300207E14 /* Jost-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Jost-Light.ttf"; path = "../../../../../Desktop/Jost-Light.ttf"; sourceTree = "<group>"; };
 		1993F0132A2F6D4300207E14 /* Cookie-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Cookie-Regular.ttf"; path = "../../../../../Desktop/Cookie-Regular.ttf"; sourceTree = "<group>"; };
 		1993F0142A2F6D4300207E14 /* Jost-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Jost-Bold.ttf"; path = "../../../../../Desktop/Jost-Bold.ttf"; sourceTree = "<group>"; };
-		1993F0152A2F6DFF00207E14 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		1993F0152A2F6DFF00207E14 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1993F0162A2F753600207E14 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
+		19943BC72A2FA197009E9BCC /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
+		19943BCA2A2FA2A6009E9BCC /* Extension + Font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + Font.swift"; sourceTree = "<group>"; };
+		199747412A31EE44004D657C /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
+		19AF33432A30F73500DD252D /* Extension + Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + Color.swift"; sourceTree = "<group>"; };
 		19AF8A772A06768100388F8F /* Cookify.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cookify.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		19AF8A7A2A06768100388F8F /* CookifyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CookifyApp.swift; sourceTree = "<group>"; };
 		19AF8A7C2A06768100388F8F /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -40,6 +54,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1980C0062A31F8FF00F95A72 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				1980C0072A31F91D00F95A72 /* CustomButton.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		1983161E2A2FB4D600F03959 /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				19943BC72A2FA197009E9BCC /* OnboardingView.swift */,
+				1983161C2A2FB4CE00F03959 /* OnboardingModel.swift */,
+			);
+			path = Onboarding;
+			sourceTree = "<group>";
+		};
 		1993F00F2A2F6D2900207E14 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
@@ -50,6 +81,60 @@
 				1993F0112A2F6D4300207E14 /* Jost-Regular.ttf */,
 			);
 			path = Fonts;
+			sourceTree = "<group>";
+		};
+		19943BC42A2FA120009E9BCC /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				19AF8A7C2A06768100388F8F /* ContentView.swift */,
+				1983161E2A2FB4D600F03959 /* Onboarding */,
+				199747432A31EE59004D657C /* SignIn */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		19943BC62A2FA134009E9BCC /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				198F1C552A2FBCE900AF53D0 /* OnboardingViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		19943BC92A2FA28C009E9BCC /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				19943BCA2A2FA2A6009E9BCC /* Extension + Font.swift */,
+				19AF33432A30F73500DD252D /* Extension + Color.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		199747432A31EE59004D657C /* SignIn */ = {
+			isa = PBXGroup;
+			children = (
+				199747412A31EE44004D657C /* SignInView.swift */,
+			);
+			path = SignIn;
+			sourceTree = "<group>";
+		};
+		19AF33412A30F23800DD252D /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				19AF8A7E2A06768500388F8F /* Assets.xcassets */,
+				1993F00F2A2F6D2900207E14 /* Fonts */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		19AF33422A30F28400DD252D /* SupportingFiles */ = {
+			isa = PBXGroup;
+			children = (
+				1993F0152A2F6DFF00207E14 /* Info.plist */,
+				1993F0162A2F753600207E14 /* Launch Screen.storyboard */,
+				19AF8A7A2A06768100388F8F /* CookifyApp.swift */,
+			);
+			path = SupportingFiles;
 			sourceTree = "<group>";
 		};
 		19AF8A6E2A06768100388F8F = {
@@ -71,13 +156,13 @@
 		19AF8A792A06768100388F8F /* Cookify */ = {
 			isa = PBXGroup;
 			children = (
-				1993F0152A2F6DFF00207E14 /* Info.plist */,
-				1993F00F2A2F6D2900207E14 /* Fonts */,
-				19AF8A7A2A06768100388F8F /* CookifyApp.swift */,
-				19AF8A7C2A06768100388F8F /* ContentView.swift */,
-				19AF8A7E2A06768500388F8F /* Assets.xcassets */,
+				1980C0062A31F8FF00F95A72 /* Components */,
+				19943BC92A2FA28C009E9BCC /* Extensions */,
+				19943BC62A2FA134009E9BCC /* ViewModels */,
+				19943BC42A2FA120009E9BCC /* Views */,
+				19AF33422A30F28400DD252D /* SupportingFiles */,
+				19AF33412A30F23800DD252D /* Resources */,
 				19AF8A802A06768500388F8F /* Preview Content */,
-				1993F0162A2F753600207E14 /* Launch Screen.storyboard */,
 			);
 			path = Cookify;
 			sourceTree = "<group>";
@@ -161,7 +246,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				19943BCB2A2FA2A6009E9BCC /* Extension + Font.swift in Sources */,
+				198F1C562A2FBCE900AF53D0 /* OnboardingViewModel.swift in Sources */,
+				1983161D2A2FB4CE00F03959 /* OnboardingModel.swift in Sources */,
+				19AF33442A30F73500DD252D /* Extension + Color.swift in Sources */,
+				19943BC82A2FA197009E9BCC /* OnboardingView.swift in Sources */,
 				19AF8A7D2A06768100388F8F /* ContentView.swift in Sources */,
+				199747422A31EE44004D657C /* SignInView.swift in Sources */,
+				1980C0082A31F91D00F95A72 /* CustomButton.swift in Sources */,
 				19AF8A7B2A06768100388F8F /* CookifyApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -294,7 +386,7 @@
 				DEVELOPMENT_TEAM = C4QZKCN6PP;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Cookify/Info.plist;
+				INFOPLIST_FILE = Cookify/SupportingFiles/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
@@ -324,7 +416,7 @@
 				DEVELOPMENT_TEAM = C4QZKCN6PP;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Cookify/Info.plist;
+				INFOPLIST_FILE = Cookify/SupportingFiles/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
