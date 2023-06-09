@@ -9,9 +9,14 @@ import SwiftUI
 
 @main
 struct CookifyApp: App {
+    @AppStorage("shouldOnboardingHidden") var shouldOnboardingHidden: Bool?
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            if shouldOnboardingHidden ?? false {
+                SignInView()
+            } else {
+                ContentView()
+            }
         }
     }
 }

@@ -12,7 +12,7 @@ struct ContentView: View {
     var body: some View {
         TabView(selection: $vm.selectedPage) {
             ForEach(Onboarding.allCases) { viewData in
-                OnboardingView(data: viewData, shouldOnboardingHidden: $vm.shouldOnboardingHidden)
+                OnboardingView(data: viewData)
                     .tag(viewData.id)
             }
         }
