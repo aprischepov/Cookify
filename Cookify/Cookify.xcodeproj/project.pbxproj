@@ -7,8 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		197FF1CC2A323A5900A812AA /* Jost-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 197FF1CB2A323A5900A812AA /* Jost-SemiBold.ttf */; };
+		197FF1CE2A323AA300A812AA /* Cookie-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 197FF1CD2A323AA300A812AA /* Cookie-Regular.ttf */; };
+		197FF1D22A323AC000A812AA /* Jost-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 197FF1CF2A323AC000A812AA /* Jost-Bold.ttf */; };
+		197FF1D32A323AC000A812AA /* Jost-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 197FF1D02A323AC000A812AA /* Jost-Light.ttf */; };
+		197FF1D42A323AC000A812AA /* Jost-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 197FF1D12A323AC000A812AA /* Jost-Medium.ttf */; };
+		197FF3B12A32488D00EFF1AF /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 197FF3B02A32488D00EFF1AF /* CustomTextField.swift */; };
 		1980C0082A31F91D00F95A72 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1980C0072A31F91D00F95A72 /* CustomButton.swift */; };
-		1983161D2A2FB4CE00F03959 /* OnboardingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1983161C2A2FB4CE00F03959 /* OnboardingModel.swift */; };
 		198F1C562A2FBCE900AF53D0 /* OnboardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 198F1C552A2FBCE900AF53D0 /* OnboardingViewModel.swift */; };
 		1993F0172A2F753600207E14 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1993F0162A2F753600207E14 /* Launch Screen.storyboard */; };
 		19943BC82A2FA197009E9BCC /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19943BC72A2FA197009E9BCC /* OnboardingView.swift */; };
@@ -22,14 +27,14 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		197FF1CB2A323A5900A812AA /* Jost-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Jost-SemiBold.ttf"; path = "../../../../../../Desktop/Jost-SemiBold.ttf"; sourceTree = "<group>"; };
+		197FF1CD2A323AA300A812AA /* Cookie-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Cookie-Regular.ttf"; path = "../../../../../../Desktop/Cookie-Regular.ttf"; sourceTree = "<group>"; };
+		197FF1CF2A323AC000A812AA /* Jost-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Jost-Bold.ttf"; path = "../../../../../../Desktop/Jost-Bold.ttf"; sourceTree = "<group>"; };
+		197FF1D02A323AC000A812AA /* Jost-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Jost-Light.ttf"; path = "../../../../../../Desktop/Jost-Light.ttf"; sourceTree = "<group>"; };
+		197FF1D12A323AC000A812AA /* Jost-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Jost-Medium.ttf"; path = "../../../../../../Desktop/Jost-Medium.ttf"; sourceTree = "<group>"; };
+		197FF3B02A32488D00EFF1AF /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		1980C0072A31F91D00F95A72 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
-		1983161C2A2FB4CE00F03959 /* OnboardingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingModel.swift; sourceTree = "<group>"; };
 		198F1C552A2FBCE900AF53D0 /* OnboardingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewModel.swift; sourceTree = "<group>"; };
-		1993F0102A2F6D4300207E14 /* Jost-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Jost-Medium.ttf"; path = "../../../../../Desktop/Jost-Medium.ttf"; sourceTree = "<group>"; };
-		1993F0112A2F6D4300207E14 /* Jost-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Jost-Regular.ttf"; path = "../../../../../Desktop/Jost-Regular.ttf"; sourceTree = "<group>"; };
-		1993F0122A2F6D4300207E14 /* Jost-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Jost-Light.ttf"; path = "../../../../../Desktop/Jost-Light.ttf"; sourceTree = "<group>"; };
-		1993F0132A2F6D4300207E14 /* Cookie-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Cookie-Regular.ttf"; path = "../../../../../Desktop/Cookie-Regular.ttf"; sourceTree = "<group>"; };
-		1993F0142A2F6D4300207E14 /* Jost-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Jost-Bold.ttf"; path = "../../../../../Desktop/Jost-Bold.ttf"; sourceTree = "<group>"; };
 		1993F0152A2F6DFF00207E14 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1993F0162A2F753600207E14 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		19943BC72A2FA197009E9BCC /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
@@ -58,6 +63,7 @@
 			isa = PBXGroup;
 			children = (
 				1980C0072A31F91D00F95A72 /* CustomButton.swift */,
+				197FF3B02A32488D00EFF1AF /* CustomTextField.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -66,7 +72,6 @@
 			isa = PBXGroup;
 			children = (
 				19943BC72A2FA197009E9BCC /* OnboardingView.swift */,
-				1983161C2A2FB4CE00F03959 /* OnboardingModel.swift */,
 			);
 			path = Onboarding;
 			sourceTree = "<group>";
@@ -74,11 +79,11 @@
 		1993F00F2A2F6D2900207E14 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
-				1993F0132A2F6D4300207E14 /* Cookie-Regular.ttf */,
-				1993F0142A2F6D4300207E14 /* Jost-Bold.ttf */,
-				1993F0122A2F6D4300207E14 /* Jost-Light.ttf */,
-				1993F0102A2F6D4300207E14 /* Jost-Medium.ttf */,
-				1993F0112A2F6D4300207E14 /* Jost-Regular.ttf */,
+				197FF1CF2A323AC000A812AA /* Jost-Bold.ttf */,
+				197FF1D02A323AC000A812AA /* Jost-Light.ttf */,
+				197FF1D12A323AC000A812AA /* Jost-Medium.ttf */,
+				197FF1CD2A323AA300A812AA /* Cookie-Regular.ttf */,
+				197FF1CB2A323A5900A812AA /* Jost-SemiBold.ttf */,
 			);
 			path = Fonts;
 			sourceTree = "<group>";
@@ -234,8 +239,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				1993F0172A2F753600207E14 /* Launch Screen.storyboard in Resources */,
+				197FF1D42A323AC000A812AA /* Jost-Medium.ttf in Resources */,
+				197FF1CC2A323A5900A812AA /* Jost-SemiBold.ttf in Resources */,
 				19AF8A822A06768500388F8F /* Preview Assets.xcassets in Resources */,
+				197FF1D22A323AC000A812AA /* Jost-Bold.ttf in Resources */,
 				19AF8A7F2A06768500388F8F /* Assets.xcassets in Resources */,
+				197FF1CE2A323AA300A812AA /* Cookie-Regular.ttf in Resources */,
+				197FF1D32A323AC000A812AA /* Jost-Light.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -248,8 +258,8 @@
 			files = (
 				19943BCB2A2FA2A6009E9BCC /* Extension + Font.swift in Sources */,
 				198F1C562A2FBCE900AF53D0 /* OnboardingViewModel.swift in Sources */,
-				1983161D2A2FB4CE00F03959 /* OnboardingModel.swift in Sources */,
 				19AF33442A30F73500DD252D /* Extension + Color.swift in Sources */,
+				197FF3B12A32488D00EFF1AF /* CustomTextField.swift in Sources */,
 				19943BC82A2FA197009E9BCC /* OnboardingView.swift in Sources */,
 				19AF8A7D2A06768100388F8F /* ContentView.swift in Sources */,
 				199747422A31EE44004D657C /* SignInView.swift in Sources */,
@@ -390,8 +400,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -420,8 +429,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

@@ -9,6 +9,7 @@
 		<string>Jost-Regular.ttf</string>
 		<string>Jost-Medium.ttf</string>
 		<string>Jost-Bold.ttf</string>
+		<string>Jost-SemiBold.ttf</string>
 	</array>
 	<key>UIApplicationSceneManifest</key>
 	<dict>

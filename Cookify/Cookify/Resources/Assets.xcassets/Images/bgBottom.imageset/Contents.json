@@ -1,8 +1,9 @@
 {
   "images" : [
     {
-      "filename" : "bgBottomLight.svg",
-      "idiom" : "universal"
+      "filename" : "bg@1xbottom.png",
+      "idiom" : "universal",
+      "scale" : "1x"
     },
     {
       "appearances" : [
@@ -11,8 +12,41 @@
           "value" : "dark"
         }
       ],
-      "filename" : "bgBottomDark.svg",
-      "idiom" : "universal"
+      "filename" : "bg@1xdarkBottom.png",
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "filename" : "bg@2xbottom.png",
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ],
+      "filename" : "bg@2xdarkBottom.png",
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "filename" : "bg@3xbottom.png",
+      "idiom" : "universal",
+      "scale" : "3x"
+    },
+    {
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ],
+      "filename" : "bg@3xdarkBottom.png",
+      "idiom" : "universal",
+      "scale" : "3x"
     }
   ],
   "info" : {

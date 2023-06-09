@@ -12,12 +12,15 @@ enum FontName: String {
     case light = "Jost-Light"
     case regular = "Jost-Regular"
     case medium = "Jost-Medium"
+    case semiBold = "Jost-SemiBold"
     case bold = "Jost-Bold"
 }
 
 enum FontSize: CGFloat {
     case largeTitle = 32
+    case title = 24
     case body = 18
+    case footnote = 14
 }
 
 extension Font {

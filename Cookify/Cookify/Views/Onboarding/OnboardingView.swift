@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct OnboardingView: View {
-    var data: OnboardingData
+    var data: Onboarding
     @Binding var shouldOnboardingHidden: Bool
     var body: some View {
         VStack(alignment: .center) {
@@ -55,7 +55,7 @@ struct OnboardingView: View {
 
 struct OnboardingView_Previews: PreviewProvider {
     static var previews: some View {
-        OnboardingView(data: OnboardingViewModel.onboardingCards[0], shouldOnboardingHidden: .constant(true))
+        OnboardingView(data: Onboarding.firstPage, shouldOnboardingHidden: .constant(true))
             .previewDevice(PreviewDevice(rawValue: "iPhone SE (3rd generation)"))
         //            .previewDisplayName("iPhonew 14 Pro Max")
         //        OnboardingView(data: OnboardingData.list.first!)

@@ -8,10 +8,10 @@
 import SwiftUI
 
 struct ContentView: View {
-    @ObservedObject private var vm = OnboardingViewModel()
+    @StateObject private var vm = OnboardingViewModel()
     var body: some View {
         TabView(selection: $vm.selectedPage) {
-            ForEach(OnboardingViewModel.onboardingCards) { viewData in
+            ForEach(Onboarding.allCases) { viewData in
                 OnboardingView(data: viewData, shouldOnboardingHidden: $vm.shouldOnboardingHidden)
                     .tag(viewData.id)
             }
