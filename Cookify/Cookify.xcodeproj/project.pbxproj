@@ -13,6 +13,7 @@
 		197FF1D32A323AC000A812AA /* Jost-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 197FF1D02A323AC000A812AA /* Jost-Light.ttf */; };
 		197FF1D42A323AC000A812AA /* Jost-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 197FF1D12A323AC000A812AA /* Jost-Medium.ttf */; };
 		197FF3B12A32488D00EFF1AF /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 197FF3B02A32488D00EFF1AF /* CustomTextField.swift */; };
+		197FF3B32A33723800EFF1AF /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 197FF3B22A33723800EFF1AF /* MainView.swift */; };
 		1980C0082A31F91D00F95A72 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1980C0072A31F91D00F95A72 /* CustomButton.swift */; };
 		198F1C562A2FBCE900AF53D0 /* OnboardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 198F1C552A2FBCE900AF53D0 /* OnboardingViewModel.swift */; };
 		1993F0172A2F753600207E14 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1993F0162A2F753600207E14 /* Launch Screen.storyboard */; };
@@ -33,6 +34,7 @@
 		197FF1D02A323AC000A812AA /* Jost-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Jost-Light.ttf"; path = "../../../../../../Desktop/Jost-Light.ttf"; sourceTree = "<group>"; };
 		197FF1D12A323AC000A812AA /* Jost-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Jost-Medium.ttf"; path = "../../../../../../Desktop/Jost-Medium.ttf"; sourceTree = "<group>"; };
 		197FF3B02A32488D00EFF1AF /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
+		197FF3B22A33723800EFF1AF /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		1980C0072A31F91D00F95A72 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		198F1C552A2FBCE900AF53D0 /* OnboardingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewModel.swift; sourceTree = "<group>"; };
 		1993F0152A2F6DFF00207E14 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -94,6 +96,7 @@
 				19AF8A7C2A06768100388F8F /* ContentView.swift */,
 				1983161E2A2FB4D600F03959 /* Onboarding */,
 				199747432A31EE59004D657C /* SignIn */,
+				197FF3B22A33723800EFF1AF /* MainView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -259,6 +262,7 @@
 				19943BCB2A2FA2A6009E9BCC /* Extension + Font.swift in Sources */,
 				198F1C562A2FBCE900AF53D0 /* OnboardingViewModel.swift in Sources */,
 				19AF33442A30F73500DD252D /* Extension + Color.swift in Sources */,
+				197FF3B32A33723800EFF1AF /* MainView.swift in Sources */,
 				197FF3B12A32488D00EFF1AF /* CustomTextField.swift in Sources */,
 				19943BC82A2FA197009E9BCC /* OnboardingView.swift in Sources */,
 				19AF8A7D2A06768100388F8F /* ContentView.swift in Sources */,

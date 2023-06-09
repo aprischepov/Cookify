@@ -7,9 +7,16 @@
 
 import SwiftUI
 
+enum AppCondition: String {
+    case onboarding
+    case signIn
+    case signOut
+}
+
 struct OnboardingView: View {
     var data: Onboarding
-    @AppStorage("shouldOnboardingHidden", store: .standard) var shouldOnboardingHidden: Bool = false
+    @Binding var shouldOnboardingHidden: Bool
+    @AppStorage("appCondition", store: .standard) var appCondition: AppCondition = .onboarding
     var body: some View {
         VStack(alignment: .center) {
             VStack(alignment: .center, spacing: 16) {
@@ -28,6 +35,7 @@ struct OnboardingView: View {
                 //                Finish onboarding button
                 Button {
                     shouldOnboardingHidden.toggle()
+                    appCondition = .signOut
                 } label: {
                     CustomButton(title: "Finish")
                 }
@@ -55,7 +63,7 @@ struct OnboardingView: View {
 
 struct OnboardingView_Previews: PreviewProvider {
     static var previews: some View {
-        OnboardingView(data: Onboarding.firstPage)
+        OnboardingView(data: Onboarding.firstPage, shouldOnboardingHidden: .constant(false))
             .previewDevice(PreviewDevice(rawValue: "iPhone SE (3rd generation)"))
         //            .previewDisplayName("iPhonew 14 Pro Max")
         //        OnboardingView(data: OnboardingData.list.first!)

@@ -9,12 +9,17 @@ import SwiftUI
 
 @main
 struct CookifyApp: App {
-    @AppStorage("shouldOnboardingHidden") var shouldOnboardingHidden: Bool?
+    @AppStorage("appCondition") var appCondition: AppCondition?
     var body: some Scene {
         WindowGroup {
-            if shouldOnboardingHidden ?? false {
+            switch appCondition {
+            case .onboarding:
+                ContentView()
+            case .signIn:
+                MainView()
+            case .signOut:
                 SignInView()
-            } else {
+            case .none:
                 ContentView()
             }
         }
