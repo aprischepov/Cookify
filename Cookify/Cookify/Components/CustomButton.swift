@@ -12,6 +12,17 @@ enum StyleCustomButton {
     case borderButton
     case googleButton
     case appleButton
+    
+    var borderColor: Color {
+        switch self {
+        case .filledButton:
+            return Color.clear
+        case .borderButton, .googleButton:
+            return Color.customColor(.orange)
+        case .appleButton:
+            return Color.customColor(.black)
+        }
+    }
 }
 
 struct CustomButton: View {
@@ -46,17 +57,8 @@ struct CustomButton: View {
         .frame(maxWidth: .infinity, maxHeight: 48)
         .font(.jost(.medium, size: .body))
         .overlay {
-            switch style {
-            case .filledButton:
-                RoundedRectangle(cornerRadius: 10)
-                    .stroke(.clear)
-            case .borderButton, .googleButton:
-                RoundedRectangle(cornerRadius: 10)
-                    .stroke(Color.customColor(.orange))
-            case .appleButton:
-                RoundedRectangle(cornerRadius: 10)
-                    .stroke(Color.customColor(.black))
-            }
+            RoundedRectangle(cornerRadius: 10)
+                .stroke(style.borderColor)
         }
     }
 }
