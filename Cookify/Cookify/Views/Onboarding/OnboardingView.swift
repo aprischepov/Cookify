@@ -37,7 +37,7 @@ struct OnboardingView: View {
                     shouldOnboardingHidden.toggle()
                     appCondition = .signOut
                 } label: {
-                    CustomButton(title: "Finish")
+                    CustomButton(title: "Finish", style: .filledButton)
                 }
                 .frame(maxWidth: .infinity, maxHeight: 48)
                 .opacity(data.id == 3 ? 1 : 0)

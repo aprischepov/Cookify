@@ -14,6 +14,7 @@
 		197FF1D42A323AC000A812AA /* Jost-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 197FF1D12A323AC000A812AA /* Jost-Medium.ttf */; };
 		197FF3B12A32488D00EFF1AF /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 197FF3B02A32488D00EFF1AF /* CustomTextField.swift */; };
 		197FF3B32A33723800EFF1AF /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 197FF3B22A33723800EFF1AF /* MainView.swift */; };
+		197FF3B52A34451F00EFF1AF /* SignInViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 197FF3B42A34451E00EFF1AF /* SignInViewModel.swift */; };
 		1980C0082A31F91D00F95A72 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1980C0072A31F91D00F95A72 /* CustomButton.swift */; };
 		198F1C562A2FBCE900AF53D0 /* OnboardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 198F1C552A2FBCE900AF53D0 /* OnboardingViewModel.swift */; };
 		1993F0172A2F753600207E14 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1993F0162A2F753600207E14 /* Launch Screen.storyboard */; };
@@ -35,6 +36,7 @@
 		197FF1D12A323AC000A812AA /* Jost-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Jost-Medium.ttf"; path = "../../../../../../Desktop/Jost-Medium.ttf"; sourceTree = "<group>"; };
 		197FF3B02A32488D00EFF1AF /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		197FF3B22A33723800EFF1AF /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		197FF3B42A34451E00EFF1AF /* SignInViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewModel.swift; sourceTree = "<group>"; };
 		1980C0072A31F91D00F95A72 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		198F1C552A2FBCE900AF53D0 /* OnboardingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewModel.swift; sourceTree = "<group>"; };
 		1993F0152A2F6DFF00207E14 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -122,6 +124,7 @@
 			isa = PBXGroup;
 			children = (
 				199747412A31EE44004D657C /* SignInView.swift */,
+				197FF3B42A34451E00EFF1AF /* SignInViewModel.swift */,
 			);
 			path = SignIn;
 			sourceTree = "<group>";
@@ -267,6 +270,7 @@
 				19943BC82A2FA197009E9BCC /* OnboardingView.swift in Sources */,
 				19AF8A7D2A06768100388F8F /* ContentView.swift in Sources */,
 				199747422A31EE44004D657C /* SignInView.swift in Sources */,
+				197FF3B52A34451F00EFF1AF /* SignInViewModel.swift in Sources */,
 				1980C0082A31F91D00F95A72 /* CustomButton.swift in Sources */,
 				19AF8A7B2A06768100388F8F /* CookifyApp.swift in Sources */,
 			);

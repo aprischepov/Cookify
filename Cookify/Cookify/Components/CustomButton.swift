@@ -7,32 +7,63 @@
 
 import SwiftUI
 
+enum StyleCustomButton {
+    case filledButton
+    case borderButton
+    case googleButton
+    case appleButton
+}
+
 struct CustomButton: View {
     var title: String
+    var style: StyleCustomButton
     var body: some View {
-        //        ZStack {
-        //            Rectangle()
-        //                .frame(height: 56)
-        //                .foregroundColor(Color.customColor(.purple))
-        //                .cornerRadius(24)
-        //            Text("Log In")
-        //                .font(.plusJacartaSans(.semiBold, size: 16))
-        //            .foregroundColor(Color.customColor(.white))
-        //        }
         ZStack {
-            RoundedRectangle(cornerRadius: 10)
-                .frame(maxWidth: .infinity, maxHeight: 48)
-                .foregroundColor(.customColor(.orange))
-            Text(title)
-                .font(.jost(.medium, size: .body))
-                .foregroundColor(.white)
+            switch style {
+            case .filledButton:
+                RoundedRectangle(cornerRadius: 10)
+                    .foregroundColor(.customColor(.orange))
+                Text(title)
+                    .foregroundColor(.customColor(.white))
+            case .appleButton:
+                HStack(alignment: .center, spacing: 4) {
+                    Image(systemName: "apple.logo")
+                        .foregroundColor(.customColor(.black))
+                    Text(title)
+                        .foregroundColor(.customColor(.black))
+                }
+            case .borderButton:
+                Text(title)
+                    .foregroundColor(.customColor(.orange))
+            case .googleButton:
+                HStack(alignment: .center, spacing: 4) {
+                    Image("google")
+                    Text(title)
+                        .foregroundColor(.customColor(.orange))
+                }
+            }
+        }
+        .frame(maxWidth: .infinity, maxHeight: 48)
+        .font(.jost(.medium, size: .body))
+        .overlay {
+            switch style {
+            case .filledButton:
+                RoundedRectangle(cornerRadius: 10)
+                    .stroke(.clear)
+            case .borderButton, .googleButton:
+                RoundedRectangle(cornerRadius: 10)
+                    .stroke(Color.customColor(.orange))
+            case .appleButton:
+                RoundedRectangle(cornerRadius: 10)
+                    .stroke(Color.customColor(.black))
+            }
         }
     }
 }
 
 struct Button_Previews: PreviewProvider {
     static var previews: some View {
-        CustomButton(title: "Push me")
+        CustomButton(title: "Sign In", style: .filledButton)
             .previewLayout(.sizeThatFits)
             .padding()
     }
