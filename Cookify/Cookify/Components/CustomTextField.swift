@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Combine
 
 enum TextFieldType {
     case defaultTextField
@@ -16,15 +17,17 @@ struct CustomTextField: View {
     var title: String
     var placeholder: String
     let textFieldType: TextFieldType
+    var keyboardType: UIKeyboardType
     @Binding var inputText: String
     @Binding var isHiddenPassword: Bool
     
-    init(title: String, placeholder: String, textFieldType: TextFieldType, inputText: Binding<String>, isHiddenPassword: Binding<Bool> = .constant(false)) {
+    init(title: String, placeholder: String, textFieldType: TextFieldType, inputText: Binding<String>, isHiddenPassword: Binding<Bool> = .constant(false), keyboardType: UIKeyboardType) {
         self.title = title
         self.placeholder = placeholder
         self.textFieldType = textFieldType
         self._inputText = inputText
         self._isHiddenPassword = isHiddenPassword
+        self.keyboardType = keyboardType
     }
     
     var body: some View {
@@ -36,11 +39,14 @@ struct CustomTextField: View {
                 switch textFieldType {
                 case .defaultTextField:
                     TextField(placeholder, text: $inputText)
+                        .keyboardType(keyboardType)
                 case .passwordTextField:
                     if isHiddenPassword {
                         SecureField(placeholder, text: $inputText)
+                            .keyboardType(keyboardType)
                     } else {
                         TextField(placeholder, text: $inputText)
+                            .keyboardType(keyboardType)
                     }
                 }
             }
@@ -66,7 +72,7 @@ struct CustomTextField: View {
 
 struct CustomTextField_Previews: PreviewProvider {
     static var previews: some View {
-        CustomTextField(title: "Password", placeholder: "strongPassword", textFieldType: .passwordTextField, inputText: .constant(""))
+        CustomTextField(title: "Password", placeholder: "strongPassword", textFieldType: .passwordTextField, inputText: .constant(""), keyboardType: .default)
             .previewLayout(.sizeThatFits)
             .padding()
     }
