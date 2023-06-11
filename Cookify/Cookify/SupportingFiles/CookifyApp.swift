@@ -7,11 +7,17 @@
 
 import SwiftUI
 import UIKit
+import Firebase
 
 @main
 struct CookifyApp: App {
     @AppStorage("appCondition") var appCondition: AppCondition?
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+    
+    init() {
+        FirebaseApp.configure()
+    }
+    
     var body: some Scene {
         WindowGroup {
             switch appCondition {
