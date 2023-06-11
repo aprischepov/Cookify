@@ -7,15 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		197FF1CC2A323A5900A812AA /* Jost-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 197FF1CB2A323A5900A812AA /* Jost-SemiBold.ttf */; };
-		197FF1CE2A323AA300A812AA /* Cookie-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 197FF1CD2A323AA300A812AA /* Cookie-Regular.ttf */; };
-		197FF1D22A323AC000A812AA /* Jost-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 197FF1CF2A323AC000A812AA /* Jost-Bold.ttf */; };
-		197FF1D32A323AC000A812AA /* Jost-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 197FF1D02A323AC000A812AA /* Jost-Light.ttf */; };
-		197FF1D42A323AC000A812AA /* Jost-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 197FF1D12A323AC000A812AA /* Jost-Medium.ttf */; };
+		195AA8DA2A35E65600F7E6CF /* Jost-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 195AA8D42A35E65600F7E6CF /* Jost-Light.ttf */; };
+		195AA8DB2A35E65600F7E6CF /* Jost-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 195AA8D52A35E65600F7E6CF /* Jost-Regular.ttf */; };
+		195AA8DC2A35E65700F7E6CF /* Jost-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 195AA8D62A35E65600F7E6CF /* Jost-SemiBold.ttf */; };
+		195AA8DD2A35E65700F7E6CF /* Jost-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 195AA8D72A35E65600F7E6CF /* Jost-Bold.ttf */; };
+		195AA8DE2A35E65700F7E6CF /* Cookie-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 195AA8D82A35E65600F7E6CF /* Cookie-Regular.ttf */; };
+		195AA8DF2A35E65700F7E6CF /* Jost-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 195AA8D92A35E65600F7E6CF /* Jost-Medium.ttf */; };
+		195AA8E12A35E9C100F7E6CF /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 195AA8E02A35E9C100F7E6CF /* CustomButton.swift */; };
 		197FF3B12A32488D00EFF1AF /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 197FF3B02A32488D00EFF1AF /* CustomTextField.swift */; };
 		197FF3B32A33723800EFF1AF /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 197FF3B22A33723800EFF1AF /* MainView.swift */; };
 		197FF3B52A34451F00EFF1AF /* SignInViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 197FF3B42A34451E00EFF1AF /* SignInViewModel.swift */; };
-		1980C0082A31F91D00F95A72 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1980C0072A31F91D00F95A72 /* CustomButton.swift */; };
 		198C9B062A3500F1008285A3 /* OnboardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 198C9B052A3500F1008285A3 /* OnboardingViewModel.swift */; };
 		198C9B0C2A35028F008285A3 /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 198C9B0A2A35028E008285A3 /* RegisterView.swift */; };
 		198C9B0D2A35028F008285A3 /* RegisterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 198C9B0B2A35028E008285A3 /* RegisterViewModel.swift */; };
@@ -31,15 +32,16 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		197FF1CB2A323A5900A812AA /* Jost-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Jost-SemiBold.ttf"; path = "../../../../../../Desktop/Jost-SemiBold.ttf"; sourceTree = "<group>"; };
-		197FF1CD2A323AA300A812AA /* Cookie-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Cookie-Regular.ttf"; path = "../../../../../../Desktop/Cookie-Regular.ttf"; sourceTree = "<group>"; };
-		197FF1CF2A323AC000A812AA /* Jost-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Jost-Bold.ttf"; path = "../../../../../../Desktop/Jost-Bold.ttf"; sourceTree = "<group>"; };
-		197FF1D02A323AC000A812AA /* Jost-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Jost-Light.ttf"; path = "../../../../../../Desktop/Jost-Light.ttf"; sourceTree = "<group>"; };
-		197FF1D12A323AC000A812AA /* Jost-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Jost-Medium.ttf"; path = "../../../../../../Desktop/Jost-Medium.ttf"; sourceTree = "<group>"; };
+		195AA8D42A35E65600F7E6CF /* Jost-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Jost-Light.ttf"; sourceTree = "<group>"; };
+		195AA8D52A35E65600F7E6CF /* Jost-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Jost-Regular.ttf"; sourceTree = "<group>"; };
+		195AA8D62A35E65600F7E6CF /* Jost-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Jost-SemiBold.ttf"; sourceTree = "<group>"; };
+		195AA8D72A35E65600F7E6CF /* Jost-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Jost-Bold.ttf"; sourceTree = "<group>"; };
+		195AA8D82A35E65600F7E6CF /* Cookie-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Cookie-Regular.ttf"; sourceTree = "<group>"; };
+		195AA8D92A35E65600F7E6CF /* Jost-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Jost-Medium.ttf"; sourceTree = "<group>"; };
+		195AA8E02A35E9C100F7E6CF /* CustomButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		197FF3B02A32488D00EFF1AF /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		197FF3B22A33723800EFF1AF /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		197FF3B42A34451E00EFF1AF /* SignInViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewModel.swift; sourceTree = "<group>"; };
-		1980C0072A31F91D00F95A72 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		198C9B052A3500F1008285A3 /* OnboardingViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingViewModel.swift; sourceTree = "<group>"; };
 		198C9B0A2A35028E008285A3 /* RegisterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
 		198C9B0B2A35028E008285A3 /* RegisterViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewModel.swift; sourceTree = "<group>"; };
@@ -70,7 +72,7 @@
 		1980C0062A31F8FF00F95A72 /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				1980C0072A31F91D00F95A72 /* CustomButton.swift */,
+				195AA8E02A35E9C100F7E6CF /* CustomButton.swift */,
 				197FF3B02A32488D00EFF1AF /* CustomTextField.swift */,
 			);
 			path = Components;
@@ -85,13 +87,6 @@
 			path = Onboarding;
 			sourceTree = "<group>";
 		};
-		198C9B072A350121008285A3 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Models;
-			sourceTree = "<group>";
-		};
 		198C9B092A35028E008285A3 /* Register */ = {
 			isa = PBXGroup;
 			children = (
@@ -104,11 +99,12 @@
 		1993F00F2A2F6D2900207E14 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
-				197FF1CF2A323AC000A812AA /* Jost-Bold.ttf */,
-				197FF1D02A323AC000A812AA /* Jost-Light.ttf */,
-				197FF1D12A323AC000A812AA /* Jost-Medium.ttf */,
-				197FF1CD2A323AA300A812AA /* Cookie-Regular.ttf */,
-				197FF1CB2A323A5900A812AA /* Jost-SemiBold.ttf */,
+				195AA8D82A35E65600F7E6CF /* Cookie-Regular.ttf */,
+				195AA8D72A35E65600F7E6CF /* Jost-Bold.ttf */,
+				195AA8D42A35E65600F7E6CF /* Jost-Light.ttf */,
+				195AA8D92A35E65600F7E6CF /* Jost-Medium.ttf */,
+				195AA8D52A35E65600F7E6CF /* Jost-Regular.ttf */,
+				195AA8D62A35E65600F7E6CF /* Jost-SemiBold.ttf */,
 			);
 			path = Fonts;
 			sourceTree = "<group>";
@@ -181,7 +177,6 @@
 		19AF8A792A06768100388F8F /* Cookify */ = {
 			isa = PBXGroup;
 			children = (
-				198C9B072A350121008285A3 /* Models */,
 				1980C0062A31F8FF00F95A72 /* Components */,
 				19943BC92A2FA28C009E9BCC /* Extensions */,
 				19943BC42A2FA120009E9BCC /* Views */,
@@ -258,14 +253,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				195AA8DF2A35E65700F7E6CF /* Jost-Medium.ttf in Resources */,
+				195AA8DD2A35E65700F7E6CF /* Jost-Bold.ttf in Resources */,
 				1993F0172A2F753600207E14 /* Launch Screen.storyboard in Resources */,
-				197FF1D42A323AC000A812AA /* Jost-Medium.ttf in Resources */,
-				197FF1CC2A323A5900A812AA /* Jost-SemiBold.ttf in Resources */,
 				19AF8A822A06768500388F8F /* Preview Assets.xcassets in Resources */,
-				197FF1D22A323AC000A812AA /* Jost-Bold.ttf in Resources */,
 				19AF8A7F2A06768500388F8F /* Assets.xcassets in Resources */,
-				197FF1CE2A323AA300A812AA /* Cookie-Regular.ttf in Resources */,
-				197FF1D32A323AC000A812AA /* Jost-Light.ttf in Resources */,
+				195AA8DA2A35E65600F7E6CF /* Jost-Light.ttf in Resources */,
+				195AA8DB2A35E65600F7E6CF /* Jost-Regular.ttf in Resources */,
+				195AA8DC2A35E65700F7E6CF /* Jost-SemiBold.ttf in Resources */,
+				195AA8DE2A35E65700F7E6CF /* Cookie-Regular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -276,6 +272,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				195AA8E12A35E9C100F7E6CF /* CustomButton.swift in Sources */,
 				19943BCB2A2FA2A6009E9BCC /* Extension + Font.swift in Sources */,
 				19AF33442A30F73500DD252D /* Extension + Color.swift in Sources */,
 				197FF3B32A33723800EFF1AF /* MainView.swift in Sources */,
@@ -287,7 +284,6 @@
 				198C9B0D2A35028F008285A3 /* RegisterViewModel.swift in Sources */,
 				197FF3B52A34451F00EFF1AF /* SignInViewModel.swift in Sources */,
 				198C9B0C2A35028F008285A3 /* RegisterView.swift in Sources */,
-				1980C0082A31F91D00F95A72 /* CustomButton.swift in Sources */,
 				19AF8A7B2A06768100388F8F /* CookifyApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

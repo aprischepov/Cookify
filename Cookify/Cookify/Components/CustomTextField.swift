@@ -6,11 +6,19 @@
 //
 
 import SwiftUI
-import Combine
 
 enum TextFieldType {
     case defaultTextField
     case passwordTextField
+    
+    var charactersLimit: Int {
+        switch self {
+        case .defaultTextField:
+            return 30
+        case .passwordTextField:
+            return 10
+        }
+    }
 }
 
 struct CustomTextField: View {
@@ -20,6 +28,7 @@ struct CustomTextField: View {
     var keyboardType: UIKeyboardType
     @Binding var inputText: String
     @Binding var isHiddenPassword: Bool
+    let specialCharacters = " !#$%&'()*+,-./:;<=>?@[\\]^_`{|}~"
     
     init(title: String, placeholder: String, textFieldType: TextFieldType, inputText: Binding<String>, isHiddenPassword: Binding<Bool> = .constant(false), keyboardType: UIKeyboardType) {
         self.title = title
@@ -40,13 +49,22 @@ struct CustomTextField: View {
                 case .defaultTextField:
                     TextField(placeholder, text: $inputText)
                         .keyboardType(keyboardType)
+                        .onChange(of: inputText) { newValue in
+                            inputText = String(inputText.prefix(textFieldType.charactersLimit).filter{ !specialCharacters.contains($0) })
+                        }
                 case .passwordTextField:
                     if isHiddenPassword {
                         SecureField(placeholder, text: $inputText)
                             .keyboardType(keyboardType)
+                            .onChange(of: inputText) { newValue in
+                                inputText = String(inputText.prefix(textFieldType.charactersLimit).filter{ !specialCharacters.contains($0) })
+                            }
                     } else {
                         TextField(placeholder, text: $inputText)
                             .keyboardType(keyboardType)
+                            .onChange(of: inputText) { newValue in
+                                inputText = String(inputText.prefix(textFieldType.charactersLimit).filter{ !specialCharacters.contains($0) })
+                            }
                     }
                 }
             }
@@ -58,7 +76,7 @@ struct CustomTextField: View {
                     Image(systemName: isHiddenPassword ? "eye.fill" : "eye.slash")
                         .foregroundColor(.customColor(.orange))
                 }
-
+                
             }
         }
         .padding(.horizontal, 16)
@@ -72,7 +90,7 @@ struct CustomTextField: View {
 
 struct CustomTextField_Previews: PreviewProvider {
     static var previews: some View {
-        CustomTextField(title: "Password", placeholder: "strongPassword", textFieldType: .passwordTextField, inputText: .constant(""), keyboardType: .default)
+        CustomTextField(title: "Password", placeholder: "Password", textFieldType: .defaultTextField, inputText: .constant(""), keyboardType: .default)
             .previewLayout(.sizeThatFits)
             .padding()
     }

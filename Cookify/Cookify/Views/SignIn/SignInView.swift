@@ -33,12 +33,14 @@ struct SignInView: View {
                     CustomTextField(title: "Email Address",
                                     placeholder: "example@gmail.com",
                                     textFieldType: .defaultTextField,
-                                    inputText: $vm.emailAddress, keyboardType: .emailAddress)
+                                    inputText: $vm.emailAddress,
+                                    keyboardType: .emailAddress)
                     CustomTextField(title: "Password",
                                     placeholder: "password",
                                     textFieldType: .passwordTextField,
                                     inputText: $vm.password,
-                                    isHiddenPassword: $vm.isHiddenPassword, keyboardType: .default)
+                                    isHiddenPassword: $vm.isHiddenPassword,
+                                    keyboardType: .default)
                 }
                 Spacer()
                 VStack(alignment: .center, spacing: 24) {
