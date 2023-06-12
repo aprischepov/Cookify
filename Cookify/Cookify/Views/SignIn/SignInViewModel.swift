@@ -8,7 +8,30 @@
 import Foundation
 
 final class SignInViewModel: ObservableObject {
-    @Published var emailAddress = ""
-    @Published var password = ""
-    @Published var isHiddenPassword = true
+    private let firebaseManager: FirebaseProtocol = FirebaseManager()
+    @Published var emailAddress: String = ""
+    @Published var password: String = ""
+    @Published var isHiddenPassword: Bool = true
+    @Published var errorMessage: String = "" {
+        didSet {
+            showError = true
+        }
+    }
+    @Published var showError: Bool = false
+    
+    func signIn() {
+        Task {
+            do {
+                try await firebaseManager.signInUser(email: emailAddress, password: password)
+            } catch {
+                await errorSignIn(error)
+            }
+        }
+    }
+    
+    func errorSignIn(_ error: Error) async {
+        await MainActor.run(body: {
+            errorMessage = error.localizedDescription
+        })
+    }
 }

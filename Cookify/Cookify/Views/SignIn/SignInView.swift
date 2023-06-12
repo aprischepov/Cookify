@@ -45,7 +45,7 @@ struct SignInView: View {
                 Spacer()
                 VStack(alignment: .center, spacing: 24) {
                     Button {
-                        //                sign in method
+                        vm.signIn()
                     } label: {
                         CustomButton(title: "Sign In",
                                      style: .filledButton)
@@ -89,6 +89,7 @@ struct SignInView: View {
             .padding(.horizontal, 16)
         .background(Color.customColor(.background))
         }
+        .alert(vm.errorMessage, isPresented: $vm.showError) {}
     }
 }
 

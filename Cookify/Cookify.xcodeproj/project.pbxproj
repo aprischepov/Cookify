@@ -33,6 +33,7 @@
 		19AF8A7D2A06768100388F8F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19AF8A7C2A06768100388F8F /* ContentView.swift */; };
 		19AF8A7F2A06768500388F8F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 19AF8A7E2A06768500388F8F /* Assets.xcassets */; };
 		19AF8A822A06768500388F8F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 19AF8A812A06768500388F8F /* Preview Assets.xcassets */; };
+		19DEA36A2A360BF9008637FC /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19DEA3692A360BF9008637FC /* FirebaseManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -61,6 +62,7 @@
 		19AF8A7C2A06768100388F8F /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		19AF8A7E2A06768500388F8F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		19AF8A812A06768500388F8F /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		19DEA3692A360BF9008637FC /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -186,6 +188,7 @@
 		19AF8A792A06768100388F8F /* Cookify */ = {
 			isa = PBXGroup;
 			children = (
+				19DEA3672A360BA8008637FC /* Services */,
 				1980C0062A31F8FF00F95A72 /* Components */,
 				19943BC92A2FA28C009E9BCC /* Extensions */,
 				19943BC42A2FA120009E9BCC /* Views */,
@@ -202,6 +205,14 @@
 				19AF8A812A06768500388F8F /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		19DEA3672A360BA8008637FC /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				19DEA3692A360BF9008637FC /* FirebaseManager.swift */,
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -292,6 +303,7 @@
 			files = (
 				195AA8E12A35E9C100F7E6CF /* CustomButton.swift in Sources */,
 				19943BCB2A2FA2A6009E9BCC /* Extension + Font.swift in Sources */,
+				19DEA36A2A360BF9008637FC /* FirebaseManager.swift in Sources */,
 				19AF33442A30F73500DD252D /* Extension + Color.swift in Sources */,
 				197FF3B32A33723800EFF1AF /* MainView.swift in Sources */,
 				197FF3B12A32488D00EFF1AF /* CustomTextField.swift in Sources */,

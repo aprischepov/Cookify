@@ -28,7 +28,7 @@ struct CustomTextField: View {
     var keyboardType: UIKeyboardType
     @Binding var inputText: String
     @Binding var isHiddenPassword: Bool
-    let specialCharacters = " !#$%&'()*+,-./:;<=>?@[\\]^_`{|}~"
+    let specialCharacters = " !#$%&'()*+,/:;<=>?[\\]^`{|}~"
     
     init(title: String, placeholder: String, textFieldType: TextFieldType, inputText: Binding<String>, isHiddenPassword: Binding<Bool> = .constant(false), keyboardType: UIKeyboardType) {
         self.title = title
