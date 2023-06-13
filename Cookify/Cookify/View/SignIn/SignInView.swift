@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+import GoogleSignIn
+import GoogleSignInSwift
 
 struct SignInView: View {
     @StateObject var vm = SignInViewModel()
@@ -46,6 +48,7 @@ struct SignInView: View {
                 VStack(alignment: .center, spacing: 24) {
                     Button {
                         vm.signIn()
+                        vm.fetchUser()
                     } label: {
                         CustomButton(title: "Sign In",
                                      style: .filledButton)
@@ -58,6 +61,7 @@ struct SignInView: View {
                     VStack(alignment: .center, spacing: 16) {
                         Button {
                             //                    sign in with google
+                            vm.signInGoogle()
                         } label: {
                             CustomButton(title: "Sign In with Google",
                                          style: .googleButton)
@@ -89,6 +93,9 @@ struct SignInView: View {
             .padding(.horizontal, 16)
         .background(Color.customColor(.background))
         }
+        .overlay(content: {
+            LoadingView(show: $vm.isLoading)
+        })
         .alert(vm.errorMessage, isPresented: $vm.showError) {}
     }
 }

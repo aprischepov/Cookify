@@ -12,6 +12,14 @@
 				<string>REVERSE_CLIENT_ID</string>
 			</array>
 		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>com.googleusercontent.apps.336030585709-52c2vmk92haoi7sq8ac3bc5os0gis7om</string>
+			</array>
+		</dict>
 	</array>
 	<key>UIAppFonts</key>
 	<array>

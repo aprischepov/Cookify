@@ -9,6 +9,7 @@ import SwiftUI
 
 struct RegisterView: View {
     @StateObject var vm = RegistrationViewModel()
+    @AppStorage("appCondition") var appCondition: AppCondition?
     @Environment(\.dismiss) private var dismiss
     var body: some View {
         VStack(alignment: .center, spacing: 40) {
@@ -43,6 +44,7 @@ struct RegisterView: View {
             }
             Button {
 //                sign up button
+                vm.registerUser()
             } label: {
                 CustomButton(title: "Sign Up", style: .filledButton)
             }
@@ -67,6 +69,11 @@ struct RegisterView: View {
         .padding(.horizontal, 16)
         .padding(.vertical, 8)
         .navigationTitle("Create Account")
+        .overlay(content: {
+            LoadingView(show: $vm.isLoading)
+        })
+//        Alert with firebase error
+        .alert(vm.errorMessage, isPresented: $vm.showError) {}
     }
 }
 

@@ -22,13 +22,13 @@ struct CookifyApp: App {
         WindowGroup {
             switch appCondition {
             case .onboarding:
-                ContentView()
+                OnboardingView()
             case .signIn:
                 MainView()
             case .signOut:
                 SignInView()
             case .none:
-                ContentView()
+                OnboardingView()
             }
         }
     }
