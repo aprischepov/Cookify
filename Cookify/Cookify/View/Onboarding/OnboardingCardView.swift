@@ -13,8 +13,8 @@ enum AppCondition: String {
     case signOut
 }
 
-struct OnboardingView: View {
-    var data: Onboarding
+struct OnboardingCardView: View {
+    var data: OnboardingCards
     @Binding var shouldOnboardingHidden: Bool
     @AppStorage("appCondition", store: .standard) var appCondition: AppCondition = .onboarding
     var body: some View {
@@ -63,7 +63,7 @@ struct OnboardingView: View {
 
 struct OnboardingView_Previews: PreviewProvider {
     static var previews: some View {
-        OnboardingView(data: Onboarding.firstPage, shouldOnboardingHidden: .constant(false))
+        OnboardingCardView(data: OnboardingCards.firstPage, shouldOnboardingHidden: .constant(false))
             .previewDevice(PreviewDevice(rawValue: "iPhone SE (3rd generation)"))
         //            .previewDisplayName("iPhonew 14 Pro Max")
         //        OnboardingView(data: OnboardingData.list.first!)

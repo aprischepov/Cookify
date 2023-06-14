@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+import GoogleSignIn
+import GoogleSignInSwift
 
 struct SignInView: View {
     @StateObject var vm = SignInViewModel()
@@ -33,17 +35,19 @@ struct SignInView: View {
                     CustomTextField(title: "Email Address",
                                     placeholder: "example@gmail.com",
                                     textFieldType: .defaultTextField,
-                                    inputText: $vm.emailAddress)
+                                    inputText: $vm.emailAddress,
+                                    keyboardType: .emailAddress)
                     CustomTextField(title: "Password",
                                     placeholder: "password",
                                     textFieldType: .passwordTextField,
                                     inputText: $vm.password,
-                                    isHiddenPassword: $vm.isHiddenPassword)
+                                    isHiddenPassword: $vm.isHiddenPassword,
+                                    keyboardType: .default)
                 }
                 Spacer()
                 VStack(alignment: .center, spacing: 24) {
                     Button {
-                        //                sign in method
+                        vm.signIn()
                     } label: {
                         CustomButton(title: "Sign In",
                                      style: .filledButton)
@@ -56,6 +60,7 @@ struct SignInView: View {
                     VStack(alignment: .center, spacing: 16) {
                         Button {
                             //                    sign in with google
+                            vm.signInGoogle()
                         } label: {
                             CustomButton(title: "Sign In with Google",
                                          style: .googleButton)
@@ -87,6 +92,10 @@ struct SignInView: View {
             .padding(.horizontal, 16)
         .background(Color.customColor(.background))
         }
+        .overlay(content: {
+            LoadingView(show: $vm.isLoading)
+        })
+        .alert(vm.errorMessage, isPresented: $vm.showError) {}
     }
 }
 

@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum Onboarding: Identifiable, CaseIterable {
+enum OnboardingCards: Identifiable, CaseIterable {
     case firstPage
     case secondPage
     case thirdPage
@@ -63,7 +63,7 @@ enum Onboarding: Identifiable, CaseIterable {
     }
 }
 
-final class OnboardingViewModel: ObservableObject {
+final class OnboardingCardViewModel: ObservableObject {
     @Published var selectedPage = 0
     @Published var shouldOnboardingHidden = false
 }
