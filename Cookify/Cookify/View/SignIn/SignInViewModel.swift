@@ -28,16 +28,6 @@ final class SignInViewModel: ObservableObject {
         Task {
             do {
                 try await firebaseManager.signInUser(email: emailAddress, password: password)
-            } catch {
-                await errorSignIn(error)
-            }
-        }
-    }
-    
-    func fetchUser() {
-        isLoading = true
-        Task {
-            do {
                 try await firebaseManager.fetchUser()
             } catch {
                 await errorSignIn(error)

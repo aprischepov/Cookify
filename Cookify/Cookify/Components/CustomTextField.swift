@@ -46,26 +46,18 @@ struct CustomTextField: View {
                     .font(.jost(.regular, size: .caption))
                     .foregroundColor(.customColor(.orange))
                 switch textFieldType {
-                case .defaultTextField:
+                case .passwordTextField where isHiddenPassword:
+                    SecureField(placeholder, text: $inputText)
+                        .keyboardType(keyboardType)
+                        .onChange(of: inputText) { newValue in
+                            inputText = String(inputText.prefix(textFieldType.charactersLimit).filter{ !specialCharacters.contains($0) })
+                        }
+                default:
                     TextField(placeholder, text: $inputText)
                         .keyboardType(keyboardType)
                         .onChange(of: inputText) { newValue in
                             inputText = String(inputText.prefix(textFieldType.charactersLimit).filter{ !specialCharacters.contains($0) })
                         }
-                case .passwordTextField:
-                    if isHiddenPassword {
-                        SecureField(placeholder, text: $inputText)
-                            .keyboardType(keyboardType)
-                            .onChange(of: inputText) { newValue in
-                                inputText = String(inputText.prefix(textFieldType.charactersLimit).filter{ !specialCharacters.contains($0) })
-                            }
-                    } else {
-                        TextField(placeholder, text: $inputText)
-                            .keyboardType(keyboardType)
-                            .onChange(of: inputText) { newValue in
-                                inputText = String(inputText.prefix(textFieldType.charactersLimit).filter{ !specialCharacters.contains($0) })
-                            }
-                    }
                 }
             }
             Spacer()

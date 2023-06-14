@@ -24,10 +24,11 @@ protocol FirebaseProtocol {
 final class FirebaseManager: FirebaseProtocol {
 //    MARK: - Properties
     @AppStorage("appCondition") var appConditionStored: AppCondition?
-    @AppStorage("userFirstNme") var userFirsNameStored = ""
-    @AppStorage("userLastName") var userLastNameStored = ""
-    @AppStorage("userEmail") var userEmailStored = ""
-    @AppStorage("userUID") var userUID = ""
+//    @AppStorage("userFirstNme") var userFirsNameStored: String = ""
+//    @AppStorage("userLastName") var userLastNameStored: String = ""
+//    @AppStorage("userEmail") var userEmailStored: String = ""
+//    @AppStorage("userUID") var userUID: String = ""
+//    @AppStorage("user") var userLocal: UserLocal
     
 //    MARK: - Methods
 //    Sign In
@@ -51,13 +52,12 @@ final class FirebaseManager: FirebaseProtocol {
         let user = User(firstName: firstName, lastName: lastName, emailAddress: email, image: downloadURL)
 //        Saving User Object
         let _ = try Firestore.firestore().collection("Users").document(userUID).setData(from: user) { [weak self] error in
-            guard let self else { return }
-            if error == nil {
+            guard let self,
+                  error == nil else { return }
                 self.appConditionStored = .signIn
-                self.userFirsNameStored = firstName
-                self.userLastNameStored = lastName
-                self.userEmailStored = email
-            }
+//                self.userFirsNameStored = firstName
+//                self.userLastNameStored = lastName
+//                self.userEmailStored = email
         }
     }
     
@@ -67,9 +67,9 @@ final class FirebaseManager: FirebaseProtocol {
         let user = try await Firestore.firestore().collection("Users").document(userId).getDocument(as: User.self)
         await MainActor.run(body: {
             appConditionStored = .signIn
-            userFirsNameStored = user.firstName
-            userLastNameStored = user.lastName
-            userEmailStored = user.emailAddress
+//            userFirsNameStored = user.firstName
+//            userLastNameStored = user.lastName
+//            userEmailStored = user.emailAddress
         })
     }
     
@@ -86,9 +86,9 @@ final class FirebaseManager: FirebaseProtocol {
             try await Auth.auth().signIn(with: credential)
             await MainActor.run(body: {
                 appConditionStored = .signIn
-                userFirsNameStored = user.profile?.familyName ?? ""
-                userLastNameStored = user.profile?.familyName ?? ""
-                userEmailStored = user.profile?.email ?? ""
+//                userFirsNameStored = user.profile?.familyName ?? ""
+//                userLastNameStored = user.profile?.familyName ?? ""
+//                userEmailStored = user.profile?.email ?? ""
             })
         }
     }

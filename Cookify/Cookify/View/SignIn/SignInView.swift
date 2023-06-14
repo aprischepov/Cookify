@@ -48,7 +48,6 @@ struct SignInView: View {
                 VStack(alignment: .center, spacing: 24) {
                     Button {
                         vm.signIn()
-                        vm.fetchUser()
                     } label: {
                         CustomButton(title: "Sign In",
                                      style: .filledButton)
