@@ -36,6 +36,10 @@
 		19AF8A7D2A06768100388F8F /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19AF8A7C2A06768100388F8F /* OnboardingView.swift */; };
 		19AF8A7F2A06768500388F8F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 19AF8A7E2A06768500388F8F /* Assets.xcassets */; };
 		19AF8A822A06768500388F8F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 19AF8A812A06768500388F8F /* Preview Assets.xcassets */; };
+		19DB92292A39E2FD00757733 /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = 19DB92282A39E2FD00757733 /* Moya */; };
+		19DB922C2A39E5E000757733 /* MoyaManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19DB922B2A39E5DF00757733 /* MoyaManager.swift */; };
+		19DB922E2A39E8E000757733 /* SpoonacularApiProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19DB922D2A39E8E000757733 /* SpoonacularApiProvider.swift */; };
+		19DB92302A39F66100757733 /* RecipesByTypeData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19DB922F2A39F66100757733 /* RecipesByTypeData.swift */; };
 		19DEA36A2A360BF9008637FC /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19DEA3692A360BF9008637FC /* FirebaseManager.swift */; };
 		19E0B77C2A36FD0D00BB626D /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19E0B77B2A36FD0D00BB626D /* User.swift */; };
 		19E0B77F2A371A6600BB626D /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 19E0B77E2A371A6600BB626D /* FirebaseFirestoreSwift */; };
@@ -43,8 +47,10 @@
 		19E71CC92A38B657007F0D02 /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 19E71CC82A38B657007F0D02 /* GoogleSignInSwift */; };
 		19E71CCB2A38B856007F0D02 /* CustomFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19E71CCA2A38B856007F0D02 /* CustomFunction.swift */; };
 		19E71CCD2A38BBA7007F0D02 /* Extension + UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19E71CCC2A38BBA7007F0D02 /* Extension + UIApplication.swift */; };
+		19E71CCF2A39D6B0007F0D02 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19E71CCE2A39D6B0007F0D02 /* HomeViewModel.swift */; };
 		19F23FD32A3782EE003A4FC5 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19F23FD22A3782EE003A4FC5 /* HomeView.swift */; };
 		19F23FD92A3783E2003A4FC5 /* CommunityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19F23FD82A3783E2003A4FC5 /* CommunityView.swift */; };
+		19FAB82B2A3B213900D9C00D /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 19FAB82A2A3B213900D9C00D /* SDWebImageSwiftUI */; };
 		19FE10DD2A389A6000D8DA49 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19FE10DC2A389A6000D8DA49 /* LoadingView.swift */; };
 /* End PBXBuildFile section */
 
@@ -77,10 +83,14 @@
 		19AF8A7C2A06768100388F8F /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		19AF8A7E2A06768500388F8F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		19AF8A812A06768500388F8F /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		19DB922B2A39E5DF00757733 /* MoyaManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoyaManager.swift; sourceTree = "<group>"; };
+		19DB922D2A39E8E000757733 /* SpoonacularApiProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpoonacularApiProvider.swift; sourceTree = "<group>"; };
+		19DB922F2A39F66100757733 /* RecipesByTypeData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipesByTypeData.swift; sourceTree = "<group>"; };
 		19DEA3692A360BF9008637FC /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
 		19E0B77B2A36FD0D00BB626D /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		19E71CCA2A38B856007F0D02 /* CustomFunction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomFunction.swift; sourceTree = "<group>"; };
 		19E71CCC2A38BBA7007F0D02 /* Extension + UIApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + UIApplication.swift"; sourceTree = "<group>"; };
+		19E71CCE2A39D6B0007F0D02 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		19F23FD22A3782EE003A4FC5 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		19F23FD82A3783E2003A4FC5 /* CommunityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityView.swift; sourceTree = "<group>"; };
 		19FE10DC2A389A6000D8DA49 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
@@ -95,7 +105,9 @@
 				19798A152A36059900D73BE4 /* FirebaseAuth in Frameworks */,
 				19798A172A36059900D73BE4 /* FirebaseFirestore in Frameworks */,
 				19E71CC92A38B657007F0D02 /* GoogleSignInSwift in Frameworks */,
+				19FAB82B2A3B213900D9C00D /* SDWebImageSwiftUI in Frameworks */,
 				19798A192A36059900D73BE4 /* FirebaseStorage in Frameworks */,
+				19DB92292A39E2FD00757733 /* Moya in Frameworks */,
 				19E0B77F2A371A6600BB626D /* FirebaseFirestoreSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -245,6 +257,8 @@
 			isa = PBXGroup;
 			children = (
 				19DEA3692A360BF9008637FC /* FirebaseManager.swift */,
+				19DB922B2A39E5DF00757733 /* MoyaManager.swift */,
+				19DB922D2A39E8E000757733 /* SpoonacularApiProvider.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -253,6 +267,7 @@
 			isa = PBXGroup;
 			children = (
 				19E0B77B2A36FD0D00BB626D /* User.swift */,
+				19DB922F2A39F66100757733 /* RecipesByTypeData.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -268,6 +283,7 @@
 			isa = PBXGroup;
 			children = (
 				19F23FD22A3782EE003A4FC5 /* HomeView.swift */,
+				19E71CCE2A39D6B0007F0D02 /* HomeViewModel.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -327,6 +343,8 @@
 				19E0B77E2A371A6600BB626D /* FirebaseFirestoreSwift */,
 				19E71CC62A38B657007F0D02 /* GoogleSignIn */,
 				19E71CC82A38B657007F0D02 /* GoogleSignInSwift */,
+				19DB92282A39E2FD00757733 /* Moya */,
+				19FAB82A2A3B213900D9C00D /* SDWebImageSwiftUI */,
 			);
 			productName = Cookify;
 			productReference = 19AF8A772A06768100388F8F /* Cookify.app */;
@@ -359,6 +377,8 @@
 			packageReferences = (
 				19798A132A36059800D73BE4 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				19E71CC52A38B657007F0D02 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
+				19DB92272A39E2FD00757733 /* XCRemoteSwiftPackageReference "Moya" */,
+				19FAB8292A3B213800D9C00D /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
 			);
 			productRefGroup = 19AF8A782A06768100388F8F /* Products */;
 			projectDirPath = "";
@@ -404,6 +424,7 @@
 				19943BC82A2FA197009E9BCC /* OnboardingCardView.swift in Sources */,
 				19AF8A7D2A06768100388F8F /* OnboardingView.swift in Sources */,
 				19E0B77C2A36FD0D00BB626D /* User.swift in Sources */,
+				19DB922C2A39E5E000757733 /* MoyaManager.swift in Sources */,
 				198C9B062A3500F1008285A3 /* OnboardingCardViewModel.swift in Sources */,
 				1903DF122A37874C00478DFE /* SearchView.swift in Sources */,
 				1903DF142A37878800478DFE /* ShoppingView.swift in Sources */,
@@ -413,10 +434,13 @@
 				19F23FD92A3783E2003A4FC5 /* CommunityView.swift in Sources */,
 				197FF3B52A34451F00EFF1AF /* SignInViewModel.swift in Sources */,
 				19E71CCB2A38B856007F0D02 /* CustomFunction.swift in Sources */,
+				19E71CCF2A39D6B0007F0D02 /* HomeViewModel.swift in Sources */,
+				19DB92302A39F66100757733 /* RecipesByTypeData.swift in Sources */,
 				19E71CCD2A38BBA7007F0D02 /* Extension + UIApplication.swift in Sources */,
 				19F23FD32A3782EE003A4FC5 /* HomeView.swift in Sources */,
 				198C9B0C2A35028F008285A3 /* RegisterView.swift in Sources */,
 				19AF8A7B2A06768100388F8F /* CookifyApp.swift in Sources */,
+				19DB922E2A39E8E000757733 /* SpoonacularApiProvider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -627,12 +651,28 @@
 				minimumVersion = 9.0.0;
 			};
 		};
+		19DB92272A39E2FD00757733 /* XCRemoteSwiftPackageReference "Moya" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Moya/Moya.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 15.0.0;
+			};
+		};
 		19E71CC52A38B657007F0D02 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/google/GoogleSignIn-iOS.git";
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 7.0.0;
+			};
+		};
+		19FAB8292A3B213800D9C00D /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImageSwiftUI.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -653,6 +693,11 @@
 			package = 19798A132A36059800D73BE4 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseStorage;
 		};
+		19DB92282A39E2FD00757733 /* Moya */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 19DB92272A39E2FD00757733 /* XCRemoteSwiftPackageReference "Moya" */;
+			productName = Moya;
+		};
 		19E0B77E2A371A6600BB626D /* FirebaseFirestoreSwift */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 19798A132A36059800D73BE4 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
@@ -667,6 +712,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 19E71CC52A38B657007F0D02 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
 			productName = GoogleSignInSwift;
+		};
+		19FAB82A2A3B213900D9C00D /* SDWebImageSwiftUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 19FAB8292A3B213800D9C00D /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;
+			productName = SDWebImageSwiftUI;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

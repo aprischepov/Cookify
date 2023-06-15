@@ -16,7 +16,7 @@ import GoogleSignInSwift
 protocol FirebaseProtocol {
     func signInUser(email: String, password: String) async throws
     func registerUser(firstName: String, lastName: String, email: String, password: String) async throws
-    func fetchUser() async throws
+    func fetchUser() async throws -> User?
     func signInWithGoogle() async throws
     func logGoogleUser(user: GIDGoogleUser) async throws
 }
@@ -62,8 +62,8 @@ final class FirebaseManager: FirebaseProtocol {
     }
     
 //    Fetch User
-    func fetchUser() async throws {
-        guard let userId = Auth.auth().currentUser?.uid else { return }
+    func fetchUser() async throws -> User? {
+        guard let userId = Auth.auth().currentUser?.uid else { return nil }
         let user = try await Firestore.firestore().collection("Users").document(userId).getDocument(as: User.self)
         await MainActor.run(body: {
             appConditionStored = .signIn
@@ -71,6 +71,7 @@ final class FirebaseManager: FirebaseProtocol {
 //            userLastNameStored = user.lastName
 //            userEmailStored = user.emailAddress
         })
+        return user
     }
     
 //    Sign In With Google
