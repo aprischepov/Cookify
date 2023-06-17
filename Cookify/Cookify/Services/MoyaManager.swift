@@ -9,7 +9,7 @@ import Foundation
 import Moya
 
 protocol MoyaManagerProtocol {
-    func getRecipesByType(type: RecipeType, count: Int) async throws -> RecipesByTypeData
+    func getRecipesByType(type: RecipeType, count: Int, offset: Int) async throws -> RecipesByTypeData
 }
 
 final class MoyaManager: MoyaManagerProtocol {
@@ -22,9 +22,9 @@ final class MoyaManager: MoyaManagerProtocol {
     
 //    MARK: - Methods
 //    Get Recipes By Type
-    func getRecipesByType(type: RecipeType, count: Int) async throws -> RecipesByTypeData {
+    func getRecipesByType(type: RecipeType, count: Int, offset: Int) async throws -> RecipesByTypeData {
         return try await withCheckedThrowingContinuation({ continuation in
-            providerSpoonacular.request(.getRecipesByType(type: type, count: count)) { result in
+            providerSpoonacular.request(.getRecipesByType(type: type, count: count, offset: offset)) { result in
                 switch result {
                 case .success(let response):
                     do {

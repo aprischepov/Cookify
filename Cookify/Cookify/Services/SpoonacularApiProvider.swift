@@ -23,10 +23,43 @@ enum RecipeType: String, CaseIterable {
     case fingerfood = "fingerfood"
     case snack = "snack"
     case drink = "drink"
+    
+    var id: Int {
+        switch self {
+        case .mainCourse:
+            return 0
+        case .sideDish:
+            return 1
+        case .dessert:
+            return 2
+        case .appetizer:
+            return 3
+        case .salad:
+            return 4
+        case .bread:
+            return 5
+        case .breakfast:
+            return 6
+        case .soup:
+            return 7
+        case .beverage:
+            return 8
+        case .sauce:
+            return 9
+        case .marinade:
+            return 10
+        case .fingerfood:
+            return 11
+        case .snack:
+            return 12
+        case .drink:
+            return 13
+        }
+    }
 }
 
 enum SpoonacularApiProvider {
-    case getRecipesByType(type: RecipeType, count: Int)
+    case getRecipesByType(type: RecipeType, count: Int, offset: Int)
 //    case getRecipeInformationById
 //    case searchByIngredients
 }
@@ -56,9 +89,10 @@ extension SpoonacularApiProvider: TargetType {
             params["apiKey"] = spoonacularApiKey
         }
         switch self {
-        case .getRecipesByType(type: let type, count: let count):
+        case .getRecipesByType(type: let type, count: let count, offset: let offset):
             params["type"] = type.rawValue
-            params["addRecipeInformation"] = true
+            params["addRecipeInformation"] = true.description
+            params["offset"] = offset
             params["number"] = count
         }
         return params

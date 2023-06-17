@@ -26,10 +26,10 @@ struct MainView: View {
                 .tabItem {
                     Label("Shopping", systemImage: "list.bullet")
                 }
-            ProfileView()
-                .tabItem {
-                    Label("Profile", systemImage: "person")
-                }
+//            ProfileView()
+//                .tabItem {
+//                    Label("Profile", systemImage: "person")
+//                }
         }
     }
 }

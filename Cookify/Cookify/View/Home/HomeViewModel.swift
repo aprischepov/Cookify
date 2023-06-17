@@ -11,19 +11,48 @@ final class HomeViewModel: ObservableObject {
 //    MARK: - Properties
     private let moyaManager: MoyaManagerProtocol = MoyaManager()
     private let firebaseManager: FirebaseProtocol = FirebaseManager()
-    @Published var listRecipes: [RecipesByTypeData] = []
     @Published var userProfile: User?
+    @Published var searchText: String = ""
+    @Published var currentTypeRecipes: RecipeType = (RecipeType.allCases.first ?? .mainCourse)
     @Published var showError: Bool = false
     @Published var errorMessage: String = "" {
         didSet {
             showError = true
         }
     }
+    //    For list recipes
+    @Published var listRecipes: [RecipeByType] = [] {
+        didSet {
+            offset = listRecipes.count
+            let newData = countRecipesByType - listRecipes.count
+            if newData >= 20 {
+                number = 20
+            } else {
+                number = newData
+            }
+            isLoadingNewData = false
+        }
+    }
+    @Published var isLoadingNewData: Bool = false
+    private var countRecipesByType: Int = 0
+    private var offset: Int = 0
+    private var number: Int = 20
     
 //    MARK: - Methods
 //    Get Recipes By Type
-    func getRecipesByType(type: RecipeType, count: Int) async throws -> RecipesByTypeData {
-        try await moyaManager.getRecipesByType(type: type, count: count)
+    func getRecipesByType() async {
+        Task {
+            do {
+                let recipes = try await moyaManager.getRecipesByType(type: currentTypeRecipes, count: number, offset: offset)
+                await MainActor.run(body: {
+                    countRecipesByType = recipes.totalResults
+                    listRecipes.append(contentsOf: recipes.results)
+                    isLoadingNewData = false
+                })
+            } catch {
+                await errorHandling(error)
+            }
+        }
     }
     
 //    Fetch User Data
@@ -35,13 +64,13 @@ final class HomeViewModel: ObservableObject {
                     userProfile = user
                 })
             } catch {
-                await errorFetchUser(error)
+                await errorHandling(error)
             }
         }
     }
     
 //    Errors
-    private func errorFetchUser(_ error: Error) async {
+    private func errorHandling(_ error: Error) async {
         await MainActor.run(body: {
             errorMessage = error.localizedDescription
         })

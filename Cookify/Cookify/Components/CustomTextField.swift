@@ -72,7 +72,8 @@ struct CustomTextField: View {
             }
         }
         .padding(.horizontal, 16)
-        .frame(maxWidth: .infinity, maxHeight: 56)
+        .frame(maxWidth: .infinity)
+        .frame(height: 56)
         .overlay {
             RoundedRectangle(cornerRadius: 10)
                 .stroke(Color.customColor(.orange))
