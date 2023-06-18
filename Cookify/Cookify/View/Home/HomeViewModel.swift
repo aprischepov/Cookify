@@ -13,7 +13,7 @@ final class HomeViewModel: ObservableObject {
     private let firebaseManager: FirebaseProtocol = FirebaseManager()
     @Published var userProfile: User?
     @Published var searchText: String = ""
-    @Published var currentTypeRecipes: RecipeType = (RecipeType.allCases.first ?? .mainCourse)
+    @Published var currentTypeRecipes: RecipeType = RecipeType.mainCourse 
     @Published var showError: Bool = false
     @Published var errorMessage: String = "" {
         didSet {

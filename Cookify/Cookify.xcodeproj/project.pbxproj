@@ -50,6 +50,8 @@
 		19E71CCB2A38B856007F0D02 /* CustomFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19E71CCA2A38B856007F0D02 /* CustomFunction.swift */; };
 		19E71CCD2A38BBA7007F0D02 /* Extension + UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19E71CCC2A38BBA7007F0D02 /* Extension + UIApplication.swift */; };
 		19E71CCF2A39D6B0007F0D02 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19E71CCE2A39D6B0007F0D02 /* HomeViewModel.swift */; };
+		19E89AC12A3EDDBA00B05868 /* EditProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19E89AC02A3EDDBA00B05868 /* EditProfileViewModel.swift */; };
+		19EE51CE2A3E3514006A423A /* EditProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19EE51CD2A3E3514006A423A /* EditProfileView.swift */; };
 		19F23FD32A3782EE003A4FC5 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19F23FD22A3782EE003A4FC5 /* HomeView.swift */; };
 		19F23FD92A3783E2003A4FC5 /* CommunityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19F23FD82A3783E2003A4FC5 /* CommunityView.swift */; };
 		19F31A662A3C905D003529C7 /* RecipeCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19F31A652A3C905D003529C7 /* RecipeCard.swift */; };
@@ -96,6 +98,8 @@
 		19E71CCA2A38B856007F0D02 /* CustomFunction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomFunction.swift; sourceTree = "<group>"; };
 		19E71CCC2A38BBA7007F0D02 /* Extension + UIApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + UIApplication.swift"; sourceTree = "<group>"; };
 		19E71CCE2A39D6B0007F0D02 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		19E89AC02A3EDDBA00B05868 /* EditProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewModel.swift; sourceTree = "<group>"; };
+		19EE51CD2A3E3514006A423A /* EditProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileView.swift; sourceTree = "<group>"; };
 		19F23FD22A3782EE003A4FC5 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		19F23FD82A3783E2003A4FC5 /* CommunityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityView.swift; sourceTree = "<group>"; };
 		19F31A652A3C905D003529C7 /* RecipeCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeCard.swift; sourceTree = "<group>"; };
@@ -166,6 +170,7 @@
 		19943BC42A2FA120009E9BCC /* View */ = {
 			isa = PBXGroup;
 			children = (
+				19EE51CC2A3E34ED006A423A /* EditProfile */,
 				19F23FD72A37839F003A4FC5 /* Profile */,
 				19F23FD62A378393003A4FC5 /* Shopping */,
 				19F23FD52A37830B003A4FC5 /* Search */,
@@ -285,6 +290,15 @@
 			children = (
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		19EE51CC2A3E34ED006A423A /* EditProfile */ = {
+			isa = PBXGroup;
+			children = (
+				19EE51CD2A3E3514006A423A /* EditProfileView.swift */,
+				19E89AC02A3EDDBA00B05868 /* EditProfileViewModel.swift */,
+			);
+			path = EditProfile;
 			sourceTree = "<group>";
 		};
 		19F23FD12A3782BF003A4FC5 /* Home */ = {
@@ -444,8 +458,10 @@
 				19F23FD92A3783E2003A4FC5 /* CommunityView.swift in Sources */,
 				197FF3B52A34451F00EFF1AF /* SignInViewModel.swift in Sources */,
 				19E71CCB2A38B856007F0D02 /* CustomFunction.swift in Sources */,
+				19EE51CE2A3E3514006A423A /* EditProfileView.swift in Sources */,
 				19E71CCF2A39D6B0007F0D02 /* HomeViewModel.swift in Sources */,
 				19F31A662A3C905D003529C7 /* RecipeCard.swift in Sources */,
+				19E89AC12A3EDDBA00B05868 /* EditProfileViewModel.swift in Sources */,
 				19DB92302A39F66100757733 /* RecipesByTypeData.swift in Sources */,
 				197C50DF2A3E243600E898B5 /* ProfileViewModel.swift in Sources */,
 				19E71CCD2A38BBA7007F0D02 /* Extension + UIApplication.swift in Sources */,
