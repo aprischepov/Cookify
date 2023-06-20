@@ -18,16 +18,16 @@ struct HomeView: View {
                         //                Random Recipe and Profile
                         HStack(alignment: .center) {
                             Button {
-                                //                    get random recipe
+                                vm.showSearch.toggle()
                             } label: {
                                 Image("random")
                             }
                             Spacer()
-                                NavigationLink {
-                                    //                    profile screen
-                                    ProfileView()
-                                } label: {
-                                WebImage(url: vm.userProfile?.image).placeholder {
+                            NavigationLink {
+                                //                    profile screen
+                                ProfileView()
+                            } label: {
+                                WebImage(url: vm.authorizedUser.imageUrl).placeholder {
                                     Image("avatar")
                                         .resizable()
                                         .frame(width: 48, height: 48)
@@ -36,11 +36,14 @@ struct HomeView: View {
                                 .aspectRatio(contentMode: .fill)
                                 .frame(width: 48, height: 48)
                                 .clipShape(Circle())
+                                .overlay {
+                                    Circle().stroke(Color.customColor(.orange))
+                                }
                             }
                         }
                         //                Title
                         VStack(alignment: .leading, spacing: 0) {
-                            Text("Hey \(vm.userProfile?.firstName ?? "") 👋")
+                            Text("Hey \(vm.authorizedUser.firstName ?? "") 👋")
                                 .font(.jost(.semiBold, size: .title))
                             Text("What are you cooking today")
                                 .font(.jost(.medium, size: .titleThree))
@@ -48,30 +51,36 @@ struct HomeView: View {
                     }
                     .padding(.horizontal, 16)
                     //                                    Search Recipes
-                    ZStack {
-                        RoundedRectangle(cornerRadius: 10)
-                            .frame(height: 56)
-                            .foregroundColor(.customColor(.lightGray))
-                        HStack(alignment: .center, spacing: 8) {
-                            Image(systemName: "magnifyingglass")
-                            TextField("Search", text: $vm.searchText)
-                                .font(.jost(.regular, size: .body))
+                    Button {
+//                        action search bar
+                    } label: {
+                        ZStack {
+                            RoundedRectangle(cornerRadius: 10)
+                                .frame(height: 48)
+                                .foregroundColor(.customColor(.lightGray))
+                            HStack(alignment: .center, spacing: 8) {
+                                Image(systemName: "magnifyingglass")
+                                Text("Search")
+                                    .font(.jost(.regular, size: .body))
+                            }
+                            .frame(maxWidth: .infinity, alignment: .center)
+                            .foregroundColor(.customColor(.gray))
                         }
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .padding(16)
                     }
                     .padding(.horizontal, 16)
+//                    .fullScreenCover(isPresented: $vm.showSearch, content: {
+//                        SearchView()
+//                    })
+                    .fullScreenCover(isPresented: $vm.showSearch) {
+                        SearchRecipesView()
+                    }
+
                     //                Recipes Categories
                     ScrollView(.horizontal, showsIndicators: false) {
                         HStack(alignment: .center, spacing: 16) {
                             ForEach(RecipeType.allCases, id: \.id) { type in
                                 Button {
-                                    vm.listRecipes.removeAll()
-                                    vm.isLoadingNewData = true
-                                    vm.currentTypeRecipes = type
-                                    Task {
-                                        await vm.getRecipesByType()
-                                    }
+                                    vm.getMoreRecipesButtonAction(type: type)
                                 } label: {
                                     Text(type.rawValue.capitalizingFirstLetter())
                                         .font(.jost(.regular, size: .body))
@@ -90,38 +99,32 @@ struct HomeView: View {
                     .frame(maxWidth: .infinity)
                     //                Recipes
                     VStack(alignment: .center, spacing: 8) {
-                        ForEach(vm.listRecipes, id: \.id) { recipe in
-                            RecipeCard(recipe: recipe)
-                        }
-                        Button {
-                            Task {
-                                await vm.getRecipesByType()
+                        switch vm.dataCondition {
+                        case .loading:
+                            ProgressView()
+                        case .loaded:
+                            ForEach(vm.listRecipes, id: \.id) { recipe in
+                                RecipeCard(recipe: recipe)
                             }
-                        } label: {
-                            CustomButton(title: "Load more", style: .borderButton)
+                            Button {
+                                Task {
+                                    await vm.getRecipesByType()
+                                }
+                            } label: {
+                                CustomButton(title: "Load more", style: .borderButton)
+                            }
                         }
                     }
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
                     .padding(.horizontal, 16)
-                    .opacity(vm.isLoadingNewData ? 0 : 1)
-                    .overlay {
-                        ProgressView()
-                    }
                 }
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
             .background(Color.customColor(.background))
             .padding(.vertical, 8)
             .task {
-                if vm.userProfile != nil { return }
-                vm.isLoadingNewData = true
-                await vm.fetchUserData()
-                await vm.getRecipesByType()
+                await vm.getAllDataWithStartApp()
             }
-//            .refreshable {
-//                //            refresh action
-//                vm.userProfile = nil
-//                await vm.fetchUserData()
-//        }
         }
     }
 }

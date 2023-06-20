@@ -7,26 +7,29 @@
 
 import SwiftUI
 import SDWebImageSwiftUI
-import PhotosUI
 
 struct EditProfileView: View {
     @Environment(\.dismiss) private var dismiss
     @StateObject private var vm = EditProfileViewModel()
+    @State var imageData: Data?
     var body: some View {
         VStack(alignment: .center, spacing: 16) {
             //                User Image
             Button {
                 vm.showImagePicker.toggle()
             } label: {
-                WebImage(url: URL(string: vm.userImage)).placeholder {
-                    Image("avatar")
-                        .resizable()
-                        .frame(width: 96, height: 96)
-                }
-                .resizable()
-                .aspectRatio(contentMode: .fill)
-                .frame(width: 96, height: 96)
-                .clipShape(Circle())
+                    WebImage(url: URL(string: vm.userImage)).placeholder {
+                        Image("avatar")
+                            .resizable()
+                            .frame(width: 96, height: 96)
+                    }
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .frame(width: 96, height: 96)
+                    .clipShape(Circle())
+                    .overlay {
+                        Circle().stroke(Color.customColor(.orange), lineWidth: 2)
+                    }
             }
             
             //                User Info
@@ -52,23 +55,22 @@ struct EditProfileView: View {
             //                Update Profile Data
             Button {
                 vm.updateData()
+                dismiss()
             } label: {
                 CustomButton(title: "Update",
                              style: .filledButton)
             }
-            .opacity(vm.checkChanges() ? 1 : 0.7)
-            .disabled(!vm.checkChanges())
+            .opacity(vm.isActivedButton ? 1 : 0.7)
+            .disabled(!vm.isActivedButton)
             
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
         .padding(.horizontal, 16)
         .padding(.vertical, 8)
-        .photosPicker(isPresented: $vm.showImagePicker, selection: $vm.imageItem)
-        .onChange(of: vm.imageItem) { newValue in
-            if let newValue {
-                vm.updateImage(image: newValue)
-            }
+        .sheet(isPresented: $vm.showImagePicker) {
+            ImagePicker(imageUrl: $vm.userImage)
         }
+        .alert(vm.errorMessage, isPresented: $vm.showError) {}
     }
 }
 

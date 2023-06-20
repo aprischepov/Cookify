@@ -10,11 +10,10 @@ import SwiftUI
 
 final class ProfileViewModel: ObservableObject {
 //    MARK: - Properties
-    @AppStorage("userFirstName") var userFirsNameStored: String?
-    @AppStorage("userLastName") var userLastNameStored: String?
-    @AppStorage("userEmail") var userEmailStored: String?
-    @AppStorage("userImage") var userImage: String?
-    @Published var userProfile: User?
+//    User Properties
+    private let firebaseManager: FirebaseProtocol = FirebaseManager()
+    var authorizedUser = AuthorizedUser.shared
+//    View Properties
     @Published var editProfile: Bool = false
     @Published var errorMessage: String = "" {
         didSet {
@@ -22,7 +21,6 @@ final class ProfileViewModel: ObservableObject {
         }
     }
     @Published var showError: Bool = false
-    private let firebaseManager: FirebaseProtocol = FirebaseManager()
     
 //    MARK: - Methods
     func signOut() {

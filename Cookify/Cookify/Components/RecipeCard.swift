@@ -31,12 +31,11 @@ struct RecipeCard: View {
 //                    Health Score
                     HStack(alignment: .center, spacing: 4) {
                         Text("Health score:")
-                            .font(.jost(.regular, size: .caption))
                             .foregroundColor(.customColor(.orange))
                         Text("\(recipe.healthScore) %")
-                            .font(.jost(.regular, size: .caption))
                             .foregroundColor(.customColor(.gray))
                     }
+                    .font(.jost(.regular, size: .caption))
 //                    Ready In Minutes
                     HStack(alignment: .center, spacing: 4) {
                         Image(systemName: "clock")

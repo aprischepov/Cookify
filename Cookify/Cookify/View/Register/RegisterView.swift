@@ -48,8 +48,8 @@ struct RegisterView: View {
             } label: {
                 CustomButton(title: "Sign Up", style: .filledButton)
             }
-            .opacity(vm.activateButton() ? 1 : 0.7)
-            .disabled(!vm.activateButton())
+            .opacity(vm.isButtonActivated ? 1 : 0.7)
+            .disabled(!vm.isButtonActivated)
             Spacer()
             HStack(alignment: .top, spacing: 4) {
                 Text("Already have an account?")

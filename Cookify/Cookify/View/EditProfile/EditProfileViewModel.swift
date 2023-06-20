@@ -7,58 +7,68 @@
 
 import Foundation
 import SwiftUI
-import PhotosUI
+import Combine
 
 final class EditProfileViewModel: ObservableObject {
 //    MARK: - Properties
-//    User Properties
-    @AppStorage("userFirstName") var userFirsNameStored: String?
-    @AppStorage("userLastName") var userLastNameStored: String?
-    @AppStorage("userEmail") var userEmailStored: String?
-    @AppStorage("userImage") var userImageStored: String?
+    private let firebaseManager: FirebaseProtocol = FirebaseManager()
+    private var authorizedUser = AuthorizedUser.shared
+    private var subscriptions = Set<AnyCancellable>()
 //    View Properies
     @Published var inputUserFirstName: String = ""
     @Published var inputUserLastName: String = ""
     @Published var inputUserEmail: String = ""
     @Published var userImage: String = ""
     @Published var showImagePicker: Bool = false
-    @Published var imageItem: PhotosPickerItem?
+    @Published var isActivedButton: Bool = false
+    @Published var errorMessage: String = "" {
+        didSet {
+            showError = true
+        }
+    }
+    @Published var showError: Bool = false
     
     init() {
-        inputUserFirstName = userFirsNameStored ?? ""
-        inputUserLastName = userLastNameStored ?? ""
-        inputUserEmail = userEmailStored ?? ""
-        userImage = userImageStored ?? ""
+        inputUserFirstName = authorizedUser.firstName ?? ""
+        inputUserLastName = authorizedUser.lastName ?? ""
+        inputUserEmail = authorizedUser.emailAddress ?? ""
+        userImage = authorizedUser.imageUrl?.description ?? ""
+        
+        Publishers.CombineLatest4($inputUserFirstName, $inputUserLastName, $inputUserEmail, $userImage).sink { [weak self] _ in
+            guard let self else { return }
+            self.checkChanges()
+        }.store(in: &subscriptions)
     }
     
 //    MARK: - Methods
 //    Button Activation
-    func checkChanges() -> Bool{
-        //    If something ghanges - button is active
-        if inputUserFirstName == userFirsNameStored,
-           inputUserLastName == userLastNameStored,
-           inputUserEmail == userEmailStored {
-            return false
-        } else {
-            return true
-        }
+    func checkChanges() {
+        isActivedButton = inputUserFirstName != authorizedUser.firstName ?? "" ||
+        inputUserLastName != authorizedUser.lastName ?? "" ||
+        inputUserEmail != authorizedUser.emailAddress ?? "" ||
+        userImage != authorizedUser.imageUrl?.description ?? ""
     }
     
-//    Update Local Image
-    func updateImage(image: PhotosPickerItem) {
+    func checrStorage() {
+        
+    }
+    
+    
+//    Update Data in Firebase Storage
+    func updateData() {
+        guard let imageUrl = URL(string: userImage) else { return }
         Task {
             do {
-                guard let imageData = try await image.loadTransferable(type: Data.self) else { return }
-                
-                await MainActor.run(body: {
-//                    userImage = imageData.absoluteString
-                })
+                try await firebaseManager.updateUserProfile(firstName: inputUserFirstName, lastName: inputUserLastName, email: inputUserEmail, imageUrl: imageUrl)
+            } catch {
+                await errorHandling(error)
             }
         }
     }
     
-//    Update Data in Firebase Storage
-    func updateData() {
-        
+    private func errorHandling(_ error: Error) async {
+        await MainActor.run(body: {
+            errorMessage = error.localizedDescription
+        })
     }
 }

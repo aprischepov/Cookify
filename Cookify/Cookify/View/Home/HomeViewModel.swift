@@ -11,30 +11,35 @@ final class HomeViewModel: ObservableObject {
 //    MARK: - Properties
     private let moyaManager: MoyaManagerProtocol = MoyaManager()
     private let firebaseManager: FirebaseProtocol = FirebaseManager()
-    @Published var userProfile: User?
+    @Published var authorizedUser = AuthorizedUser.shared
+//    View Properties
     @Published var searchText: String = ""
+    @Published var dataCondition: DataCondition = .loading
+    @Published var updateData: Bool = true
     @Published var currentTypeRecipes: RecipeType = RecipeType.mainCourse 
     @Published var showError: Bool = false
+    @Published var showSearch: Bool = false
     @Published var errorMessage: String = "" {
         didSet {
             showError = true
         }
     }
-    //    For list recipes
+    //    Recipes Properties
     @Published var listRecipes: [RecipeByType] = [] {
         didSet {
             offset = listRecipes.count
+        }
+    }
+    private var countRecipesByType: Int = 0 {
+        didSet {
             let newData = countRecipesByType - listRecipes.count
             if newData >= 20 {
                 number = 20
             } else {
                 number = newData
             }
-            isLoadingNewData = false
         }
     }
-    @Published var isLoadingNewData: Bool = false
-    private var countRecipesByType: Int = 0
     private var offset: Int = 0
     private var number: Int = 20
     
@@ -47,7 +52,7 @@ final class HomeViewModel: ObservableObject {
                 await MainActor.run(body: {
                     countRecipesByType = recipes.totalResults
                     listRecipes.append(contentsOf: recipes.results)
-                    isLoadingNewData = false
+                    dataCondition = .loaded
                 })
             } catch {
                 await errorHandling(error)
@@ -59,14 +64,31 @@ final class HomeViewModel: ObservableObject {
     func fetchUserData() async {
         Task {
             do {
-                let user = try await firebaseManager.fetchUser()
-                await MainActor.run(body: {
-                    userProfile = user
-                })
+                try await firebaseManager.fetchUser()
             } catch {
                 await errorHandling(error)
             }
         }
+    }
+    
+    func getMoreRecipesButtonAction(type: RecipeType) {
+        listRecipes.removeAll()
+        dataCondition = .loading
+        currentTypeRecipes = type
+        Task {
+            await getRecipesByType()
+        }
+    }
+    
+    func getAllDataWithStartApp() async {
+        if !updateData { return }
+        DispatchQueue.main.async { [weak self] in
+            guard let self else { return }
+            self.dataCondition = .loading
+            self.updateData = false
+        }
+        await fetchUserData()
+        await getRecipesByType()
     }
     
 //    Errors
@@ -75,4 +97,9 @@ final class HomeViewModel: ObservableObject {
             errorMessage = error.localizedDescription
         })
     }
+}
+
+enum DataCondition {
+    case loading
+    case loaded
 }

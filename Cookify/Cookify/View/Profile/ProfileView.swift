@@ -19,7 +19,7 @@ struct ProfileView: View {
                         vm.editProfile.toggle()
                     } label: {
                         HStack(alignment: .center, spacing: 16) {
-                            WebImage(url: URL(string: vm.userImage ?? "")).placeholder {
+                            WebImage(url: vm.authorizedUser.imageUrl).placeholder {
                                 Image("avatar")
                                     .resizable()
                                     .frame(width: 56, height: 56)
@@ -28,11 +28,14 @@ struct ProfileView: View {
                             .aspectRatio(contentMode: .fill)
                             .frame(width: 56, height: 56)
                             .clipShape(Circle())
+                            .overlay {
+                                Circle().stroke(Color.customColor(.orange))
+                            }
                             VStack(alignment: .leading, spacing: 0) {
-                                Text("\(vm.userFirsNameStored ?? "Unkrnown") \(vm.userLastNameStored ?? "User")")
+                                Text("\(vm.authorizedUser.firstName ?? "Unkrnown") \(vm.authorizedUser.lastName ?? "User")")
                                     .font(.jost(.regular, size: .body))
                                     .foregroundColor(.customColor(.black))
-                                Text(vm.userEmailStored ?? "Email")
+                                Text(vm.authorizedUser.emailAddress ?? "Email")
                                     .font(.jost(.regular, size: .footnote))
                                     .foregroundColor(.customColor(.gray))
                             }
@@ -63,8 +66,6 @@ struct ProfileView: View {
                         Text("Sign Out")
                             .frame(maxWidth: .infinity, alignment: .center)
                     }
-                    
-                    
                 }
                 .font(.jost(.regular, size: .body))
             }

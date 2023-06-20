@@ -29,12 +29,12 @@ final class MoyaManager: MoyaManagerProtocol {
                 case .success(let response):
                     do {
                         let recipes = try response.map(RecipesByTypeData.self)
-                        continuation.resume(with: .success(recipes))
+                        continuation.resume(returning: recipes)
                     } catch {
                         continuation.resume(throwing: error)
                     }
                 case .failure(let error):
-                    continuation.resume(with: .failure(error))
+                    continuation.resume(throwing: error)
                 }
             }
         })
