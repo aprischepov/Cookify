@@ -68,9 +68,6 @@ struct HomeView: View {
                         }
                     }
                     .padding(.horizontal, 16)
-//                    .fullScreenCover(isPresented: $vm.showSearch, content: {
-//                        SearchView()
-//                    })
                     .fullScreenCover(isPresented: $vm.showSearch) {
                         SearchRecipesView()
                     }
@@ -98,7 +95,7 @@ struct HomeView: View {
                     }
                     .frame(maxWidth: .infinity)
                     //                Recipes
-                    VStack(alignment: .center, spacing: 8) {
+                    VStack(alignment: .center, spacing: 16) {
                         switch vm.dataCondition {
                         case .loading:
                             ProgressView()

@@ -10,6 +10,7 @@
 		1903DF122A37874C00478DFE /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1903DF112A37874C00478DFE /* SearchView.swift */; };
 		1903DF142A37878800478DFE /* ShoppingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1903DF132A37878800478DFE /* ShoppingView.swift */; };
 		1903DF162A37879800478DFE /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1903DF152A37879800478DFE /* ProfileView.swift */; };
+		19100F552A422E3300AE6549 /* Extension + View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19100F542A422E3200AE6549 /* Extension + View.swift */; };
 		191564932A3B7D11000B9F97 /* Extension + String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 191564922A3B7D11000B9F97 /* Extension + String.swift */; };
 		195AA8DA2A35E65600F7E6CF /* Jost-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 195AA8D42A35E65600F7E6CF /* Jost-Light.ttf */; };
 		195AA8DB2A35E65600F7E6CF /* Jost-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 195AA8D52A35E65600F7E6CF /* Jost-Regular.ttf */; };
@@ -47,6 +48,7 @@
 		19E0B77F2A371A6600BB626D /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 19E0B77E2A371A6600BB626D /* FirebaseFirestoreSwift */; };
 		19E187C82A41BA3D001C7051 /* AuthorizedUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19E187C72A41BA3D001C7051 /* AuthorizedUser.swift */; };
 		19E187CA2A41F67D001C7051 /* SearchRecipesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19E187C92A41F67D001C7051 /* SearchRecipesView.swift */; };
+		19E3EBC62A42002900460F91 /* SearchRecipesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19E3EBC52A42002900460F91 /* SearchRecipesViewModel.swift */; };
 		19E71CC72A38B657007F0D02 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 19E71CC62A38B657007F0D02 /* GoogleSignIn */; };
 		19E71CC92A38B657007F0D02 /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 19E71CC82A38B657007F0D02 /* GoogleSignInSwift */; };
 		19E71CCB2A38B856007F0D02 /* CustomFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19E71CCA2A38B856007F0D02 /* CustomFunction.swift */; };
@@ -66,6 +68,7 @@
 		1903DF112A37874C00478DFE /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		1903DF132A37878800478DFE /* ShoppingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingView.swift; sourceTree = "<group>"; };
 		1903DF152A37879800478DFE /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		19100F542A422E3200AE6549 /* Extension + View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + View.swift"; sourceTree = "<group>"; };
 		191564922A3B7D11000B9F97 /* Extension + String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + String.swift"; sourceTree = "<group>"; };
 		195AA8D42A35E65600F7E6CF /* Jost-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Jost-Light.ttf"; sourceTree = "<group>"; };
 		195AA8D52A35E65600F7E6CF /* Jost-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Jost-Regular.ttf"; sourceTree = "<group>"; };
@@ -100,6 +103,7 @@
 		19E0B77B2A36FD0D00BB626D /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		19E187C72A41BA3D001C7051 /* AuthorizedUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizedUser.swift; sourceTree = "<group>"; };
 		19E187C92A41F67D001C7051 /* SearchRecipesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRecipesView.swift; sourceTree = "<group>"; };
+		19E3EBC52A42002900460F91 /* SearchRecipesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRecipesViewModel.swift; sourceTree = "<group>"; };
 		19E71CCA2A38B856007F0D02 /* CustomFunction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomFunction.swift; sourceTree = "<group>"; };
 		19E71CCC2A38BBA7007F0D02 /* Extension + UIApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + UIApplication.swift"; sourceTree = "<group>"; };
 		19E71CCE2A39D6B0007F0D02 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
@@ -198,6 +202,7 @@
 				19AF33432A30F73500DD252D /* Extension + Color.swift */,
 				19E71CCC2A38BBA7007F0D02 /* Extension + UIApplication.swift */,
 				191564922A3B7D11000B9F97 /* Extension + String.swift */,
+				19100F542A422E3200AE6549 /* Extension + View.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -303,6 +308,7 @@
 			isa = PBXGroup;
 			children = (
 				19E187C92A41F67D001C7051 /* SearchRecipesView.swift */,
+				19E3EBC52A42002900460F91 /* SearchRecipesViewModel.swift */,
 			);
 			path = SearchRecipes;
 			sourceTree = "<group>";
@@ -463,6 +469,7 @@
 				197FF3B12A32488D00EFF1AF /* CustomTextField.swift in Sources */,
 				19943BC82A2FA197009E9BCC /* OnboardingCardView.swift in Sources */,
 				19AF8A7D2A06768100388F8F /* OnboardingView.swift in Sources */,
+				19100F552A422E3300AE6549 /* Extension + View.swift in Sources */,
 				19E0B77C2A36FD0D00BB626D /* User.swift in Sources */,
 				19E187CA2A41F67D001C7051 /* SearchRecipesView.swift in Sources */,
 				19DB922C2A39E5E000757733 /* MoyaManager.swift in Sources */,
@@ -482,6 +489,7 @@
 				19F31A662A3C905D003529C7 /* RecipeCard.swift in Sources */,
 				19E89AC12A3EDDBA00B05868 /* EditProfileViewModel.swift in Sources */,
 				19DB92302A39F66100757733 /* RecipesByTypeData.swift in Sources */,
+				19E3EBC62A42002900460F91 /* SearchRecipesViewModel.swift in Sources */,
 				197C50DF2A3E243600E898B5 /* ProfileViewModel.swift in Sources */,
 				19E71CCD2A38BBA7007F0D02 /* Extension + UIApplication.swift in Sources */,
 				19F23FD32A3782EE003A4FC5 /* HomeView.swift in Sources */,

@@ -12,7 +12,7 @@ import Combine
 final class EditProfileViewModel: ObservableObject {
 //    MARK: - Properties
     private let firebaseManager: FirebaseProtocol = FirebaseManager()
-    private var authorizedUser = AuthorizedUser.shared
+    @StateObject private var authorizedUser = AuthorizedUser.shared
     private var subscriptions = Set<AnyCancellable>()
 //    View Properies
     @Published var inputUserFirstName: String = ""

@@ -20,4 +20,5 @@ struct RecipeByType: Decodable {
     let readyInMinutes: Int
     let servings: Int
     let image: String
+    let pricePerServing: Double
 }

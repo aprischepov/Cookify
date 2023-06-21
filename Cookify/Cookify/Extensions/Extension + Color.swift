@@ -16,6 +16,7 @@ enum Colors: String {
     case black = "black"
     case gray = "gray"
     case lightGray = "lightGray"
+    case lightOrange = "lightOrange"
 }
 
 extension Color {
