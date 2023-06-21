@@ -19,6 +19,7 @@ enum FontName: String {
 enum FontSize: CGFloat {
     case largeTitle = 32
     case title = 24
+    case titleThree = 20
     case body = 18
     case footnote = 14
     case caption = 12

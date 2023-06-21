@@ -37,5 +37,7 @@
 		<key>UISceneConfigurations</key>
 		<dict/>
 	</dict>
+	<key>SpoonacularApiKey</key>
+	<string>3be93607dd0a4cd58976e8178189ad5d</string>
 </dict>
 </plist>

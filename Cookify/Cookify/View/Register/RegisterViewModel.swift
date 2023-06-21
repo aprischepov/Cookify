@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import Combine
 
 final class RegistrationViewModel : ObservableObject {
 //    MARK: Properties
@@ -26,19 +27,29 @@ final class RegistrationViewModel : ObservableObject {
     }
     @Published var showError: Bool = false
     @Published var isLoading: Bool = false
+    @Published var isButtonActivated: Bool = false
+    private var subscriptions = Set<AnyCancellable>()
+    
+    init() {
+        let generalParams = Publishers
+            .CombineLatest3($firstName, $lastName, $emailAddress)
+        let passwords = Publishers
+            .CombineLatest($password, $confirmedPassword)
+        generalParams.combineLatest(passwords).sink { [weak self] _ in
+            guard let self else { return }
+            self.activateButton()
+        }.store(in: &subscriptions)
+    }
     
 //    Check all fields and compare passwords
-    func activateButton() -> Bool {
-        if !firstName.isEmpty,
-           !lastName.isEmpty,
-           !emailAddress.isEmpty,
-           !password.isEmpty,
-           !confirmedPassword.isEmpty,
-           password == confirmedPassword {
-            return true
-        } else {
-            return false
-        }
+    func activateButton() {
+        isButtonActivated =  !firstName.isEmpty &&
+           !lastName.isEmpty &&
+           !emailAddress.isEmpty &&
+           !password.isEmpty &&
+           !confirmedPassword.isEmpty &&
+           password == confirmedPassword
+            
     }
     
     func registerUser() {

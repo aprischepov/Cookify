@@ -54,7 +54,8 @@ struct CustomButton: View {
                 }
             }
         }
-        .frame(maxWidth: .infinity, maxHeight: 48)
+        .frame(maxWidth: .infinity)
+        .frame(height: 48)
         .font(.jost(.medium, size: .body))
         .overlay {
             RoundedRectangle(cornerRadius: 10)

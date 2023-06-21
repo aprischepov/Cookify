@@ -35,7 +35,7 @@ final class SignInViewModel: ObservableObject {
         }
     }
     
-    func errorSignIn(_ error: Error) async {
+    private func errorSignIn(_ error: Error) async {
         await MainActor.run(body: {
             errorMessage = error.localizedDescription
             isLoading = false
