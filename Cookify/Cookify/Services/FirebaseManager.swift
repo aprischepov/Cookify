@@ -125,7 +125,7 @@ final class FirebaseManager: FirebaseProtocol {
         try Auth.auth().signOut()
         await MainActor.run(body: {
             appConditionStored = .signOut
-            AuthorizedUser.shared.destroy()
+            AuthorizedUser.shared.deleteUserData()
         })
     }
 }

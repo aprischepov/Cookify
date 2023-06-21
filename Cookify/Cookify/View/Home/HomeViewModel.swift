@@ -11,11 +11,10 @@ final class HomeViewModel: ObservableObject {
 //    MARK: - Properties
     private let moyaManager: MoyaManagerProtocol = MoyaManager()
     private let firebaseManager: FirebaseProtocol = FirebaseManager()
-    @Published var authorizedUser = AuthorizedUser.shared
+    var authorizedUser = AuthorizedUser.shared
 //    View Properties
     @Published var searchText: String = ""
     @Published var dataCondition: DataCondition = .loading
-    @Published var updateData: Bool = true
     @Published var currentTypeRecipes: RecipeType = RecipeType.mainCourse 
     @Published var showError: Bool = false
     @Published var showSearch: Bool = false
@@ -81,11 +80,9 @@ final class HomeViewModel: ObservableObject {
     }
     
     func getAllDataWithStartApp() async {
-        if !updateData { return }
-        DispatchQueue.main.async { [weak self] in
-            guard let self else { return }
-            self.dataCondition = .loading
-            self.updateData = false
+        if !listRecipes.isEmpty { return }
+        await MainActor.run {
+            dataCondition = .loading
         }
         await fetchUserData()
         await getRecipesByType()

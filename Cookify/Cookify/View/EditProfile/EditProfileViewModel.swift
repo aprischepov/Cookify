@@ -49,11 +49,6 @@ final class EditProfileViewModel: ObservableObject {
         userImage != authorizedUser.imageUrl?.description ?? ""
     }
     
-    func checrStorage() {
-        
-    }
-    
-    
 //    Update Data in Firebase Storage
     func updateData() {
         guard let imageUrl = URL(string: userImage) else { return }

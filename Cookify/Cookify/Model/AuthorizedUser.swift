@@ -16,7 +16,7 @@ final class AuthorizedUser: ObservableObject {
     
     private init() {}
     
-    func destroy() {
+    func deleteUserData() {
         firstName = nil
         lastName = nil
         emailAddress = nil
