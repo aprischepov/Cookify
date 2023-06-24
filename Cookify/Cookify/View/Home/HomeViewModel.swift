@@ -11,7 +11,7 @@ final class HomeViewModel: ObservableObject {
 //    MARK: - Properties
     private let moyaManager: MoyaManagerProtocol = MoyaManager()
     private let firebaseManager: FirebaseProtocol = FirebaseManager()
-    var authorizedUser = AuthorizedUser.shared
+    @Published var authorizedUser = AuthorizedUser.shared
 //    View Properties
     @Published var searchText: String = ""
     @Published var dataCondition: DataCondition = .loading
@@ -24,6 +24,7 @@ final class HomeViewModel: ObservableObject {
         }
     }
     //    Recipes Properties
+    @Published var listFavoritesRecipes: [FavoriteRecipe] = []
     @Published var listRecipes: [RecipeByType] = [] {
         didSet {
             offset = listRecipes.count
@@ -85,6 +86,7 @@ final class HomeViewModel: ObservableObject {
             dataCondition = .loading
         }
         await fetchUserData()
+        await fetchFavoritesRecipes()
         await getRecipesByType()
     }
     
@@ -93,6 +95,56 @@ final class HomeViewModel: ObservableObject {
         await MainActor.run(body: {
             errorMessage = error.localizedDescription
         })
+    }
+    
+//    Add Recipe to Favorites
+    func addRecipeToFavorites(recipe: FavoriteRecipe) {
+        Task {
+            do {
+                let uid = try await firebaseManager.addToFavorites(recipe: recipe)
+                let favoriteRecipe = FavoriteRecipe(uid: uid, veryPopular: recipe.veryPopular, healthScore: recipe.healthScore, id: recipe.id, title: recipe.title, readyInMinutes: recipe.readyInMinutes, servings: recipe.servings, image: recipe.image, pricePerServing: recipe.pricePerServing)
+                await MainActor.run(body: {
+                    listFavoritesRecipes.append(favoriteRecipe)
+                })
+            } catch {
+                await errorHandling(error)
+            }
+        }
+    }
+    
+//    Fetch Favorites Recipes
+    func fetchFavoritesRecipes() async {
+        Task {
+            do {
+                let fetchedRecipes = try await firebaseManager.fetchFavoritesRecipes()
+                await MainActor.run(body: {
+                    listFavoritesRecipes = fetchedRecipes
+                })
+            } catch {
+                await errorHandling(error)
+            }
+        }
+    }
+    
+//    Search Favorites
+    func searchById(id: Int) -> Bool {
+        listFavoritesRecipes.contains { $0.id == id }
+    }
+    
+//    Remove Recipe from Favorites
+    func removeFromFavorites(recipe: FavoriteRecipe) {
+        let selectedRecipe = listFavoritesRecipes.first{ $0.id == recipe.id }
+        guard let recipeSelect = selectedRecipe else { return }
+        Task {
+            do {
+                try await firebaseManager.deleteFromFavorites(recipe: recipeSelect)
+                await MainActor.run(body: {
+                    listFavoritesRecipes.removeAll{ $0.id == recipeSelect.id }
+                })
+            } catch {
+                await errorHandling(error)
+            }
+        }
     }
 }
 

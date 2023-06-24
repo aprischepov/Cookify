@@ -9,7 +9,8 @@ import SwiftUI
 import SDWebImageSwiftUI
 
 struct HomeView: View {
-    @StateObject private var vm = HomeViewModel()
+    @StateObject var vm: HomeViewModel
+    @StateObject private var user = AuthorizedUser.shared
     var body: some View {
         NavigationView {
             ScrollView(.vertical, showsIndicators: false) {
@@ -43,7 +44,7 @@ struct HomeView: View {
                         }
                         //                Title
                         VStack(alignment: .leading, spacing: 0) {
-                            Text("Hey \(vm.authorizedUser.firstName ?? "") 👋")
+                            Text("Hey \(user.firstName ?? "") 👋")
                                 .font(.jost(.semiBold, size: .title))
                             Text("What are you cooking today")
                                 .font(.jost(.medium, size: .titleThree))
@@ -52,7 +53,7 @@ struct HomeView: View {
                     .padding(.horizontal, 16)
                     //                                    Search Recipes
                     Button {
-//                        action search bar
+                        //                        action search bar
                     } label: {
                         ZStack {
                             RoundedRectangle(cornerRadius: 10)
@@ -71,7 +72,7 @@ struct HomeView: View {
                     .fullScreenCover(isPresented: $vm.showSearch) {
                         SearchRecipesView()
                     }
-
+                    
                     //                Recipes Categories
                     ScrollView(.horizontal, showsIndicators: false) {
                         HStack(alignment: .center, spacing: 16) {
@@ -98,10 +99,29 @@ struct HomeView: View {
                     VStack(alignment: .center, spacing: 16) {
                         switch vm.dataCondition {
                         case .loading:
+                            Spacer()
                             ProgressView()
+                            Spacer()
                         case .loaded:
                             ForEach(vm.listRecipes, id: \.id) { recipe in
-                                RecipeCard(recipe: recipe)
+                                RecipeCard(recipe: recipe,
+                                           isFavorite: vm.searchById(id: recipe.id)) { isFavorite in
+                                    if isFavorite {
+                                        vm.removeFromFavorites(recipe: FavoriteRecipe(veryPopular: recipe.veryPopular, healthScore: recipe.healthScore, id: recipe.id, title: recipe.title, readyInMinutes: recipe.readyInMinutes, servings: recipe.servings, image: recipe.image, pricePerServing: recipe.pricePerServing))
+//                                        vm.removeFromFavorites(recipe: FavoriteRecipe(veryPopular: recipe.veryPopular, healthScore: recipe.healthScore, id: recipe.id, title: recipe.title, readyInMinutes: recipe.readyInMinutes, servings: recipe.servings, image: recipe.image, pricePerServing: recipe.pricePerServing))
+//                                        let selectedRecipe = vm.listFavoritesRecipes.filter{ $0.id == recipe.id }
+                                        
+//                                        let selectedRecipe = vm.listFavoritesRecipes.first{ $0.id == recipe.id }
+                                        
+//                                        vm.listFavoritesRecipes.removeAll { favoriteRecipe in
+//                                            favoriteRecipe.id == recipe.id
+//                                        }
+                                    } else {
+                                        vm.addRecipeToFavorites(recipe: FavoriteRecipe(veryPopular: recipe.veryPopular, healthScore: recipe.healthScore, id: recipe.id, title: recipe.title, readyInMinutes: recipe.readyInMinutes, servings: recipe.servings, image: recipe.image, pricePerServing: recipe.pricePerServing))
+//                                        vm.listFavoritesRecipes.append(FavoriteRecipe(veryPopular: recipe.veryPopular, healthScore: recipe.healthScore, id: recipe.id, title: recipe.title, readyInMinutes: recipe.readyInMinutes, servings: recipe.servings, image: recipe.image, pricePerServing: recipe.pricePerServing))
+//                                        vm.addRecipeToFavorites(recipe: FavoriteRecipe(veryPopular: recipe.veryPopular, healthScore: recipe.healthScore, id: recipe.id, title: recipe.title, readyInMinutes: recipe.readyInMinutes, servings: recipe.servings, image: recipe.image, pricePerServing: recipe.pricePerServing))
+                                    }
+                                }
                             }
                             Button {
                                 Task {
@@ -128,6 +148,6 @@ struct HomeView: View {
 
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
-        HomeView()
+        HomeView(vm: HomeViewModel())
     }
 }
