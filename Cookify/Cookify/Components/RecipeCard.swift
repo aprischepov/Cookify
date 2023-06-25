@@ -10,8 +10,8 @@ import SDWebImageSwiftUI
 
 struct RecipeCard: View {
     var recipe: Recipe
-    @State var isFavorite: Bool
-    var favoriteTapped: (Bool) -> Void
+//    @State var isFavorite: Bool
+    var favoriteTapped: () -> Void
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
 //            Main Recipe Image - Upper Half of Card
@@ -61,10 +61,11 @@ struct RecipeCard: View {
                         .foregroundColor(.customColor(.darkGray))
                     Spacer()
                     Button {
-                        favoriteTapped(isFavorite)
-                        isFavorite.toggle()
+//                        favoriteTapped(isFavorite)
+//                        isFavorite.toggle()
+                        favoriteTapped()
                     } label: {
-                        Image(systemName: isFavorite ? "heart.fill" : "heart")
+                        Image(systemName: recipe.isFavorite ? "heart.fill" : "heart")
                             .resizable()
                             .frame(width: 30, height: 24)
                     }
@@ -82,7 +83,7 @@ struct RecipeCard: View {
 
 struct RecipeCard_Previews: PreviewProvider {
     static var previews: some View {
-        RecipeCard(recipe: Recipe(isFavorite: false, veryPopular: false, healthScore: 100, id: 782585, title: "Cannellini Bean", readyInMinutes: 45, servings: 6, image: "https://spoonacular.com/recipeImages/782585-312x231.jpg", pricePerServing: 10.0), isFavorite: false, favoriteTapped: { _ in })
+        RecipeCard(recipe: Recipe(isFavorite: false, veryPopular: false, healthScore: 100, id: 782585, title: "Cannellini Bean", readyInMinutes: 45, servings: 6, image: "https://spoonacular.com/recipeImages/782585-312x231.jpg", pricePerServing: 10.0), favoriteTapped: {  })
             .previewLayout(.sizeThatFits)
             .padding()
     }

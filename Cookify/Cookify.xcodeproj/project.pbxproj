@@ -359,9 +359,9 @@
 		19F23FD12A3782BF003A4FC5 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				19F6BC402A47708300E95F68 /* HomeViewModel.swift */,
 				19F23FD22A3782EE003A4FC5 /* HomeView.swift */,
 				19E187CB2A41F68A001C7051 /* SearchRecipes */,
-				19F6BC402A47708300E95F68 /* HomeViewModel.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";

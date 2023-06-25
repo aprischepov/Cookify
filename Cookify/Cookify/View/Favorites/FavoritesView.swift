@@ -20,19 +20,7 @@ struct FavoritesView: View {
                     FavoriteRecipeCard(recipe: recipe)
                 }
                 .onDelete { indexSet in
-//                    vm.sendIndexRecipes(index: indexSet)
-//                    vm.favoriteRecipes.remove(atOffsets: indexSet)
                     vm.removeFavriteRecipe(indexSet: indexSet)
-//                    for index in indexSet {
-//                        vm.removeRecipe(index: index)
-//                    }
-//                    for index in indexSet {
-////                        vm.removeRecipe(index: index)
-//                        vm.likedRecipes.remove(at: index)
-//                    }
-                    
-//                    vm.removeRecipe(index: index)
-//                    let rem = vm.likedRecipes.remove(atOffsets: index)
                 }
             }
             .listStyle(.inset)

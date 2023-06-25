@@ -75,7 +75,9 @@ final class MainViewModel: ObservableObject {
             case .addToFavoritesRecipes(recipe: let recipe):
                 self.addRecipeToFavorites(recipe: recipe)
             case .getRecipes(type: let type):
-                self.getFullListRecipes(type: type)
+                Task {
+                    await self.getFullListRecipes(type: type)
+                }
             case .changedTypeGetNewRecipes(type: let type):
                 self.getNewRecipes(type: type)
             }
@@ -86,30 +88,25 @@ final class MainViewModel: ObservableObject {
     //    Get All Data With Strating App
     func getAllData() async {
         guard fullListRecipes.isEmpty else { return }
-        Task {
-            async let _: () = fetchUserData()
-            async let _: () = getFavoritesRecipes()
-            async let _: () =  getFullListRecipes(type: .mainCourse)
-        }
+        await fetchUserData()
+        await getFavoritesRecipes()
+        await getFullListRecipes(type: .mainCourse)
         await MainActor.run(body: {
             homeViewModel.dataCondition = .loaded
         })
     }
     
     //    Fetch User Data
-    private func fetchUserData() {
-        Task {
+    private func fetchUserData() async {
             do {
                 try await firebaseManager.fetchUser()
             } catch {
                 await errorHandling(error)
             }
-        }
     }
     
     //    Get List With Favorites Recipes
-    private func getFavoritesRecipes() {
-        Task {
+    private func getFavoritesRecipes() async {
             do {
                 let fetchedFavoritesRecipes = try await firebaseManager.fetchFavoritesRecipes()
                 await MainActor.run(body: {
@@ -118,12 +115,10 @@ final class MainViewModel: ObservableObject {
             } catch {
                 await errorHandling(error)
             }
-        }
     }
     
     //    Get Full List Recipes
-    private func getFullListRecipes(type: RecipeType) {
-        Task {
+    private func getFullListRecipes(type: RecipeType) async {
             do {
                 let recipesFromApi = try await moyaManager.getRecipesByType(type: type, count: countLoadingRecipes, offset: countRecipesOffset)
                 let recipes = recipesFromApi.results.map{ Recipe(isFavorite: isFavoriteRecipe(id: $0.id), veryPopular: $0.veryPopular, healthScore: $0.healthScore, id: $0.id, title: $0.title, readyInMinutes: $0.readyInMinutes, servings: $0.servings, image: $0.image, pricePerServing: $0.pricePerServing) }
@@ -135,19 +130,22 @@ final class MainViewModel: ObservableObject {
             } catch {
                 await errorHandling(error)
             }
-        }
     }
     
     //    Get Recipes With Another Type
     private func getNewRecipes(type: RecipeType) {
         fullListRecipes.removeAll()
         Task {
-            getFullListRecipes(type: type)
+            await getFullListRecipes(type: type)
         }
     }
     
     //    Add Recipe to Favorites
     private func addRecipeToFavorites(recipe: FavoriteRecipe) {
+        if let index = fullListRecipes.firstIndex(where: { $0.id == recipe.id }) {
+            fullListRecipes.remove(at: index)
+            fullListRecipes.insert(Recipe(isFavorite: true, veryPopular: recipe.veryPopular, healthScore: recipe.healthScore, id: recipe.id, title: recipe.title, readyInMinutes: recipe.readyInMinutes, servings: recipe.servings, image: recipe.image, pricePerServing: recipe.pricePerServing), at: index)
+        }
         Task {
             do {
                 let uid = try await firebaseManager.addToFavorites(recipe: recipe)
@@ -164,6 +162,10 @@ final class MainViewModel: ObservableObject {
     //    Remove Recipe from Favorites
     func removeFromFavorites(recipe: FavoriteRecipe) {
         let selectedRecipe = favoriteRecipes.first{ $0.id == recipe.id }
+        if let index = fullListRecipes.firstIndex(where: { $0.id == recipe.id }) {
+            fullListRecipes.remove(at: index)
+            fullListRecipes.insert(Recipe(isFavorite: false, veryPopular: recipe.veryPopular, healthScore: recipe.healthScore, id: recipe.id, title: recipe.title, readyInMinutes: recipe.readyInMinutes, servings: recipe.servings, image: recipe.image, pricePerServing: recipe.pricePerServing), at: index)
+        }
         guard let selectedRecipe = selectedRecipe else { return }
         Task {
             do {

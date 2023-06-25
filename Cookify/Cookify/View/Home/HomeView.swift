@@ -103,40 +103,18 @@ struct HomeView: View {
                             ProgressView()
                         case .loaded:
                             ForEach(vm.fullListRecipes, id: \.id) { recipe in
-                                RecipeCard(recipe: recipe, isFavorite: recipe.isFavorite) { isFavorite in
+                                RecipeCard(recipe: recipe) {
                                     let favoriteRecipe = FavoriteRecipe(veryPopular: recipe.veryPopular, healthScore: recipe.healthScore, id: recipe.id, title: recipe.title, readyInMinutes: recipe.readyInMinutes, servings: recipe.servings, image: recipe.image, pricePerServing: recipe.pricePerServing)
-                                    switch isFavorite {
+                                    switch recipe.isFavorite {
                                     case true:
                                         vm.sendAction(actionType: .removeFromFavoritesRecipes(recipe: favoriteRecipe))
                                     case false:
                                         vm.sendAction(actionType: .addToFavoritesRecipes(recipe: favoriteRecipe))
+                                    }
                                 }
-                            }
-//                            ForEach(vm.favoriteRecipes, id: \.id) { recipe in
-//                                RecipeCard(recipe: recipe,
-//                                           isFavorite: vm.searchById(id: recipe.id)) { isFavorite in
-//                                    if isFavorite {
-//                                        vm.removeFromFavorites(recipe: FavoriteRecipe(veryPopular: recipe.veryPopular, healthScore: recipe.healthScore, id: recipe.id, title: recipe.title, readyInMinutes: recipe.readyInMinutes, servings: recipe.servings, image: recipe.image, pricePerServing: recipe.pricePerServing))
-//                                        vm.removeFromFavorites(recipe: FavoriteRecipe(veryPopular: recipe.veryPopular, healthScore: recipe.healthScore, id: recipe.id, title: recipe.title, readyInMinutes: recipe.readyInMinutes, servings: recipe.servings, image: recipe.image, pricePerServing: recipe.pricePerServing))
-//                                        let selectedRecipe = vm.listFavoritesRecipes.filter{ $0.id == recipe.id }
-                                        
-//                                        let selectedRecipe = vm.listFavoritesRecipes.first{ $0.id == recipe.id }
-                                        
-//                                        vm.listFavoritesRecipes.removeAll { favoriteRecipe in
-//                                            favoriteRecipe.id == recipe.id
-//                                        }
-//                                    } else {
-//                                        vm.addRecipeToFavorites(recipe: FavoriteRecipe(veryPopular: recipe.veryPopular, healthScore: recipe.healthScore, id: recipe.id, title: recipe.title, readyInMinutes: recipe.readyInMinutes, servings: recipe.servings, image: recipe.image, pricePerServing: recipe.pricePerServing))
-//                                        vm.listFavoritesRecipes.append(FavoriteRecipe(veryPopular: recipe.veryPopular, healthScore: recipe.healthScore, id: recipe.id, title: recipe.title, readyInMinutes: recipe.readyInMinutes, servings: recipe.servings, image: recipe.image, pricePerServing: recipe.pricePerServing))
-//                                        vm.addRecipeToFavorites(recipe: FavoriteRecipe(veryPopular: recipe.veryPopular, healthScore: recipe.healthScore, id: recipe.id, title: recipe.title, readyInMinutes: recipe.readyInMinutes, servings: recipe.servings, image: recipe.image, pricePerServing: recipe.pricePerServing))
-//                                    }
-//                                }
                             }
                             Button {
                                 vm.sendAction(actionType: .getRecipes(type: vm.currentTypeRecipes))
-//                                Task {
-//                                    await vm.getRecipesByType()
-//                                }
                             } label: {
                                 CustomButton(title: "Load more", style: .borderButton)
                             }
@@ -149,9 +127,6 @@ struct HomeView: View {
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
             .background(Color.customColor(.background))
             .padding(.vertical, 8)
-//            .task {
-//                await vm.getAllDataWithStartApp()
-//            }
         }
     }
 }
