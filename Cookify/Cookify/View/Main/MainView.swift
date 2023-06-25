@@ -11,7 +11,7 @@ struct MainView: View {
     @StateObject var vm = MainViewModel()
     var body: some View {
         TabView {
-            HomeView(vm: vm.homeViewModel)
+            HomeView(vm: vm.homeViewModel, user: vm.user)
                 .tabItem {
                     Image(systemName: "house")
                 }
@@ -31,6 +31,9 @@ struct MainView: View {
                 .tabItem {
                     Image(systemName: "heart")
                 }
+        }
+        .task {
+            await vm.getAllData()
         }
     }
 }

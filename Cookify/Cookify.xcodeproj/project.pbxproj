@@ -56,7 +56,6 @@
 		19E71CC92A38B657007F0D02 /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 19E71CC82A38B657007F0D02 /* GoogleSignInSwift */; };
 		19E71CCB2A38B856007F0D02 /* CustomFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19E71CCA2A38B856007F0D02 /* CustomFunction.swift */; };
 		19E71CCD2A38BBA7007F0D02 /* Extension + UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19E71CCC2A38BBA7007F0D02 /* Extension + UIApplication.swift */; };
-		19E71CCF2A39D6B0007F0D02 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19E71CCE2A39D6B0007F0D02 /* HomeViewModel.swift */; };
 		19E89AC12A3EDDBA00B05868 /* EditProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19E89AC02A3EDDBA00B05868 /* EditProfileViewModel.swift */; };
 		19EAB9772A405B3E00CDF200 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19EAB9762A405B3E00CDF200 /* ImagePicker.swift */; };
 		19ECF2A92A45B9CE003FAA6F /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19ECF2A82A45B9CE003FAA6F /* MainViewModel.swift */; };
@@ -65,6 +64,8 @@
 		19F23FD92A3783E2003A4FC5 /* CommunityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19F23FD82A3783E2003A4FC5 /* CommunityView.swift */; };
 		19F31A662A3C905D003529C7 /* RecipeCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19F31A652A3C905D003529C7 /* RecipeCard.swift */; };
 		19F660B32A440F6D00577D86 /* SubmittedRecipes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19F660B22A440F6D00577D86 /* SubmittedRecipes.swift */; };
+		19F6BC412A47708300E95F68 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19F6BC402A47708300E95F68 /* HomeViewModel.swift */; };
+		19F6BC432A477EAA00E95F68 /* Recipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19F6BC422A477EAA00E95F68 /* Recipe.swift */; };
 		19FAB82B2A3B213900D9C00D /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 19FAB82A2A3B213900D9C00D /* SDWebImageSwiftUI */; };
 		19FE10DD2A389A6000D8DA49 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19FE10DC2A389A6000D8DA49 /* LoadingView.swift */; };
 /* End PBXBuildFile section */
@@ -114,7 +115,6 @@
 		19E3EBC52A42002900460F91 /* SearchRecipesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRecipesViewModel.swift; sourceTree = "<group>"; };
 		19E71CCA2A38B856007F0D02 /* CustomFunction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomFunction.swift; sourceTree = "<group>"; };
 		19E71CCC2A38BBA7007F0D02 /* Extension + UIApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + UIApplication.swift"; sourceTree = "<group>"; };
-		19E71CCE2A39D6B0007F0D02 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		19E89AC02A3EDDBA00B05868 /* EditProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewModel.swift; sourceTree = "<group>"; };
 		19EAB9762A405B3E00CDF200 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		19ECF2A82A45B9CE003FAA6F /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
@@ -123,6 +123,8 @@
 		19F23FD82A3783E2003A4FC5 /* CommunityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityView.swift; sourceTree = "<group>"; };
 		19F31A652A3C905D003529C7 /* RecipeCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeCard.swift; sourceTree = "<group>"; };
 		19F660B22A440F6D00577D86 /* SubmittedRecipes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmittedRecipes.swift; sourceTree = "<group>"; };
+		19F6BC402A47708300E95F68 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		19F6BC422A477EAA00E95F68 /* Recipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recipe.swift; sourceTree = "<group>"; };
 		19FE10DC2A389A6000D8DA49 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -314,6 +316,7 @@
 				19DB922F2A39F66100757733 /* RecipesReceived.swift */,
 				19E187C72A41BA3D001C7051 /* AuthorizedUser.swift */,
 				19F660B22A440F6D00577D86 /* SubmittedRecipes.swift */,
+				19F6BC422A477EAA00E95F68 /* Recipe.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -357,8 +360,8 @@
 			isa = PBXGroup;
 			children = (
 				19F23FD22A3782EE003A4FC5 /* HomeView.swift */,
-				19E71CCE2A39D6B0007F0D02 /* HomeViewModel.swift */,
 				19E187CB2A41F68A001C7051 /* SearchRecipes */,
+				19F6BC402A47708300E95F68 /* HomeViewModel.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -494,6 +497,7 @@
 				195AA8E12A35E9C100F7E6CF /* CustomButton.swift in Sources */,
 				19943BCB2A2FA2A6009E9BCC /* Extension + Font.swift in Sources */,
 				19DEA36A2A360BF9008637FC /* FirebaseManager.swift in Sources */,
+				19F6BC412A47708300E95F68 /* HomeViewModel.swift in Sources */,
 				197D132E2A433FD70039F66B /* FavoriteRecipeCard.swift in Sources */,
 				19AF33442A30F73500DD252D /* Extension + Color.swift in Sources */,
 				197FF3B32A33723800EFF1AF /* MainView.swift in Sources */,
@@ -520,7 +524,6 @@
 				197FF3B52A34451F00EFF1AF /* SignInViewModel.swift in Sources */,
 				19E71CCB2A38B856007F0D02 /* CustomFunction.swift in Sources */,
 				19EE51CE2A3E3514006A423A /* EditProfileView.swift in Sources */,
-				19E71CCF2A39D6B0007F0D02 /* HomeViewModel.swift in Sources */,
 				19F31A662A3C905D003529C7 /* RecipeCard.swift in Sources */,
 				19E89AC12A3EDDBA00B05868 /* EditProfileViewModel.swift in Sources */,
 				19DB92302A39F66100757733 /* RecipesReceived.swift in Sources */,
@@ -533,6 +536,7 @@
 				19AF8A7B2A06768100388F8F /* CookifyApp.swift in Sources */,
 				19DB922E2A39E8E000757733 /* SpoonacularApiProvider.swift in Sources */,
 				19E187C82A41BA3D001C7051 /* AuthorizedUser.swift in Sources */,
+				19F6BC432A477EAA00E95F68 /* Recipe.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -133,7 +133,7 @@ final class FirebaseManager: FirebaseProtocol {
             AuthorizedUser.shared.deleteUserData()
         })
     }
-    //  Upload / Remove Favorites Recipes
+    //  Upload / Favorites Recipes
     func addToFavorites(recipe: FavoriteRecipe) async throws -> String {
         guard let userId = Auth.auth().currentUser?.uid else { return "" }
             let recipeDoc = try Firestore.firestore().collection("Users").document(userId).collection("Liked").addDocument(from: recipe)

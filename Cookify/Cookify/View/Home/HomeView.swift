@@ -7,10 +7,11 @@
 
 import SwiftUI
 import SDWebImageSwiftUI
+import Combine
 
 struct HomeView: View {
     @StateObject var vm: HomeViewModel
-    @StateObject private var user = AuthorizedUser.shared
+    @StateObject var user: AuthorizedUser
     var body: some View {
         NavigationView {
             ScrollView(.vertical, showsIndicators: false) {
@@ -28,7 +29,7 @@ struct HomeView: View {
                                 //                    profile screen
                                 ProfileView()
                             } label: {
-                                WebImage(url: vm.authorizedUser.imageUrl).placeholder {
+                                WebImage(url: user.imageUrl).placeholder {
                                     Image("avatar")
                                         .resizable()
                                         .frame(width: 48, height: 48)
@@ -61,7 +62,7 @@ struct HomeView: View {
                                 .foregroundColor(.customColor(.lightGray))
                             HStack(alignment: .center, spacing: 8) {
                                 Image(systemName: "magnifyingglass")
-                                Text("Search")
+                                Text("Search Recipes")
                                     .font(.jost(.regular, size: .body))
                             }
                             .frame(maxWidth: .infinity, alignment: .center)
@@ -78,7 +79,7 @@ struct HomeView: View {
                         HStack(alignment: .center, spacing: 16) {
                             ForEach(RecipeType.allCases, id: \.id) { type in
                                 Button {
-                                    vm.getMoreRecipesButtonAction(type: type)
+                                    vm.sendAction(actionType: .changedTypeGetNewRecipes(type: type))
                                 } label: {
                                     Text(type.rawValue.capitalizingFirstLetter())
                                         .font(.jost(.regular, size: .body))
@@ -99,15 +100,23 @@ struct HomeView: View {
                     VStack(alignment: .center, spacing: 16) {
                         switch vm.dataCondition {
                         case .loading:
-                            Spacer()
                             ProgressView()
-                            Spacer()
                         case .loaded:
-                            ForEach(vm.listRecipes, id: \.id) { recipe in
-                                RecipeCard(recipe: recipe,
-                                           isFavorite: vm.searchById(id: recipe.id)) { isFavorite in
-                                    if isFavorite {
-                                        vm.removeFromFavorites(recipe: FavoriteRecipe(veryPopular: recipe.veryPopular, healthScore: recipe.healthScore, id: recipe.id, title: recipe.title, readyInMinutes: recipe.readyInMinutes, servings: recipe.servings, image: recipe.image, pricePerServing: recipe.pricePerServing))
+                            ForEach(vm.fullListRecipes, id: \.id) { recipe in
+                                RecipeCard(recipe: recipe, isFavorite: recipe.isFavorite) { isFavorite in
+                                    let favoriteRecipe = FavoriteRecipe(veryPopular: recipe.veryPopular, healthScore: recipe.healthScore, id: recipe.id, title: recipe.title, readyInMinutes: recipe.readyInMinutes, servings: recipe.servings, image: recipe.image, pricePerServing: recipe.pricePerServing)
+                                    switch isFavorite {
+                                    case true:
+                                        vm.sendAction(actionType: .removeFromFavoritesRecipes(recipe: favoriteRecipe))
+                                    case false:
+                                        vm.sendAction(actionType: .addToFavoritesRecipes(recipe: favoriteRecipe))
+                                }
+                            }
+//                            ForEach(vm.favoriteRecipes, id: \.id) { recipe in
+//                                RecipeCard(recipe: recipe,
+//                                           isFavorite: vm.searchById(id: recipe.id)) { isFavorite in
+//                                    if isFavorite {
+//                                        vm.removeFromFavorites(recipe: FavoriteRecipe(veryPopular: recipe.veryPopular, healthScore: recipe.healthScore, id: recipe.id, title: recipe.title, readyInMinutes: recipe.readyInMinutes, servings: recipe.servings, image: recipe.image, pricePerServing: recipe.pricePerServing))
 //                                        vm.removeFromFavorites(recipe: FavoriteRecipe(veryPopular: recipe.veryPopular, healthScore: recipe.healthScore, id: recipe.id, title: recipe.title, readyInMinutes: recipe.readyInMinutes, servings: recipe.servings, image: recipe.image, pricePerServing: recipe.pricePerServing))
 //                                        let selectedRecipe = vm.listFavoritesRecipes.filter{ $0.id == recipe.id }
                                         
@@ -116,17 +125,18 @@ struct HomeView: View {
 //                                        vm.listFavoritesRecipes.removeAll { favoriteRecipe in
 //                                            favoriteRecipe.id == recipe.id
 //                                        }
-                                    } else {
-                                        vm.addRecipeToFavorites(recipe: FavoriteRecipe(veryPopular: recipe.veryPopular, healthScore: recipe.healthScore, id: recipe.id, title: recipe.title, readyInMinutes: recipe.readyInMinutes, servings: recipe.servings, image: recipe.image, pricePerServing: recipe.pricePerServing))
+//                                    } else {
+//                                        vm.addRecipeToFavorites(recipe: FavoriteRecipe(veryPopular: recipe.veryPopular, healthScore: recipe.healthScore, id: recipe.id, title: recipe.title, readyInMinutes: recipe.readyInMinutes, servings: recipe.servings, image: recipe.image, pricePerServing: recipe.pricePerServing))
 //                                        vm.listFavoritesRecipes.append(FavoriteRecipe(veryPopular: recipe.veryPopular, healthScore: recipe.healthScore, id: recipe.id, title: recipe.title, readyInMinutes: recipe.readyInMinutes, servings: recipe.servings, image: recipe.image, pricePerServing: recipe.pricePerServing))
 //                                        vm.addRecipeToFavorites(recipe: FavoriteRecipe(veryPopular: recipe.veryPopular, healthScore: recipe.healthScore, id: recipe.id, title: recipe.title, readyInMinutes: recipe.readyInMinutes, servings: recipe.servings, image: recipe.image, pricePerServing: recipe.pricePerServing))
-                                    }
-                                }
+//                                    }
+//                                }
                             }
                             Button {
-                                Task {
-                                    await vm.getRecipesByType()
-                                }
+                                vm.sendAction(actionType: .getRecipes(type: vm.currentTypeRecipes))
+//                                Task {
+//                                    await vm.getRecipesByType()
+//                                }
                             } label: {
                                 CustomButton(title: "Load more", style: .borderButton)
                             }
@@ -139,15 +149,16 @@ struct HomeView: View {
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
             .background(Color.customColor(.background))
             .padding(.vertical, 8)
-            .task {
-                await vm.getAllDataWithStartApp()
-            }
+//            .task {
+//                await vm.getAllDataWithStartApp()
+//            }
         }
     }
 }
 
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
-        HomeView(vm: HomeViewModel())
+        HomeView(vm: HomeViewModel(subject: PassthroughSubject<ActionsWithRecipes, Never>()),
+                 user: AuthorizedUser.shared)
     }
 }
