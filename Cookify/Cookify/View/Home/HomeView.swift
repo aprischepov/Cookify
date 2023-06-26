@@ -11,7 +11,6 @@ import Combine
 
 struct HomeView: View {
     @StateObject var vm: HomeViewModel
-    @StateObject var user: AuthorizedUser
     var body: some View {
         NavigationView {
             ScrollView(.vertical, showsIndicators: false) {
@@ -29,7 +28,7 @@ struct HomeView: View {
                                 //                    profile screen
                                 ProfileView()
                             } label: {
-                                WebImage(url: user.imageUrl).placeholder {
+                                WebImage(url: vm.user.imageUrl).placeholder {
                                     Image("avatar")
                                         .resizable()
                                         .frame(width: 48, height: 48)
@@ -45,7 +44,7 @@ struct HomeView: View {
                         }
                         //                Title
                         VStack(alignment: .leading, spacing: 0) {
-                            Text("Hey \(user.firstName ?? "") 👋")
+                            Text("Hey \(vm.user.firstName ?? "") 👋")
                                 .font(.jost(.semiBold, size: .title))
                             Text("What are you cooking today")
                                 .font(.jost(.medium, size: .titleThree))
@@ -98,19 +97,13 @@ struct HomeView: View {
                     .frame(maxWidth: .infinity)
                     //                Recipes
                     VStack(alignment: .center, spacing: 16) {
-                        switch vm.dataCondition {
-                        case .loading:
-                            ProgressView()
-                        case .loaded:
+//                        switch vm.dataCondition {
+//                        case .loading:
+//                            ProgressView()
+//                        case .loaded:
                             ForEach(vm.fullListRecipes, id: \.id) { recipe in
                                 RecipeCard(recipe: recipe) {
-                                    let favoriteRecipe = FavoriteRecipe(veryPopular: recipe.veryPopular, healthScore: recipe.healthScore, id: recipe.id, title: recipe.title, readyInMinutes: recipe.readyInMinutes, servings: recipe.servings, image: recipe.image, pricePerServing: recipe.pricePerServing)
-                                    switch recipe.isFavorite {
-                                    case true:
-                                        vm.sendAction(actionType: .removeFromFavoritesRecipes(recipe: favoriteRecipe))
-                                    case false:
-                                        vm.sendAction(actionType: .addToFavoritesRecipes(recipe: favoriteRecipe))
-                                    }
+                                    vm.sendFavoriteRecipe(recipe: recipe)
                                 }
                             }
                             Button {
@@ -118,7 +111,10 @@ struct HomeView: View {
                             } label: {
                                 CustomButton(title: "Load more", style: .borderButton)
                             }
-                        }
+                            .opacity(vm.dataCondition == .loading ? 0 : 1)
+                        ProgressView()
+                            .opacity(vm.dataCondition == .loading ? 1 : 0)
+//                        }
                     }
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
                     .padding(.horizontal, 16)
@@ -133,7 +129,6 @@ struct HomeView: View {
 
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
-        HomeView(vm: HomeViewModel(subject: PassthroughSubject<ActionsWithRecipes, Never>()),
-                 user: AuthorizedUser.shared)
+        HomeView(vm: HomeViewModel(subject: PassthroughSubject<ActionsWithRecipes, Never>(), user: AuthorizedUser.shared))
     }
 }

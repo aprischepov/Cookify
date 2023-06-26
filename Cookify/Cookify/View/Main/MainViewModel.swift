@@ -9,8 +9,7 @@ import SwiftUI
 import Combine
 
 enum ActionsWithRecipes {
-    case removeFromFavoritesRecipes(recipe: FavoriteRecipe)
-    case addToFavoritesRecipes(recipe: FavoriteRecipe)
+    case changeFromFavoritesRecipes(recipe: FavoriteRecipe)
     case getRecipes(type: RecipeType)
     case changedTypeGetNewRecipes(type: RecipeType)
 }
@@ -52,7 +51,7 @@ final class MainViewModel: ObservableObject {
     //    MARK: Init
     init() {
         
-        self.homeViewModel = HomeViewModel(subject: subject)
+        self.homeViewModel = HomeViewModel(subject: subject, user: user)
         self.favoritesViewModel = FavoritesViewModel(subject: subject)
         
         $fullListRecipes
@@ -70,10 +69,8 @@ final class MainViewModel: ObservableObject {
         subject.sink { [weak self] action in
             guard let self else { return }
             switch action {
-            case .removeFromFavoritesRecipes(recipe: let recipe):
-                self.removeFromFavorites(recipe: recipe)
-            case .addToFavoritesRecipes(recipe: let recipe):
-                self.addRecipeToFavorites(recipe: recipe)
+            case .changeFromFavoritesRecipes(recipe: let recipe):
+                self.changeRecipeFromFavorites(recipe: recipe)
             case .getRecipes(type: let type):
                 Task {
                     await self.getFullListRecipes(type: type)
@@ -121,7 +118,7 @@ final class MainViewModel: ObservableObject {
     private func getFullListRecipes(type: RecipeType) async {
             do {
                 let recipesFromApi = try await moyaManager.getRecipesByType(type: type, count: countLoadingRecipes, offset: countRecipesOffset)
-                let recipes = recipesFromApi.results.map{ Recipe(isFavorite: isFavoriteRecipe(id: $0.id), veryPopular: $0.veryPopular, healthScore: $0.healthScore, id: $0.id, title: $0.title, readyInMinutes: $0.readyInMinutes, servings: $0.servings, image: $0.image, pricePerServing: $0.pricePerServing) }
+                let recipes = recipesFromApi.results.map{ $0.transfromToRecipe(isFavorite: isFavoriteRecipe(id: $0.id)) }
                 await MainActor.run(body: {
                     countRecipes = recipes.count
                     fullListRecipes.append(contentsOf: recipes)
@@ -140,12 +137,21 @@ final class MainViewModel: ObservableObject {
         }
     }
     
+    private func changeRecipeFromFavorites(recipe: FavoriteRecipe) {
+        guard let index = fullListRecipes.firstIndex(where: { $0.id == recipe.id }) else { return }
+        let isFavoriteRecipe = isFavoriteRecipe(id: recipe.id)
+        fullListRecipes.remove(at: index)
+        fullListRecipes.insert(Recipe(isFavorite: !isFavoriteRecipe, veryPopular: recipe.veryPopular, healthScore: recipe.healthScore, id: recipe.id, title: recipe.title, readyInMinutes: recipe.readyInMinutes, servings: recipe.servings, image: recipe.image, pricePerServing: recipe.pricePerServing), at: index)
+        switch isFavoriteRecipe {
+        case true:
+            removeFromFavorites(recipe: recipe)
+        case false:
+            addRecipeToFavorites(recipe: recipe)
+        }
+    }
+    
     //    Add Recipe to Favorites
     private func addRecipeToFavorites(recipe: FavoriteRecipe) {
-        if let index = fullListRecipes.firstIndex(where: { $0.id == recipe.id }) {
-            fullListRecipes.remove(at: index)
-            fullListRecipes.insert(Recipe(isFavorite: true, veryPopular: recipe.veryPopular, healthScore: recipe.healthScore, id: recipe.id, title: recipe.title, readyInMinutes: recipe.readyInMinutes, servings: recipe.servings, image: recipe.image, pricePerServing: recipe.pricePerServing), at: index)
-        }
         Task {
             do {
                 let uid = try await firebaseManager.addToFavorites(recipe: recipe)
@@ -162,10 +168,6 @@ final class MainViewModel: ObservableObject {
     //    Remove Recipe from Favorites
     func removeFromFavorites(recipe: FavoriteRecipe) {
         let selectedRecipe = favoriteRecipes.first{ $0.id == recipe.id }
-        if let index = fullListRecipes.firstIndex(where: { $0.id == recipe.id }) {
-            fullListRecipes.remove(at: index)
-            fullListRecipes.insert(Recipe(isFavorite: false, veryPopular: recipe.veryPopular, healthScore: recipe.healthScore, id: recipe.id, title: recipe.title, readyInMinutes: recipe.readyInMinutes, servings: recipe.servings, image: recipe.image, pricePerServing: recipe.pricePerServing), at: index)
-        }
         guard let selectedRecipe = selectedRecipe else { return }
         Task {
             do {

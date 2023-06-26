@@ -12,6 +12,7 @@
 		1903DF162A37879800478DFE /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1903DF152A37879800478DFE /* ProfileView.swift */; };
 		19100F552A422E3300AE6549 /* Extension + View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19100F542A422E3200AE6549 /* Extension + View.swift */; };
 		191564932A3B7D11000B9F97 /* Extension + String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 191564922A3B7D11000B9F97 /* Extension + String.swift */; };
+		193B82172A49AA4600657409 /* Extension + RecipeByType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 193B82162A49AA4600657409 /* Extension + RecipeByType.swift */; };
 		195AA8DA2A35E65600F7E6CF /* Jost-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 195AA8D42A35E65600F7E6CF /* Jost-Light.ttf */; };
 		195AA8DB2A35E65600F7E6CF /* Jost-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 195AA8D52A35E65600F7E6CF /* Jost-Regular.ttf */; };
 		195AA8DC2A35E65700F7E6CF /* Jost-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 195AA8D62A35E65600F7E6CF /* Jost-SemiBold.ttf */; };
@@ -76,6 +77,7 @@
 		1903DF152A37879800478DFE /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		19100F542A422E3200AE6549 /* Extension + View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + View.swift"; sourceTree = "<group>"; };
 		191564922A3B7D11000B9F97 /* Extension + String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + String.swift"; sourceTree = "<group>"; };
+		193B82162A49AA4600657409 /* Extension + RecipeByType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + RecipeByType.swift"; sourceTree = "<group>"; };
 		195AA8D42A35E65600F7E6CF /* Jost-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Jost-Light.ttf"; sourceTree = "<group>"; };
 		195AA8D52A35E65600F7E6CF /* Jost-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Jost-Regular.ttf"; sourceTree = "<group>"; };
 		195AA8D62A35E65600F7E6CF /* Jost-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Jost-SemiBold.ttf"; sourceTree = "<group>"; };
@@ -225,6 +227,7 @@
 				19E71CCC2A38BBA7007F0D02 /* Extension + UIApplication.swift */,
 				191564922A3B7D11000B9F97 /* Extension + String.swift */,
 				19100F542A422E3200AE6549 /* Extension + View.swift */,
+				193B82162A49AA4600657409 /* Extension + RecipeByType.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -524,6 +527,7 @@
 				197FF3B52A34451F00EFF1AF /* SignInViewModel.swift in Sources */,
 				19E71CCB2A38B856007F0D02 /* CustomFunction.swift in Sources */,
 				19EE51CE2A3E3514006A423A /* EditProfileView.swift in Sources */,
+				193B82172A49AA4600657409 /* Extension + RecipeByType.swift in Sources */,
 				19F31A662A3C905D003529C7 /* RecipeCard.swift in Sources */,
 				19E89AC12A3EDDBA00B05868 /* EditProfileViewModel.swift in Sources */,
 				19DB92302A39F66100757733 /* RecipesReceived.swift in Sources */,

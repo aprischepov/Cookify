@@ -11,6 +11,7 @@ import Combine
 final class HomeViewModel: ObservableObject {
     //    MARK: - Properties
     let subject: PassthroughSubject<ActionsWithRecipes, Never>
+    @Published var user: AuthorizedUser
 //    Recipe Properties
     @Published var fullListRecipes: [Recipe] = []
     @Published var currentTypeRecipes: RecipeType = RecipeType.mainCourse
@@ -19,16 +20,15 @@ final class HomeViewModel: ObservableObject {
     @Published var dataCondition: DataCondition = .loading
     
     //    MARK: - Init
-    init(subject: PassthroughSubject<ActionsWithRecipes, Never>) {
+    init(subject: PassthroughSubject<ActionsWithRecipes, Never>, user: AuthorizedUser) {
         self.subject = subject
+        self.user = user
     }
     //    MARK: - Methods
     func sendAction(actionType: ActionsWithRecipes) {
         switch actionType {
-        case .removeFromFavoritesRecipes(let recipe):
-            subject.send(.removeFromFavoritesRecipes(recipe: recipe))
-        case .addToFavoritesRecipes(let recipe):
-            subject.send(.addToFavoritesRecipes(recipe: recipe))
+        case .changeFromFavoritesRecipes(let recipe):
+            subject.send(.changeFromFavoritesRecipes(recipe: recipe))
         case .getRecipes(let type):
             subject.send(.getRecipes(type: type))
             dataCondition = .loading
@@ -37,6 +37,11 @@ final class HomeViewModel: ObservableObject {
             currentTypeRecipes = type
             dataCondition = .loading
         }
+    }
+    
+    func sendFavoriteRecipe(recipe: Recipe) {
+        let favoriteRecipe = FavoriteRecipe(veryPopular: recipe.veryPopular, healthScore: recipe.healthScore, id: recipe.id, title: recipe.title, readyInMinutes: recipe.readyInMinutes, servings: recipe.servings, image: recipe.image, pricePerServing: recipe.pricePerServing)
+        sendAction(actionType: .changeFromFavoritesRecipes(recipe: favoriteRecipe))
     }
 }
 

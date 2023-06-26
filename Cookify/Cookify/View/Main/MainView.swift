@@ -11,7 +11,7 @@ struct MainView: View {
     @StateObject var vm = MainViewModel()
     var body: some View {
         TabView {
-            HomeView(vm: vm.homeViewModel, user: vm.user)
+            HomeView(vm: vm.homeViewModel)
                 .tabItem {
                     Image(systemName: "house")
                 }

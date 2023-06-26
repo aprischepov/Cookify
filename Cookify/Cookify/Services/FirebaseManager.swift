@@ -143,7 +143,7 @@ final class FirebaseManager: FirebaseProtocol {
     func fetchFavoritesRecipes() async throws -> [FavoriteRecipe] {
         guard let userId = Auth.auth().currentUser?.uid else { return [] }
         return  try await Firestore.firestore().collection("Users").document(userId).collection("Liked").getDocuments().documents.compactMap({ recipe -> FavoriteRecipe? in
-            try? recipe.data(as: FavoriteRecipe.self)
+            try recipe.data(as: FavoriteRecipe.self)
         })
     }
 //    Delete Favorites Recipes

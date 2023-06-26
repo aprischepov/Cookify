@@ -10,14 +10,16 @@ import SDWebImageSwiftUI
 
 struct RecipeCard: View {
     var recipe: Recipe
-//    @State var isFavorite: Bool
     var favoriteTapped: () -> Void
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
 //            Main Recipe Image - Upper Half of Card
                 WebImage(url: URL(string: recipe.image)).placeholder {
-                    Image("cookifyIcon")
-                        .opacity(0.3)
+                    ZStack {
+                        Image("cookifyIcon")
+                            .opacity(0.3)
+                    }
+                    .frame(maxWidth: .infinity, maxHeight: 240, alignment: .center)
                 }
                     .resizable()
                     .scaledToFill()
@@ -40,10 +42,11 @@ struct RecipeCard: View {
             VStack(alignment: .leading, spacing: 4) {
                 Text(recipe.title)
                     .font(.jost(.bold, size: .title))
+                    .lineLimit(2, reservesSpace: true)
                 HStack(alignment: .center, spacing: 8) {
                     Text("Health Score:")
                         .font(.jost(.semiBold, size: .body))
-                    Text("\(recipe.healthScore)%")
+                    Text(recipe.healthScore.formatted(.percent))
                         .foregroundColor(.customColor(.darkGray))
                         .padding(.horizontal, 8)
                         .padding(.vertical, 4)
@@ -61,8 +64,6 @@ struct RecipeCard: View {
                         .foregroundColor(.customColor(.darkGray))
                     Spacer()
                     Button {
-//                        favoriteTapped(isFavorite)
-//                        isFavorite.toggle()
                         favoriteTapped()
                     } label: {
                         Image(systemName: recipe.isFavorite ? "heart.fill" : "heart")

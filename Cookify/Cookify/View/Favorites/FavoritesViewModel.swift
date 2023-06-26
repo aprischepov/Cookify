@@ -22,6 +22,6 @@ final class FavoritesViewModel: ObservableObject {
     
     func removeFavriteRecipe(indexSet: IndexSet) {
         guard let index = indexSet.first else { return }
-        subject.send(.removeFromFavoritesRecipes(recipe: favoriteRecipes[index]))
+        subject.send(.changeFromFavoritesRecipes(recipe: favoriteRecipes[index]))
     }      
 }
