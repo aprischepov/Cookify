@@ -46,7 +46,7 @@
 		19DB92292A39E2FD00757733 /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = 19DB92282A39E2FD00757733 /* Moya */; };
 		19DB922C2A39E5E000757733 /* MoyaManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19DB922B2A39E5DF00757733 /* MoyaManager.swift */; };
 		19DB922E2A39E8E000757733 /* SpoonacularApiProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19DB922D2A39E8E000757733 /* SpoonacularApiProvider.swift */; };
-		19DB92302A39F66100757733 /* RecipesReceived.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19DB922F2A39F66100757733 /* RecipesReceived.swift */; };
+		19DB92302A39F66100757733 /* RecipesModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19DB922F2A39F66100757733 /* RecipesModels.swift */; };
 		19DEA36A2A360BF9008637FC /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19DEA3692A360BF9008637FC /* FirebaseManager.swift */; };
 		19E0B77C2A36FD0D00BB626D /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19E0B77B2A36FD0D00BB626D /* User.swift */; };
 		19E0B77F2A371A6600BB626D /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 19E0B77E2A371A6600BB626D /* FirebaseFirestoreSwift */; };
@@ -64,7 +64,6 @@
 		19F23FD32A3782EE003A4FC5 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19F23FD22A3782EE003A4FC5 /* HomeView.swift */; };
 		19F23FD92A3783E2003A4FC5 /* CommunityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19F23FD82A3783E2003A4FC5 /* CommunityView.swift */; };
 		19F31A662A3C905D003529C7 /* RecipeCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19F31A652A3C905D003529C7 /* RecipeCard.swift */; };
-		19F660B32A440F6D00577D86 /* SubmittedRecipes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19F660B22A440F6D00577D86 /* SubmittedRecipes.swift */; };
 		19F6BC412A47708300E95F68 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19F6BC402A47708300E95F68 /* HomeViewModel.swift */; };
 		19FAB82B2A3B213900D9C00D /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 19FAB82A2A3B213900D9C00D /* SDWebImageSwiftUI */; };
 		19FE10DD2A389A6000D8DA49 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19FE10DC2A389A6000D8DA49 /* LoadingView.swift */; };
@@ -108,7 +107,7 @@
 		19AF8A812A06768500388F8F /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		19DB922B2A39E5DF00757733 /* MoyaManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoyaManager.swift; sourceTree = "<group>"; };
 		19DB922D2A39E8E000757733 /* SpoonacularApiProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpoonacularApiProvider.swift; sourceTree = "<group>"; };
-		19DB922F2A39F66100757733 /* RecipesReceived.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipesReceived.swift; sourceTree = "<group>"; };
+		19DB922F2A39F66100757733 /* RecipesModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipesModels.swift; sourceTree = "<group>"; };
 		19DEA3692A360BF9008637FC /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
 		19E0B77B2A36FD0D00BB626D /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		19E187C72A41BA3D001C7051 /* AuthorizedUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizedUser.swift; sourceTree = "<group>"; };
@@ -123,7 +122,6 @@
 		19F23FD22A3782EE003A4FC5 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		19F23FD82A3783E2003A4FC5 /* CommunityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityView.swift; sourceTree = "<group>"; };
 		19F31A652A3C905D003529C7 /* RecipeCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeCard.swift; sourceTree = "<group>"; };
-		19F660B22A440F6D00577D86 /* SubmittedRecipes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmittedRecipes.swift; sourceTree = "<group>"; };
 		19F6BC402A47708300E95F68 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		19FE10DC2A389A6000D8DA49 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -314,9 +312,8 @@
 			isa = PBXGroup;
 			children = (
 				19E0B77B2A36FD0D00BB626D /* User.swift */,
-				19DB922F2A39F66100757733 /* RecipesReceived.swift */,
+				19DB922F2A39F66100757733 /* RecipesModels.swift */,
 				19E187C72A41BA3D001C7051 /* AuthorizedUser.swift */,
-				19F660B22A440F6D00577D86 /* SubmittedRecipes.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -509,7 +506,6 @@
 				19E0B77C2A36FD0D00BB626D /* User.swift in Sources */,
 				19E187CA2A41F67D001C7051 /* SearchRecipesView.swift in Sources */,
 				197D132C2A433B340039F66B /* FavoritesViewModel.swift in Sources */,
-				19F660B32A440F6D00577D86 /* SubmittedRecipes.swift in Sources */,
 				19DB922C2A39E5E000757733 /* MoyaManager.swift in Sources */,
 				198C9B062A3500F1008285A3 /* OnboardingCardViewModel.swift in Sources */,
 				1903DF122A37874C00478DFE /* SearchView.swift in Sources */,
@@ -527,7 +523,7 @@
 				193B82172A49AA4600657409 /* Extension + RecipeByType.swift in Sources */,
 				19F31A662A3C905D003529C7 /* RecipeCard.swift in Sources */,
 				19E89AC12A3EDDBA00B05868 /* EditProfileViewModel.swift in Sources */,
-				19DB92302A39F66100757733 /* RecipesReceived.swift in Sources */,
+				19DB92302A39F66100757733 /* RecipesModels.swift in Sources */,
 				19E3EBC62A42002900460F91 /* SearchRecipesViewModel.swift in Sources */,
 				197C50DF2A3E243600E898B5 /* ProfileViewModel.swift in Sources */,
 				19ECF2A92A45B9CE003FAA6F /* MainViewModel.swift in Sources */,

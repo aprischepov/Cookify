@@ -53,7 +53,7 @@ struct HomeView: View {
                     .padding(.horizontal, 16)
                     //                                    Search Recipes
                     Button {
-                        //                        action search bar
+                        vm.showSearch.toggle()
                     } label: {
                         ZStack {
                             RoundedRectangle(cornerRadius: 10)

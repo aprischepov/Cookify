@@ -37,7 +37,7 @@ struct RecipeByType: Decodable {
     let pricePerServing: Double
 }
 
-struct RecipesBySearch: Decodable {
+struct RecipesByQuery: Decodable {
     let id: Int
     let title: String
     let imageType: String

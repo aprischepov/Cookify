@@ -155,6 +155,7 @@ final class MainViewModel: ObservableObject {
     private func addRecipeToFavorites(recipe: Recipe) {
         Task {
             do {
+//                Think about this !!!!!!!!!
                 var changedRecipe = recipe
                 changedRecipe.isFavorite.toggle()
                 let uid = try await firebaseManager.addToFavorites(recipe: changedRecipe)
