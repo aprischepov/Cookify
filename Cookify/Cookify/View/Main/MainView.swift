@@ -8,28 +8,32 @@
 import SwiftUI
 
 struct MainView: View {
+    @StateObject var vm = MainViewModel()
     var body: some View {
         TabView {
-            HomeView()
+            HomeView(vm: vm.homeViewModel)
                 .tabItem {
-                    Label("Home", systemImage: "house")
+                    Image(systemName: "house")
                 }
             CommunityView()
                 .tabItem {
-                    Label("Community", systemImage: "person.3.fill")
+                    Image(systemName: "person.3.fill")
                 }
             SearchView()
                 .tabItem {
-                    Label("Search", systemImage: "magnifyingglass")
+                    Image(systemName: "magnifyingglass")
                 }
             ShoppingView()
                 .tabItem {
-                    Label("Shopping", systemImage: "list.bullet")
+                    Image(systemName: "list.bullet")
                 }
-//            ProfileView()
-//                .tabItem {
-//                    Label("Profile", systemImage: "person")
-//                }
+            FavoritesView(vm: vm.favoritesViewModel)
+                .tabItem {
+                    Image(systemName: "heart")
+                }
+        }
+        .task {
+            await vm.getAllData()
         }
     }
 }

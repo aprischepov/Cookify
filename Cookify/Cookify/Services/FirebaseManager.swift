@@ -21,13 +21,15 @@ protocol FirebaseProtocol {
     func signInWithGoogle() async throws
     func logGoogleUser(user: GIDGoogleUser) async throws
     func signOut() async throws
+    func addToFavorites(recipe: Recipe) async throws -> String
+    func fetchFavoritesRecipes() async throws -> [Recipe]
+    func deleteFromFavorites(recipe: Recipe) async throws
 }
 
 final class FirebaseManager: FirebaseProtocol {
     //    MARK: - Properties
     @AppStorage("appCondition") var appConditionStored: AppCondition?
     private let authorizedUser = AuthorizedUser.shared
-    //    @AppStorage("user") var userLocal: UserLocal
     
     //    MARK: - Methods
     //    Sign In
@@ -54,6 +56,7 @@ final class FirebaseManager: FirebaseProtocol {
             guard let self,
                   error == nil else { return }
             self.appConditionStored = .signIn
+//            Вопрос к самому себе: нужны ли вообще на этом этапе закидывать в синглтон, все равно же дальше фетчу на главной
             self.authorizedUser.firstName = firstName
             self.authorizedUser.lastName = lastName
             self.authorizedUser.imageUrl = downloadURL
@@ -70,10 +73,12 @@ final class FirebaseManager: FirebaseProtocol {
         let downloadURL = try await storageRef.downloadURL()
         let updatedUser = User(firstName: firstName, lastName: lastName, emailAddress: email, image: downloadURL)
         try Firestore.firestore().collection("Users").document(userId).setData(from: updatedUser)
+        await MainActor.run(body: {
         authorizedUser.firstName = firstName
         authorizedUser.lastName = lastName
         authorizedUser.emailAddress = email
         authorizedUser.imageUrl = imageUrl
+        })
     }
     
     //    Fetch User
@@ -128,6 +133,25 @@ final class FirebaseManager: FirebaseProtocol {
             AuthorizedUser.shared.deleteUserData()
         })
     }
+    //  Add to Favorites Recipes
+    func addToFavorites(recipe: Recipe) async throws -> String {
+        guard let userId = Auth.auth().currentUser?.uid else { return "" }
+            let recipeDoc = try Firestore.firestore().collection("Users").document(userId).collection("Liked").addDocument(from: recipe)
+        return recipeDoc.documentID
+    }
+    //  Load Favorites Recipes
+    func fetchFavoritesRecipes() async throws -> [Recipe] {
+        guard let userId = Auth.auth().currentUser?.uid else { return [] }
+        return  try await Firestore.firestore().collection("Users").document(userId).collection("Liked").getDocuments().documents.compactMap({ recipe -> Recipe? in
+            try recipe.data(as: Recipe.self)
+        })
+    }
+//    Delete Favorites Recipes
+    func deleteFromFavorites(recipe: Recipe) async throws {
+        guard let userId = Auth.auth().currentUser?.uid,
+              let recipeUid = recipe.uid else { return }
+        try await Firestore.firestore().collection("Users").document(userId).collection("Liked").document(recipeUid).delete()
+    }
 }
 
 //enum Errors: Error {
@@ -140,3 +164,8 @@ final class FirebaseManager: FirebaseProtocol {
 //        }
 //    }
 //}
+
+enum Actions {
+    case upload
+    case remove
+}

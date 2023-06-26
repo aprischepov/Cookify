@@ -7,9 +7,10 @@
 
 import SwiftUI
 import SDWebImageSwiftUI
+import Combine
 
 struct HomeView: View {
-    @StateObject private var vm = HomeViewModel()
+    @StateObject var vm: HomeViewModel
     var body: some View {
         NavigationView {
             ScrollView(.vertical, showsIndicators: false) {
@@ -27,7 +28,7 @@ struct HomeView: View {
                                 //                    profile screen
                                 ProfileView()
                             } label: {
-                                WebImage(url: vm.authorizedUser.imageUrl).placeholder {
+                                WebImage(url: vm.user.imageUrl).placeholder {
                                     Image("avatar")
                                         .resizable()
                                         .frame(width: 48, height: 48)
@@ -43,7 +44,7 @@ struct HomeView: View {
                         }
                         //                Title
                         VStack(alignment: .leading, spacing: 0) {
-                            Text("Hey \(vm.authorizedUser.firstName ?? "") 👋")
+                            Text("Hey \(vm.user.firstName ?? "") 👋")
                                 .font(.jost(.semiBold, size: .title))
                             Text("What are you cooking today")
                                 .font(.jost(.medium, size: .titleThree))
@@ -52,7 +53,7 @@ struct HomeView: View {
                     .padding(.horizontal, 16)
                     //                                    Search Recipes
                     Button {
-//                        action search bar
+                        //                        action search bar
                     } label: {
                         ZStack {
                             RoundedRectangle(cornerRadius: 10)
@@ -60,7 +61,7 @@ struct HomeView: View {
                                 .foregroundColor(.customColor(.lightGray))
                             HStack(alignment: .center, spacing: 8) {
                                 Image(systemName: "magnifyingglass")
-                                Text("Search")
+                                Text("Search Recipes")
                                     .font(.jost(.regular, size: .body))
                             }
                             .frame(maxWidth: .infinity, alignment: .center)
@@ -71,13 +72,13 @@ struct HomeView: View {
                     .fullScreenCover(isPresented: $vm.showSearch) {
                         SearchRecipesView()
                     }
-
+                    
                     //                Recipes Categories
                     ScrollView(.horizontal, showsIndicators: false) {
                         HStack(alignment: .center, spacing: 16) {
                             ForEach(RecipeType.allCases, id: \.id) { type in
                                 Button {
-                                    vm.getMoreRecipesButtonAction(type: type)
+                                    vm.sendAction(actionType: .changedTypeGetNewRecipes(type: type))
                                 } label: {
                                     Text(type.rawValue.capitalizingFirstLetter())
                                         .font(.jost(.regular, size: .body))
@@ -96,21 +97,20 @@ struct HomeView: View {
                     .frame(maxWidth: .infinity)
                     //                Recipes
                     VStack(alignment: .center, spacing: 16) {
-                        switch vm.dataCondition {
-                        case .loading:
-                            ProgressView()
-                        case .loaded:
-                            ForEach(vm.listRecipes, id: \.id) { recipe in
-                                RecipeCard(recipe: recipe)
+                            ForEach(vm.fullListRecipes, id: \.id) { recipe in
+                                RecipeCard(recipe: recipe) {
+                                    vm.sendAction(actionType: .changeFromFavoritesRecipes(recipe: recipe))
+                                }
                             }
                             Button {
-                                Task {
-                                    await vm.getRecipesByType()
-                                }
+                                vm.sendAction(actionType: .getRecipes(type: vm.currentTypeRecipes))
                             } label: {
                                 CustomButton(title: "Load more", style: .borderButton)
                             }
-                        }
+                            .opacity(vm.dataCondition == .loading ? 0 : 1)
+                        ProgressView()
+                            .opacity(vm.dataCondition == .loading ? 1 : 0)
+//                        }
                     }
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
                     .padding(.horizontal, 16)
@@ -119,15 +119,12 @@ struct HomeView: View {
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
             .background(Color.customColor(.background))
             .padding(.vertical, 8)
-            .task {
-                await vm.getAllDataWithStartApp()
-            }
         }
     }
 }
 
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
-        HomeView()
+        HomeView(vm: HomeViewModel(subject: PassthroughSubject<ActionsWithRecipes, Never>(), user: AuthorizedUser.shared))
     }
 }

@@ -9,10 +9,10 @@ import Foundation
 
 final class AuthorizedUser: ObservableObject {
     static let shared = AuthorizedUser()
-    var firstName: String?
-    var lastName: String?
-    var emailAddress: String?
-    var imageUrl: URL?
+    @Published var firstName: String?
+    @Published var lastName: String?
+    @Published var emailAddress: String?
+    @Published var imageUrl: URL?
     
     private init() {}
     
