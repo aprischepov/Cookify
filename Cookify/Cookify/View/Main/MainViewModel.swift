@@ -9,7 +9,7 @@ import SwiftUI
 import Combine
 
 enum ActionsWithRecipes {
-    case changeFromFavoritesRecipes(recipe: FavoriteRecipe)
+    case changeFromFavoritesRecipes(recipe: Recipe)
     case getRecipes(type: RecipeType)
     case changedTypeGetNewRecipes(type: RecipeType)
 }
@@ -39,7 +39,7 @@ final class MainViewModel: ObservableObject {
             }
         }
     }
-    @Published var favoriteRecipes: [FavoriteRecipe] = []
+    @Published var favoriteRecipes: [Recipe] = []
     //    View Properties
     @Published var errorMessage: String = "" {
         didSet {
@@ -137,11 +137,12 @@ final class MainViewModel: ObservableObject {
         }
     }
     
-    private func changeRecipeFromFavorites(recipe: FavoriteRecipe) {
+    private func changeRecipeFromFavorites(recipe: Recipe) {
         guard let index = fullListRecipes.firstIndex(where: { $0.id == recipe.id }) else { return }
         let isFavoriteRecipe = isFavoriteRecipe(id: recipe.id)
-        fullListRecipes.remove(at: index)
-        fullListRecipes.insert(Recipe(isFavorite: !isFavoriteRecipe, veryPopular: recipe.veryPopular, healthScore: recipe.healthScore, id: recipe.id, title: recipe.title, readyInMinutes: recipe.readyInMinutes, servings: recipe.servings, image: recipe.image, pricePerServing: recipe.pricePerServing), at: index)
+        var changedRecipe = fullListRecipes.remove(at: index)
+        changedRecipe.isFavorite.toggle()
+        fullListRecipes.insert(changedRecipe, at: index)
         switch isFavoriteRecipe {
         case true:
             removeFromFavorites(recipe: recipe)
@@ -151,11 +152,13 @@ final class MainViewModel: ObservableObject {
     }
     
     //    Add Recipe to Favorites
-    private func addRecipeToFavorites(recipe: FavoriteRecipe) {
+    private func addRecipeToFavorites(recipe: Recipe) {
         Task {
             do {
-                let uid = try await firebaseManager.addToFavorites(recipe: recipe)
-                let favoriteRecipe = FavoriteRecipe(uid: uid, veryPopular: recipe.veryPopular, healthScore: recipe.healthScore, id: recipe.id, title: recipe.title, readyInMinutes: recipe.readyInMinutes, servings: recipe.servings, image: recipe.image, pricePerServing: recipe.pricePerServing)
+                var changedRecipe = recipe
+                changedRecipe.isFavorite.toggle()
+                let uid = try await firebaseManager.addToFavorites(recipe: changedRecipe)
+                let favoriteRecipe = Recipe(uid: uid, isFavorite: true, veryPopular: recipe.veryPopular, healthScore: recipe.healthScore, id: recipe.id, title: recipe.title, readyInMinutes: recipe.readyInMinutes, servings: recipe.servings, image: recipe.image, pricePerServing: recipe.pricePerServing)
                 await MainActor.run(body: {
                     favoriteRecipes.append(favoriteRecipe)
                 })
@@ -166,7 +169,7 @@ final class MainViewModel: ObservableObject {
     }
     
     //    Remove Recipe from Favorites
-    func removeFromFavorites(recipe: FavoriteRecipe) {
+    func removeFromFavorites(recipe: Recipe) {
         let selectedRecipe = favoriteRecipes.first{ $0.id == recipe.id }
         guard let selectedRecipe = selectedRecipe else { return }
         Task {

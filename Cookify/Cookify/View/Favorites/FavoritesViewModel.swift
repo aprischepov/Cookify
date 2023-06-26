@@ -10,7 +10,7 @@ import Combine
 
 final class FavoritesViewModel: ObservableObject {
     //    MARK: - Properties
-    @Published var favoriteRecipes: [FavoriteRecipe] = []
+    @Published var favoriteRecipes: [Recipe] = []
     let subject: PassthroughSubject<ActionsWithRecipes, Never>
     
 //    MARK: - Init

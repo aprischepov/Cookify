@@ -9,7 +9,7 @@ import SwiftUI
 import SDWebImageSwiftUI
 
 struct FavoriteRecipeCard: View {
-    var recipe: FavoriteRecipe
+    var recipe: Recipe
     var body: some View {
             HStack(alignment: .center, spacing: 8) {
                 //                Recipe's Image
@@ -60,6 +60,6 @@ struct FavoriteRecipeCard: View {
 
 struct FavoritesCard_Previews: PreviewProvider {
     static var previews: some View {
-        FavoriteRecipeCard(recipe: FavoriteRecipe(veryPopular: false, healthScore: 100, id: 12345, title: "Cannellini Bean", readyInMinutes: 45, servings: 6, image: "https://spoonacular.com/recipeImages/782585-312x231.jpg", pricePerServing: 10.00))
+        FavoriteRecipeCard(recipe: Recipe(isFavorite: false, veryPopular: false, healthScore: 100, id: 12345, title: "Cannellini Bean", readyInMinutes: 45, servings: 6, image: "https://spoonacular.com/recipeImages/782585-312x231.jpg", pricePerServing: 10.00))
     }
 }

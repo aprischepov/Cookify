@@ -66,7 +66,6 @@
 		19F31A662A3C905D003529C7 /* RecipeCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19F31A652A3C905D003529C7 /* RecipeCard.swift */; };
 		19F660B32A440F6D00577D86 /* SubmittedRecipes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19F660B22A440F6D00577D86 /* SubmittedRecipes.swift */; };
 		19F6BC412A47708300E95F68 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19F6BC402A47708300E95F68 /* HomeViewModel.swift */; };
-		19F6BC432A477EAA00E95F68 /* Recipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19F6BC422A477EAA00E95F68 /* Recipe.swift */; };
 		19FAB82B2A3B213900D9C00D /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 19FAB82A2A3B213900D9C00D /* SDWebImageSwiftUI */; };
 		19FE10DD2A389A6000D8DA49 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19FE10DC2A389A6000D8DA49 /* LoadingView.swift */; };
 /* End PBXBuildFile section */
@@ -126,7 +125,6 @@
 		19F31A652A3C905D003529C7 /* RecipeCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeCard.swift; sourceTree = "<group>"; };
 		19F660B22A440F6D00577D86 /* SubmittedRecipes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmittedRecipes.swift; sourceTree = "<group>"; };
 		19F6BC402A47708300E95F68 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
-		19F6BC422A477EAA00E95F68 /* Recipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recipe.swift; sourceTree = "<group>"; };
 		19FE10DC2A389A6000D8DA49 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -319,7 +317,6 @@
 				19DB922F2A39F66100757733 /* RecipesReceived.swift */,
 				19E187C72A41BA3D001C7051 /* AuthorizedUser.swift */,
 				19F660B22A440F6D00577D86 /* SubmittedRecipes.swift */,
-				19F6BC422A477EAA00E95F68 /* Recipe.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -540,7 +537,6 @@
 				19AF8A7B2A06768100388F8F /* CookifyApp.swift in Sources */,
 				19DB922E2A39E8E000757733 /* SpoonacularApiProvider.swift in Sources */,
 				19E187C82A41BA3D001C7051 /* AuthorizedUser.swift in Sources */,
-				19F6BC432A477EAA00E95F68 /* Recipe.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

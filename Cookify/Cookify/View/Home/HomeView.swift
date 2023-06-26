@@ -97,13 +97,9 @@ struct HomeView: View {
                     .frame(maxWidth: .infinity)
                     //                Recipes
                     VStack(alignment: .center, spacing: 16) {
-//                        switch vm.dataCondition {
-//                        case .loading:
-//                            ProgressView()
-//                        case .loaded:
                             ForEach(vm.fullListRecipes, id: \.id) { recipe in
                                 RecipeCard(recipe: recipe) {
-                                    vm.sendFavoriteRecipe(recipe: recipe)
+                                    vm.sendAction(actionType: .changeFromFavoritesRecipes(recipe: recipe))
                                 }
                             }
                             Button {

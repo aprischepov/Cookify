@@ -38,11 +38,6 @@ final class HomeViewModel: ObservableObject {
             dataCondition = .loading
         }
     }
-    
-    func sendFavoriteRecipe(recipe: Recipe) {
-        let favoriteRecipe = FavoriteRecipe(veryPopular: recipe.veryPopular, healthScore: recipe.healthScore, id: recipe.id, title: recipe.title, readyInMinutes: recipe.readyInMinutes, servings: recipe.servings, image: recipe.image, pricePerServing: recipe.pricePerServing)
-        sendAction(actionType: .changeFromFavoritesRecipes(recipe: favoriteRecipe))
-    }
 }
 
 enum DataCondition {

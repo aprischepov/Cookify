@@ -21,9 +21,9 @@ protocol FirebaseProtocol {
     func signInWithGoogle() async throws
     func logGoogleUser(user: GIDGoogleUser) async throws
     func signOut() async throws
-    func addToFavorites(recipe: FavoriteRecipe) async throws -> String
-    func fetchFavoritesRecipes() async throws -> [FavoriteRecipe]
-    func deleteFromFavorites(recipe: FavoriteRecipe) async throws
+    func addToFavorites(recipe: Recipe) async throws -> String
+    func fetchFavoritesRecipes() async throws -> [Recipe]
+    func deleteFromFavorites(recipe: Recipe) async throws
 }
 
 final class FirebaseManager: FirebaseProtocol {
@@ -134,20 +134,20 @@ final class FirebaseManager: FirebaseProtocol {
         })
     }
     //  Add to Favorites Recipes
-    func addToFavorites(recipe: FavoriteRecipe) async throws -> String {
+    func addToFavorites(recipe: Recipe) async throws -> String {
         guard let userId = Auth.auth().currentUser?.uid else { return "" }
             let recipeDoc = try Firestore.firestore().collection("Users").document(userId).collection("Liked").addDocument(from: recipe)
         return recipeDoc.documentID
     }
     //  Load Favorites Recipes
-    func fetchFavoritesRecipes() async throws -> [FavoriteRecipe] {
+    func fetchFavoritesRecipes() async throws -> [Recipe] {
         guard let userId = Auth.auth().currentUser?.uid else { return [] }
-        return  try await Firestore.firestore().collection("Users").document(userId).collection("Liked").getDocuments().documents.compactMap({ recipe -> FavoriteRecipe? in
-            try recipe.data(as: FavoriteRecipe.self)
+        return  try await Firestore.firestore().collection("Users").document(userId).collection("Liked").getDocuments().documents.compactMap({ recipe -> Recipe? in
+            try recipe.data(as: Recipe.self)
         })
     }
 //    Delete Favorites Recipes
-    func deleteFromFavorites(recipe: FavoriteRecipe) async throws {
+    func deleteFromFavorites(recipe: Recipe) async throws {
         guard let userId = Auth.auth().currentUser?.uid,
               let recipeUid = recipe.uid else { return }
         try await Firestore.firestore().collection("Users").document(userId).collection("Liked").document(recipeUid).delete()

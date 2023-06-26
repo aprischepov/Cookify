@@ -8,8 +8,9 @@
 import Foundation
 import FirebaseFirestoreSwift
 
-struct FavoriteRecipe: Codable {
+struct Recipe: Codable {
     @DocumentID var uid: String?
+    var isFavorite: Bool
     let veryPopular: Bool
     let healthScore: Int
     let id: Int
