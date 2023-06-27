@@ -10,11 +10,11 @@ import SwiftUI
 import Combine
 
 final class EditProfileViewModel: ObservableObject {
-//    MARK: - Properties
+    //    MARK: - Properties
     private let firebaseManager: FirebaseProtocol = FirebaseManager()
     @Published private var authorizedUser = AuthorizedUser.shared
     private var subscriptions = Set<AnyCancellable>()
-//    View Properies
+    //    View Properies
     @Published var inputUserFirstName: String = ""
     @Published var inputUserLastName: String = ""
     @Published var inputUserEmail: String = ""
@@ -40,8 +40,8 @@ final class EditProfileViewModel: ObservableObject {
         }.store(in: &subscriptions)
     }
     
-//    MARK: - Methods
-//    Button Activation
+    //    MARK: - Methods
+    //    Button Activation
     func checkChanges() {
         isActivedButton = inputUserFirstName != authorizedUser.firstName ?? "" ||
         inputUserLastName != authorizedUser.lastName ?? "" ||
@@ -49,7 +49,7 @@ final class EditProfileViewModel: ObservableObject {
         userImage != authorizedUser.imageUrl?.description ?? ""
     }
     
-//    Update Data in Firebase Storage
+    //    Update Data in Firebase Storage
     func updateData() {
         guard let imageUrl = URL(string: userImage) else { return }
         Task {
@@ -65,5 +65,10 @@ final class EditProfileViewModel: ObservableObject {
         await MainActor.run(body: {
             errorMessage = error.localizedDescription
         })
+    }
+    
+    //    MARK: Deinit
+    deinit {
+        subscriptions.removeAll()
     }
 }

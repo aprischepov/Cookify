@@ -10,7 +10,7 @@ import SwiftUI
 import Combine
 
 final class RegistrationViewModel : ObservableObject {
-//    MARK: Properties
+    //    MARK: Properties
     let firebaseManager: FirebaseProtocol = FirebaseManager()
     let customfunction: CustomFunctionProtocol = CustomFunction()
     @Published var firstName: String = ""
@@ -41,15 +41,15 @@ final class RegistrationViewModel : ObservableObject {
         }.store(in: &subscriptions)
     }
     
-//    Check all fields and compare passwords
+    //    Check all fields and compare passwords
     func activateButton() {
         isButtonActivated =  !firstName.isEmpty &&
-           !lastName.isEmpty &&
-           !emailAddress.isEmpty &&
-           !password.isEmpty &&
-           !confirmedPassword.isEmpty &&
-           password == confirmedPassword
-            
+        !lastName.isEmpty &&
+        !emailAddress.isEmpty &&
+        !password.isEmpty &&
+        !confirmedPassword.isEmpty &&
+        password == confirmedPassword
+        
     }
     
     func registerUser() {
@@ -69,5 +69,9 @@ final class RegistrationViewModel : ObservableObject {
             errorMessage = error.localizedDescription
             isLoading = false
         })
+    }
+    //    MARK: Deinit
+    deinit {
+        subscriptions.removeAll()
     }
 }
