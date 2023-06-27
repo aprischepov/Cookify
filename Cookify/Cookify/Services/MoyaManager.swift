@@ -11,6 +11,7 @@ import Moya
 protocol MoyaManagerProtocol {
     func getRecipesByType(type: RecipeType, count: Int, offset: Int) async throws -> RecipesByTypeData
     func getRecipeByQuery(query: String) async throws -> [RecipesByQuery]
+    func getRecipeInformationById(id: Int) async throws -> RecipeById
 }
 
 final class MoyaManager: MoyaManagerProtocol {
@@ -50,6 +51,25 @@ final class MoyaManager: MoyaManagerProtocol {
                     do {
                         let recipes = try response.map([RecipesByQuery].self)
                         continuation.resume(returning: recipes)
+                    } catch {
+                        continuation.resume(throwing: error)
+                    }
+                case .failure(let error):
+                    continuation.resume(throwing: error)
+                }
+            }
+        })
+    }
+    
+//    Get Recipe Info by Id
+    func getRecipeInformationById(id: Int) async throws -> RecipeById {
+        return try await withCheckedThrowingContinuation({ continuation in
+            providerSpoonacular.request(.getRecipeInformationById(id: id)) { result in
+                switch result {
+                case .success(let response):
+                    do {
+                        let recipeInfo = try response.map(RecipeById.self)
+                        continuation.resume(returning: recipeInfo)
                     } catch {
                         continuation.resume(throwing: error)
                     }
