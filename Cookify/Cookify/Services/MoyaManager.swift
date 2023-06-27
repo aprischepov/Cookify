@@ -14,15 +14,15 @@ protocol MoyaManagerProtocol {
 }
 
 final class MoyaManager: MoyaManagerProtocol {
-//    MARK: - Properties
+    //    MARK: - Properties
     private let providerSpoonacular: MoyaProvider<SpoonacularApiProvider>
     
     init() {
         providerSpoonacular = MoyaProvider<SpoonacularApiProvider>()
     }
     
-//    MARK: - Methods
-//    Get Recipes by Type
+    //    MARK: - Methods
+    //    Get Recipes by Type
     func getRecipesByType(type: RecipeType, count: Int, offset: Int) async throws -> RecipesByTypeData {
         return try await withCheckedThrowingContinuation({ continuation in
             providerSpoonacular.request(.getRecipesByType(type: type, count: count, offset: offset)) { result in
@@ -41,7 +41,7 @@ final class MoyaManager: MoyaManagerProtocol {
         })
     }
     
-//    Get Recipes by Query
+    //    Get Recipes by Query
     func getRecipeByQuery(query: String) async throws -> [RecipesByQuery] {
         return try await withCheckedThrowingContinuation({ continuation in
             providerSpoonacular.request(.getRecipeByQuery(query: query)) { result in

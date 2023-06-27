@@ -56,7 +56,7 @@ final class FirebaseManager: FirebaseProtocol {
             guard let self,
                   error == nil else { return }
             self.appConditionStored = .signIn
-//            Вопрос к самому себе: нужны ли вообще на этом этапе закидывать в синглтон, все равно же дальше фетчу на главной
+            //            Вопрос к самому себе: нужны ли вообще на этом этапе закидывать в синглтон, все равно же дальше фетчу на главной
             self.authorizedUser.firstName = firstName
             self.authorizedUser.lastName = lastName
             self.authorizedUser.imageUrl = downloadURL
@@ -74,10 +74,10 @@ final class FirebaseManager: FirebaseProtocol {
         let updatedUser = User(firstName: firstName, lastName: lastName, emailAddress: email, image: downloadURL)
         try Firestore.firestore().collection("Users").document(userId).setData(from: updatedUser)
         await MainActor.run(body: {
-        authorizedUser.firstName = firstName
-        authorizedUser.lastName = lastName
-        authorizedUser.emailAddress = email
-        authorizedUser.imageUrl = imageUrl
+            authorizedUser.firstName = firstName
+            authorizedUser.lastName = lastName
+            authorizedUser.emailAddress = email
+            authorizedUser.imageUrl = imageUrl
         })
     }
     
@@ -136,7 +136,7 @@ final class FirebaseManager: FirebaseProtocol {
     //  Add to Favorites Recipes
     func addToFavorites(recipe: Recipe) async throws -> String {
         guard let userId = Auth.auth().currentUser?.uid else { return "" }
-            let recipeDoc = try Firestore.firestore().collection("Users").document(userId).collection("Liked").addDocument(from: recipe)
+        let recipeDoc = try Firestore.firestore().collection("Users").document(userId).collection("Liked").addDocument(from: recipe)
         return recipeDoc.documentID
     }
     //  Load Favorites Recipes
@@ -146,7 +146,7 @@ final class FirebaseManager: FirebaseProtocol {
             try recipe.data(as: Recipe.self)
         })
     }
-//    Delete Favorites Recipes
+    //    Delete Favorites Recipes
     func deleteFromFavorites(recipe: Recipe) async throws {
         guard let userId = Auth.auth().currentUser?.uid,
               let recipeUid = recipe.uid else { return }

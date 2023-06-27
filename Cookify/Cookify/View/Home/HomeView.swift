@@ -97,20 +97,19 @@ struct HomeView: View {
                     .frame(maxWidth: .infinity)
                     //                Recipes
                     VStack(alignment: .center, spacing: 16) {
-                            ForEach(vm.fullListRecipes, id: \.id) { recipe in
-                                RecipeCard(recipe: recipe) {
-                                    vm.sendAction(actionType: .changeFromFavoritesRecipes(recipe: recipe))
-                                }
+                        ForEach(vm.fullListRecipes, id: \.id) { recipe in
+                            RecipeCard(recipe: recipe) {
+                                vm.sendAction(actionType: .changeFromFavoritesRecipes(recipe: recipe))
                             }
-                            Button {
-                                vm.sendAction(actionType: .getRecipes(type: vm.currentTypeRecipes))
-                            } label: {
-                                CustomButton(title: "Load more", style: .borderButton)
-                            }
-                            .opacity(vm.dataCondition == .loading ? 0 : 1)
+                        }
+                        Button {
+                            vm.sendAction(actionType: .getRecipes(type: vm.currentTypeRecipes))
+                        } label: {
+                            CustomButton(title: "Load more", style: .borderButton)
+                        }
+                        .opacity(vm.dataCondition == .loading ? 0 : 1)
                         ProgressView()
                             .opacity(vm.dataCondition == .loading ? 1 : 0)
-//                        }
                     }
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
                     .padding(.horizontal, 16)

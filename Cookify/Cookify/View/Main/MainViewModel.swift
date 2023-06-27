@@ -95,38 +95,38 @@ final class MainViewModel: ObservableObject {
     
     //    Fetch User Data
     private func fetchUserData() async {
-            do {
-                try await firebaseManager.fetchUser()
-            } catch {
-                await errorHandling(error)
-            }
+        do {
+            try await firebaseManager.fetchUser()
+        } catch {
+            await errorHandling(error)
+        }
     }
     
     //    Get List With Favorites Recipes
     private func getFavoritesRecipes() async {
-            do {
-                let fetchedFavoritesRecipes = try await firebaseManager.fetchFavoritesRecipes()
-                await MainActor.run(body: {
-                    favoriteRecipes = fetchedFavoritesRecipes
-                })
-            } catch {
-                await errorHandling(error)
-            }
+        do {
+            let fetchedFavoritesRecipes = try await firebaseManager.fetchFavoritesRecipes()
+            await MainActor.run(body: {
+                favoriteRecipes = fetchedFavoritesRecipes
+            })
+        } catch {
+            await errorHandling(error)
+        }
     }
     
     //    Get Full List Recipes
     private func getFullListRecipes(type: RecipeType) async {
-            do {
-                let recipesFromApi = try await moyaManager.getRecipesByType(type: type, count: countLoadingRecipes, offset: countRecipesOffset)
-                let recipes = recipesFromApi.results.map{ $0.transfromToRecipe(isFavorite: isFavoriteRecipe(id: $0.id)) }
-                await MainActor.run(body: {
-                    countRecipes = recipes.count
-                    fullListRecipes.append(contentsOf: recipes)
-                    homeViewModel.dataCondition = .loaded
-                })
-            } catch {
-                await errorHandling(error)
-            }
+        do {
+            let recipesFromApi = try await moyaManager.getRecipesByType(type: type, count: countLoadingRecipes, offset: countRecipesOffset)
+            let recipes = recipesFromApi.results.map{ $0.transfromToRecipe(isFavorite: isFavoriteRecipe(id: $0.id)) }
+            await MainActor.run(body: {
+                countRecipes = recipes.count
+                fullListRecipes.append(contentsOf: recipes)
+                homeViewModel.dataCondition = .loaded
+            })
+        } catch {
+            await errorHandling(error)
+        }
     }
     
     //    Get Recipes With Another Type
@@ -155,7 +155,7 @@ final class MainViewModel: ObservableObject {
     private func addRecipeToFavorites(recipe: Recipe) {
         Task {
             do {
-//                Think about this !!!!!!!!!
+                //                Think about this !!!!!!!!!
                 var changedRecipe = recipe
                 changedRecipe.isFavorite.toggle()
                 let uid = try await firebaseManager.addToFavorites(recipe: changedRecipe)
@@ -197,7 +197,7 @@ final class MainViewModel: ObservableObject {
         })
     }
     
-//    MARK: Deinit
+    //    MARK: Deinit
     deinit {
         cancellable.removeAll()
     }
