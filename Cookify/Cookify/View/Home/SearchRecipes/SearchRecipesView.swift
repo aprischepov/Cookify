@@ -42,37 +42,37 @@ struct SearchRecipesView: View {
                         .padding(.horizontal, 8)
                     }
                 }
-                    List(vm.recipesList, id: \.id) { recipe in
-                        HStack(alignment: .center, spacing: 8) {
-                            WebImage(url: URL(string: "https://spoonacular.com/recipeImages/\(recipe.id)-312x231.\(recipe.imageType)")).placeholder{
-                                ZStack {
-                                    Image("cookifyIcon")
-                                        .resizable()
-                                        .scaledToFit()
-                                        .opacity(0.3)
-                                }
-                                .frame(height: 40)
+                List(vm.recipesList, id: \.id) { recipe in
+                    HStack(alignment: .center, spacing: 8) {
+                        WebImage(url: vm.getImageUrl(id: recipe.id, typeImage: recipe.imageType)).placeholder{
+                            ZStack {
+                                Image("cookifyIcon")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .opacity(0.3)
                             }
-                            .resizable()
-                            .scaledToFit()
                             .frame(height: 40)
-                            Text(recipe.title)
-                                .font(.jost(.medium, size: .body))
                         }
+                        .resizable()
+                        .scaledToFit()
+                        .frame(height: 40)
+                        Text(recipe.title)
+                            .font(.jost(.medium, size: .body))
                     }
-                    .listStyle(.plain)
+                }
+                .listStyle(.plain)
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
             .padding(.horizontal, 16)
             .padding(.vertical, 8)
             .alert(vm.errorMessage, isPresented: $vm.showError) {}
         }
-            
-        }
+        
     }
-    
-    struct SearchRecipesView_Previews: PreviewProvider {
-        static var previews: some View {
-            SearchRecipesView()
-        }
+}
+
+struct SearchRecipesView_Previews: PreviewProvider {
+    static var previews: some View {
+        SearchRecipesView()
     }
+}

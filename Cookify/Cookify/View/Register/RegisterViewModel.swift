@@ -70,4 +70,8 @@ final class RegistrationViewModel : ObservableObject {
             isLoading = false
         })
     }
+//    MARK: Deinit
+    deinit {
+        subscriptions.removeAll()
+    }
 }

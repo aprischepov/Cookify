@@ -66,4 +66,9 @@ final class EditProfileViewModel: ObservableObject {
             errorMessage = error.localizedDescription
         })
     }
+    
+//    MARK: Deinit
+    deinit {
+        subscriptions.removeAll()
+    }
 }

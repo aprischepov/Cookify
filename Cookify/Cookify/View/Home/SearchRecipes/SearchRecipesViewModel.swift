@@ -38,23 +38,32 @@ final class SearchRecipesViewModel: ObservableObject {
             }.store(in: &searchCancellable)
     }
     
-//    MARK: Methods
-//    Ger Recipes by Query
+    //    MARK: Methods
+    //    Ger Recipes by Query
     func getRecipesByQuery(query: String) async {
-            do {
-                let recipes = try await moyaManager.getRecipeByQuery(query: query)
-                await MainActor.run(body: {
-                    recipesList = recipes
-                })
-            } catch {
-                await errorHandling(error)
-            }
+        do {
+            let recipes = try await moyaManager.getRecipeByQuery(query: query)
+            await MainActor.run(body: {
+                recipesList = recipes
+            })
+        } catch {
+            await errorHandling(error)
+        }
     }
     
-//    Error Handling
+    //    Error Handling
     private func errorHandling(_ error: Error) async {
         await MainActor.run(body: {
             errorMessage = error.localizedDescription
         })
+    }
+    
+    func getImageUrl(id: Int, typeImage: String) -> URL? {
+        URL(string: "https://spoonacular.com/recipeImages/\(id)-312x231.\(typeImage)")
+    }
+    
+    //    MARK: Deinit
+    deinit {
+        searchCancellable.removeAll()
     }
 }

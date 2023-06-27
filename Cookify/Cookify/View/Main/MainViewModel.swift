@@ -196,4 +196,9 @@ final class MainViewModel: ObservableObject {
             errorMessage = error.localizedDescription
         })
     }
+    
+//    MARK: Deinit
+    deinit {
+        cancellable.removeAll()
+    }
 }
