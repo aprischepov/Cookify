@@ -45,11 +45,18 @@ final class RecipeViewModel: ObservableObject {
         }
     }
     
-    //    Search Nutrients
-    func searchNutrients(name: String) -> Int {
-        guard let recipeInfo = recipeInfo else { return 0 }
-        let nutrient = recipeInfo.nutrition.nutrients.first(where: {$0.name == name})
-        return Int(nutrient?.amount ?? 0)
+    //    Search Nutrient and Nutrient Info
+    func searchNutrients(nutrient: NutrientRecipes) -> String {
+        guard let recipeInfo = recipeInfo else { return "" }
+        let recipeNutrient = recipeInfo.nutrition.nutrients.first(where: { $0.name == nutrient.rawValue })
+        return "\(Int(recipeNutrient?.amount ?? 0))\(nutrient.unit) \(nutrient.rawValue)"
+    }
+    
+//    Search Ingredient Info
+    func searchIngredient(ingredient: Ingredient) -> String {
+        guard let recipeInfo = recipeInfo else { return "" }
+        let recipeIngredient = recipeInfo.extendedIngredients.first(where: { $0.id == ingredient.id })?.measures.metric
+        return "\(Int(recipeIngredient?.amount ?? 0)) \(recipeIngredient?.unitShort ?? "")"
     }
     
     //    Remove Tags

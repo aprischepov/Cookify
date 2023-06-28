@@ -76,7 +76,7 @@ struct RecipeView: View {
                                             }
                                             .cornerRadius(5)
                                         
-                                        Text("\(vm.searchNutrients(name: nutrient.rawValue).description)\(nutrient.unit) \(nutrient.rawValue)")
+                                        Text(vm.searchNutrients(nutrient: nutrient))
                                             .font(.jost(.regular, size: .footnote))
                                             .foregroundColor(.customColor(.darkGray))
                                     }
@@ -112,7 +112,7 @@ struct RecipeView: View {
                                 VStack(alignment: .center, spacing: 4) {
                                     ForEach(recipeInfo.extendedIngredients, id: \.id) { ingredient in
                                         HStack(spacing: 8) {
-                                            Text("\(Int(ingredient.measures.metric.amount).description) \(ingredient.measures.metric.unitShort)")
+                                            Text(vm.searchIngredient(ingredient: ingredient))
                                                 .frame(maxWidth: 128, alignment: .leading)
                                                 .foregroundColor(.customColor(.darkGray))
                                             Text(ingredient.name)
