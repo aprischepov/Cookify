@@ -46,7 +46,7 @@ struct RecipesByQuery: Decodable {
 struct RecipeById: Decodable {
     let id: Int
     let title: String
-    let imageUrl: String
+    let image: String
     let readyInMinutes: Int
     let healthScore: Int
     let servings: Int
@@ -62,7 +62,7 @@ struct Nutrition: Decodable {
 
 struct Nutrients: Decodable {
     let name: String
-    let amount: Int
+    let amount: Double
 }
 
 struct Ingredient: Decodable {
@@ -74,15 +74,15 @@ struct Measures: Decodable {
     let metric: Metric
 }
 struct Metric: Decodable {
-    let amount: Int
+    let amount: Double
     let unitShort: String
 }
 
 struct AnalyzedInstructions: Decodable {
-    let steps: [Steps]
+    let steps: [Step]
 }
 
-struct Steps: Decodable {
+struct Step: Decodable {
     let number: Int
     let step: String
 }

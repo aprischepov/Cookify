@@ -43,21 +43,25 @@ struct SearchRecipesView: View {
                     }
                 }
                 List(vm.recipesList, id: \.id) { recipe in
-                    HStack(alignment: .center, spacing: 8) {
-                        WebImage(url: vm.getImageUrl(id: recipe.id, typeImage: recipe.imageType)).placeholder{
-                            ZStack {
-                                Image("cookifyIcon")
-                                    .resizable()
-                                    .scaledToFit()
-                                    .opacity(0.3)
+                    NavigationLink {
+                        RecipeView(id: recipe.id)
+                    } label: {
+                        HStack(alignment: .center, spacing: 8) {
+                            WebImage(url: vm.getImageUrl(id: recipe.id, typeImage: recipe.imageType)).placeholder{
+                                ZStack {
+                                    Image("cookifyIcon")
+                                        .resizable()
+                                        .scaledToFit()
+                                        .opacity(0.3)
+                                }
+                                .frame(height: 40)
                             }
+                            .resizable()
+                            .scaledToFit()
                             .frame(height: 40)
+                            Text(recipe.title)
+                                .font(.jost(.medium, size: .body))
                         }
-                        .resizable()
-                        .scaledToFit()
-                        .frame(height: 40)
-                        Text(recipe.title)
-                            .font(.jost(.medium, size: .body))
                     }
                 }
                 .listStyle(.plain)

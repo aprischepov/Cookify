@@ -154,16 +154,19 @@ final class FirebaseManager: FirebaseProtocol {
     }
 }
 
-//enum Errors: Error {
-//    case errorAuthorization
-//
-//    var description: String {
-//        switch self {
-//        case .errorAuthorization:
-//            return "Error with authorization"
-//        }
-//    }
-//}
+enum Errors: Error {
+    case errorAuthorization
+    case notFoundRecipe
+
+    var description: String {
+        switch self {
+        case .errorAuthorization:
+            return "Error with authorization"
+        case .notFoundRecipe:
+            return "Sorry! Recipe not found"
+        }
+    }
+}
 
 enum Actions {
     case upload

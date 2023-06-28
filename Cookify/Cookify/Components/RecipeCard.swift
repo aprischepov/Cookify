@@ -42,6 +42,8 @@ struct RecipeCard: View {
             VStack(alignment: .leading, spacing: 4) {
                 Text(recipe.title)
                     .font(.jost(.bold, size: .title))
+                    .foregroundColor(.customColor(.black))
+                    .multilineTextAlignment(.leading)
                     .lineLimit(2, reservesSpace: true)
                 HStack(alignment: .center, spacing: 8) {
                     Text("Health Score:")
@@ -53,7 +55,6 @@ struct RecipeCard: View {
                         .background(Color.customColor(.lightOrange))
                         .cornerRadius(8)
                 }
-                .font(.jost(.semiBold, size: .body))
                 Divider()
                     .padding(.top, 4)
                 HStack(spacing: 8) {

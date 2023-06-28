@@ -72,7 +72,6 @@ struct HomeView: View {
                     .fullScreenCover(isPresented: $vm.showSearch) {
                         SearchRecipesView()
                     }
-                    
                     //                Recipes Categories
                     ScrollView(.horizontal, showsIndicators: false) {
                         HStack(alignment: .center, spacing: 16) {
@@ -98,8 +97,12 @@ struct HomeView: View {
                     //                Recipes
                     VStack(alignment: .center, spacing: 16) {
                         ForEach(vm.fullListRecipes, id: \.id) { recipe in
-                            RecipeCard(recipe: recipe) {
-                                vm.sendAction(actionType: .changeFromFavoritesRecipes(recipe: recipe))
+                            NavigationLink {
+                                RecipeView(id: recipe.id)
+                            } label: {
+                                RecipeCard(recipe: recipe) {
+                                    vm.sendAction(actionType: .changeFromFavoritesRecipes(recipe: recipe))
+                                }
                             }
                         }
                         Button {
