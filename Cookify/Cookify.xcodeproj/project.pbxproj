@@ -13,6 +13,8 @@
 		19100F552A422E3300AE6549 /* Extension + View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19100F542A422E3200AE6549 /* Extension + View.swift */; };
 		191564932A3B7D11000B9F97 /* Extension + String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 191564922A3B7D11000B9F97 /* Extension + String.swift */; };
 		193B82172A49AA4600657409 /* Extension + RecipeByType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 193B82162A49AA4600657409 /* Extension + RecipeByType.swift */; };
+		193E602B2A4CB0ED00E74DB6 /* RandomRecipeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 193E602A2A4CB0ED00E74DB6 /* RandomRecipeViewModel.swift */; };
+		193E602D2A4CB19700E74DB6 /* RandomRecipeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 193E602C2A4CB19700E74DB6 /* RandomRecipeView.swift */; };
 		195AA8DA2A35E65600F7E6CF /* Jost-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 195AA8D42A35E65600F7E6CF /* Jost-Light.ttf */; };
 		195AA8DB2A35E65600F7E6CF /* Jost-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 195AA8D52A35E65600F7E6CF /* Jost-Regular.ttf */; };
 		195AA8DC2A35E65700F7E6CF /* Jost-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 195AA8D62A35E65600F7E6CF /* Jost-SemiBold.ttf */; };
@@ -79,6 +81,8 @@
 		19100F542A422E3200AE6549 /* Extension + View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + View.swift"; sourceTree = "<group>"; };
 		191564922A3B7D11000B9F97 /* Extension + String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + String.swift"; sourceTree = "<group>"; };
 		193B82162A49AA4600657409 /* Extension + RecipeByType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + RecipeByType.swift"; sourceTree = "<group>"; };
+		193E602A2A4CB0ED00E74DB6 /* RandomRecipeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomRecipeViewModel.swift; sourceTree = "<group>"; };
+		193E602C2A4CB19700E74DB6 /* RandomRecipeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomRecipeView.swift; sourceTree = "<group>"; };
 		195AA8D42A35E65600F7E6CF /* Jost-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Jost-Light.ttf"; sourceTree = "<group>"; };
 		195AA8D52A35E65600F7E6CF /* Jost-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Jost-Regular.ttf"; sourceTree = "<group>"; };
 		195AA8D62A35E65600F7E6CF /* Jost-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Jost-SemiBold.ttf"; sourceTree = "<group>"; };
@@ -151,6 +155,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		193E60272A4CB0A700E74DB6 /* RandomRecipe */ = {
+			isa = PBXGroup;
+			children = (
+				193E602A2A4CB0ED00E74DB6 /* RandomRecipeViewModel.swift */,
+				193E602C2A4CB19700E74DB6 /* RandomRecipeView.swift */,
+			);
+			path = RandomRecipe;
+			sourceTree = "<group>";
+		};
 		197D13282A433AFD0039F66B /* Favorites */ = {
 			isa = PBXGroup;
 			children = (
@@ -206,6 +219,7 @@
 		19943BC42A2FA120009E9BCC /* View */ = {
 			isa = PBXGroup;
 			children = (
+				193E60272A4CB0A700E74DB6 /* RandomRecipe */,
 				19FE10DC2A389A6000D8DA49 /* LoadingView.swift */,
 				197D13282A433AFD0039F66B /* Favorites */,
 				19F23FD72A37839F003A4FC5 /* Profile */,
@@ -518,6 +532,7 @@
 				19FE10DD2A389A6000D8DA49 /* LoadingView.swift in Sources */,
 				197FF3B12A32488D00EFF1AF /* CustomTextField.swift in Sources */,
 				19943BC82A2FA197009E9BCC /* OnboardingCardView.swift in Sources */,
+				193E602B2A4CB0ED00E74DB6 /* RandomRecipeViewModel.swift in Sources */,
 				19AF8A7D2A06768100388F8F /* OnboardingView.swift in Sources */,
 				19100F552A422E3300AE6549 /* Extension + View.swift in Sources */,
 				19E0B77C2A36FD0D00BB626D /* User.swift in Sources */,
@@ -543,6 +558,7 @@
 				19E89AC12A3EDDBA00B05868 /* EditProfileViewModel.swift in Sources */,
 				19DB92302A39F66100757733 /* RecipesModels.swift in Sources */,
 				19E3EBC62A42002900460F91 /* SearchRecipesViewModel.swift in Sources */,
+				193E602D2A4CB19700E74DB6 /* RandomRecipeView.swift in Sources */,
 				197C50DF2A3E243600E898B5 /* ProfileViewModel.swift in Sources */,
 				19ECF2A92A45B9CE003FAA6F /* MainViewModel.swift in Sources */,
 				19E71CCD2A38BBA7007F0D02 /* Extension + UIApplication.swift in Sources */,

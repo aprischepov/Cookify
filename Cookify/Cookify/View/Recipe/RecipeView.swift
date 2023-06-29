@@ -59,15 +59,15 @@ struct RecipeView: View {
                             .frame(maxWidth: .infinity, alignment: .leading)
                             .padding(.horizontal, 16)
                             //                    Summary
-                            Text(vm.convertSummary(text: recipeInfo.summary))
+                            Text(vm.summary)
                                 .font(.jost(.regular, size: .body))
                                 .frame(maxWidth: .infinity, alignment: .leading)
                                 .padding(.horizontal, 16)
                             //                    Nutrients
                             LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())]) {
-                                ForEach(NutrientRecipes.allCases, id: \.id) { nutrient in
+                                ForEach(vm.nutrients, id: \.id) { nutrient in
                                     HStack {
-                                        Image(nutrient.icon)
+                                        Image(nutrient.type.icon)
                                             .resizable()
                                             .frame(width: 24, height: 24)
                                             .padding(4)
@@ -76,7 +76,7 @@ struct RecipeView: View {
                                             }
                                             .cornerRadius(5)
                                         
-                                        Text(vm.searchNutrients(nutrient: nutrient))
+                                        Text(nutrient.text)
                                             .font(.jost(.regular, size: .footnote))
                                             .foregroundColor(.customColor(.darkGray))
                                     }
@@ -110,9 +110,9 @@ struct RecipeView: View {
                             switch vm.currentType {
                             case .ingredients:
                                 VStack(alignment: .center, spacing: 4) {
-                                    ForEach(recipeInfo.extendedIngredients, id: \.id) { ingredient in
+                                    ForEach(vm.ingredients, id: \.id) { ingredient in
                                         HStack(spacing: 8) {
-                                            Text(vm.searchIngredient(ingredient: ingredient))
+                                            Text(ingredient.text)
                                                 .frame(maxWidth: 128, alignment: .leading)
                                                 .foregroundColor(.customColor(.darkGray))
                                             Text(ingredient.name)

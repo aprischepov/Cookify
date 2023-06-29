@@ -19,9 +19,12 @@ struct HomeView: View {
                         //                Random Recipe and Profile
                         HStack(alignment: .center) {
                             Button {
-                                vm.showSearch.toggle()
+                                vm.showRandomRecipe.toggle()
                             } label: {
                                 Image("random")
+                            }
+                            .fullScreenCover(isPresented: $vm.showRandomRecipe) {
+                                RandomRecipeView()
                             }
                             Spacer()
                             NavigationLink {

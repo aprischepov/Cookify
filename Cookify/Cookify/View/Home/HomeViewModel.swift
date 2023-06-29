@@ -18,6 +18,7 @@ final class HomeViewModel: ObservableObject {
 //    View Properties
     @Published var showSearch: Bool = false
     @Published var dataCondition: DataCondition = .loading
+    @Published var showRandomRecipe: Bool = false
     
     //    MARK: - Init
     init(subject: PassthroughSubject<ActionsWithRecipes, Never>, user: AuthorizedUser) {

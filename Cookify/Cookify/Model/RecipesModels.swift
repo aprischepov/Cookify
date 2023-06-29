@@ -86,3 +86,7 @@ struct Step: Decodable {
     let number: Int
     let step: String
 }
+
+struct RecipeRandom: Decodable {
+    let recipes: [RecipeByType]
+}

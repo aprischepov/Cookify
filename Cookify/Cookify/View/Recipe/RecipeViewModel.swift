@@ -12,6 +12,9 @@ final class RecipeViewModel: ObservableObject {
     @Published var id: Int
     private let moyaManager: MoyaManagerProtocol = MoyaManager()
     @Published var recipeInfo: RecipeById?
+    @Published var summary: String = ""
+    @Published var nutrients: [NutrientModel] = []
+    @Published var ingredients: [IngredientModel] = []
     //    View Properties
     @Published var errorMessage: String = "" {
         didSet {
@@ -38,7 +41,17 @@ final class RecipeViewModel: ObservableObject {
     //    Get Recipe Info
     private func getRecipeInfo() async -> RecipeById? {
         do {
-            return try await moyaManager.getRecipeInformationById(id: id)
+            let recipe = try await moyaManager.getRecipeInformationById(id: id)
+//            Remove Tags
+            let recipeSummary = recipe.summary.replacingOccurrences(of: "<[^>]+>", with: "", options: .regularExpression, range: nil)
+//            Nutrients
+            await searchNutrients(recipe: recipe)
+//            Ingredients
+            await searchIngredients(recipe: recipe)
+            await MainActor.run(body: {
+                summary = recipeSummary
+            })
+            return recipe
         } catch {
             await errorHandling(error)
             return nil
@@ -46,22 +59,26 @@ final class RecipeViewModel: ObservableObject {
     }
     
     //    Search Nutrient and Nutrient Info
-    func searchNutrients(nutrient: NutrientRecipes) -> String {
-        guard let recipeInfo = recipeInfo else { return "" }
-        let recipeNutrient = recipeInfo.nutrition.nutrients.first(where: { $0.name == nutrient.rawValue })
-        return "\(Int(recipeNutrient?.amount ?? 0))\(nutrient.unit) \(nutrient.rawValue)"
+    func searchNutrients(recipe: RecipeById) async {
+        let calories = recipe.nutrition.nutrients.first(where: { $0.name == NutrientRecipes.calories.rawValue }).map{ NutrientModel(type: .calories, text: "\(Int($0.amount))\(NutrientRecipes.calories.unit) \(NutrientRecipes.calories.rawValue)") }
+        let fat = recipe.nutrition.nutrients.first(where: { $0.name == NutrientRecipes.fat.rawValue }).map{ NutrientModel(type: .fat, text: "\(Int($0.amount))\(NutrientRecipes.fat.unit) \(NutrientRecipes.fat.rawValue)") }
+        let protein = recipe.nutrition.nutrients.first(where: { $0.name == NutrientRecipes.protein.rawValue }).map{ NutrientModel(type: .protein, text: "\(Int($0.amount))\(NutrientRecipes.protein.unit) \(NutrientRecipes.protein.rawValue)") }
+        let carbs = recipe.nutrition.nutrients.first(where: { $0.name == NutrientRecipes.carbs.rawValue }).map{ NutrientModel(type: .carbs, text: "\(Int($0.amount))\(NutrientRecipes.carbs.unit) \(NutrientRecipes.carbs.rawValue)") }
+        guard let calories = calories,
+              let fat = fat,
+              let protein = protein,
+              let carbs = carbs else { return }
+        await MainActor.run(body: {
+            nutrients.append(contentsOf: [calories, fat, protein, carbs])
+        })
     }
     
 //    Search Ingredient Info
-    func searchIngredient(ingredient: Ingredient) -> String {
-        guard let recipeInfo = recipeInfo else { return "" }
-        let recipeIngredient = recipeInfo.extendedIngredients.first(where: { $0.id == ingredient.id })?.measures.metric
-        return "\(Int(recipeIngredient?.amount ?? 0)) \(recipeIngredient?.unitShort ?? "")"
-    }
-    
-    //    Remove Tags
-    func convertSummary(text: String) -> String {
-        text.replacingOccurrences(of: "<[^>]+>", with: "", options: .regularExpression, range: nil)
+    func searchIngredients(recipe: RecipeById) async {
+        let recipeIngredients = recipe.extendedIngredients.compactMap { IngredientModel(name: $0.name, text: "\(Int($0.measures.metric.amount)) \($0.measures.metric.unitShort)")}
+        await MainActor.run(body: {
+            ingredients = recipeIngredients
+        })
     }
     
     //    Error Handling
@@ -126,4 +143,16 @@ enum NutrientRecipes: String, CaseIterable {
             return "g"
         }
     }
+}
+
+struct NutrientModel {
+    var id = UUID()
+    var type: NutrientRecipes
+    var text: String
+}
+
+struct IngredientModel {
+    var id = UUID()
+    var name: String
+    var text: String
 }
