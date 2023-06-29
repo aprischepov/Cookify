@@ -41,7 +41,7 @@ final class RegistrationViewModel : ObservableObject {
         }.store(in: &subscriptions)
     }
     
-    //    Check all fields and compare passwords
+    //    Check All Fields and Compare Passwords
     func activateButton() {
         isButtonActivated =  !firstName.isEmpty &&
         !lastName.isEmpty &&
