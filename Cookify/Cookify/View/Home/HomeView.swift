@@ -23,7 +23,9 @@ struct HomeView: View {
                             } label: {
                                 Image("random")
                             }
-                            .fullScreenCover(isPresented: $vm.showRandomRecipe) {
+                            .fullScreenCover(isPresented: $vm.showRandomRecipe, onDismiss: {
+                                
+                            }) {
                                 RandomRecipeView()
                             }
                             Spacer()

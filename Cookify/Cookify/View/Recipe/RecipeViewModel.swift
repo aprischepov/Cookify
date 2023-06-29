@@ -15,6 +15,7 @@ final class RecipeViewModel: ObservableObject {
     @Published var summary: String = ""
     @Published var nutrients: [NutrientModel] = []
     @Published var ingredients: [IngredientModel] = []
+    @Published var steps: [Step] = []
     //    View Properties
     @Published var errorMessage: String = "" {
         didSet {
@@ -26,20 +27,18 @@ final class RecipeViewModel: ObservableObject {
     @Published var dataCondition: DataCondition = .loading
     
     //    MARK: Init
-    @MainActor
     init(id: Int) {
         self.id = id
         Task {
             if !ProcessInfo.isPreviewMode {
-                recipeInfo = await getRecipeInfo()
-                dataCondition = .loaded
+                await getRecipeInfo()
             }
         }
     }
     
     //  MARK: Methods
     //    Get Recipe Info
-    private func getRecipeInfo() async -> RecipeById? {
+    private func getRecipeInfo() async {
         do {
             let recipe = try await moyaManager.getRecipeInformationById(id: id)
 //            Remove Tags
@@ -48,13 +47,18 @@ final class RecipeViewModel: ObservableObject {
             await searchNutrients(recipe: recipe)
 //            Ingredients
             await searchIngredients(recipe: recipe)
+//            Steps
+            guard let recipeInstructions = recipe.analyzedInstructions.first?.steps else { return }
             await MainActor.run(body: {
+                recipeInfo = recipe
                 summary = recipeSummary
+                steps = recipeInstructions
+                dataCondition = .loaded
             })
-            return recipe
+//            return recipe
         } catch {
             await errorHandling(error)
-            return nil
+//            return nil
         }
     }
     

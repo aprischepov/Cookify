@@ -109,56 +109,9 @@ struct RecipeView: View {
                             .padding(.horizontal, 16)
                             switch vm.currentType {
                             case .ingredients:
-                                VStack(alignment: .center, spacing: 4) {
-                                    ForEach(vm.ingredients, id: \.id) { ingredient in
-                                        HStack(spacing: 8) {
-                                            Text(ingredient.text)
-                                                .frame(maxWidth: 128, alignment: .leading)
-                                                .foregroundColor(.customColor(.darkGray))
-                                            Text(ingredient.name)
-                                        }
-                                        .frame(maxWidth: .infinity, alignment: .leading)
-                                    }
-                                    Spacer(minLength: 16)
-                                    Button {
-                                        //                                add to shopping list action
-                                    } label: {
-                                        CustomButton(title: "Add to shopping list", style: .filledButton)
-                                    }
-                                    
-                                }
-                                .font(.jost(.regular, size: .body))
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                                .padding(.horizontal, 16)
+                                IngredientsView(ingredients: vm.ingredients)
                             case .instructions:
-                                VStack(alignment: .center, spacing: 8) {
-                                    if let steps = recipeInfo.analyzedInstructions.first?.steps { ForEach(steps, id: \.number) { step in
-                                        HStack(alignment: .top, spacing: 8) {
-                                            Text(step.number.description)
-                                                .foregroundColor(.customColor(.gray))
-                                                .font(.jost(.medium, size: .body))
-                                                .frame(width: 24)
-                                                .clipShape(Circle())
-                                                .overlay {
-                                                    Circle().stroke(Color.customColor(.orange))
-                                                }
-                                            Text(step.step)
-                                                .font(.jost(.regular, size: .body))
-                                        }
-                                        .frame(maxWidth: .infinity, alignment: .leading)
-                                    }
-                                    } else {
-                                        Text("Sorry. Instructions not found")
-                                            .font(.jost(.regular, size: .body))
-                                    }
-                                    Spacer(minLength: 16)
-                                    Button {
-                                        //                                Share to Community
-                                    } label: {
-                                        CustomButton(title: "Share to community", style: .filledButton)
-                                    }
-                                }
-                                .padding(.horizontal, 16)
+                                InstructionView(instruction: vm.steps)
                             }
                         }
                         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
@@ -169,6 +122,63 @@ struct RecipeView: View {
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
             .edgesIgnoringSafeArea(.top)
         }
+    }
+}
+
+struct IngredientsView: View {
+    var ingredients: [IngredientModel]
+    var body: some View {
+        VStack(alignment: .center, spacing: 4) {
+            ForEach(ingredients, id: \.id) { ingredient in
+                HStack(spacing: 8) {
+                    Text(ingredient.text)
+                        .frame(maxWidth: 128, alignment: .leading)
+                        .foregroundColor(.customColor(.darkGray))
+                    Text(ingredient.name)
+                }
+                .frame(maxWidth: .infinity, alignment: .leading)
+            }
+            Spacer(minLength: 16)
+            Button {
+                //                                add to shopping list action
+            } label: {
+                CustomButton(title: "Add to shopping list", style: .filledButton)
+            }
+            
+        }
+        .font(.jost(.regular, size: .body))
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .padding(.horizontal, 16)
+    }
+}
+
+struct InstructionView: View {
+    var instruction: [Step]
+    var body: some View {
+        VStack(alignment: .center, spacing: 8) {
+            ForEach(instruction, id: \.number) { step in
+                HStack(alignment: .top, spacing: 8) {
+                    Text(step.number.description)
+                        .foregroundColor(.customColor(.gray))
+                        .font(.jost(.medium, size: .body))
+                        .frame(width: 24)
+                        .clipShape(Circle())
+                        .overlay {
+                            Circle().stroke(Color.customColor(.orange))
+                        }
+                    Text(step.step)
+                        .font(.jost(.regular, size: .body))
+                }
+                .frame(maxWidth: .infinity, alignment: .leading)
+            }
+            Spacer(minLength: 16)
+            Button {
+                //                                Share to Community
+            } label: {
+                CustomButton(title: "Share to community", style: .filledButton)
+            }
+        }
+        .padding(.horizontal, 16)
     }
 }
 
