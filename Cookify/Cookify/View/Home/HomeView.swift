@@ -19,9 +19,14 @@ struct HomeView: View {
                         //                Random Recipe and Profile
                         HStack(alignment: .center) {
                             Button {
-                                vm.showSearch.toggle()
+                                vm.showRandomRecipe.toggle()
                             } label: {
                                 Image("random")
+                            }
+                            .fullScreenCover(isPresented: $vm.showRandomRecipe, onDismiss: {
+                                
+                            }) {
+                                RandomRecipeView()
                             }
                             Spacer()
                             NavigationLink {
@@ -72,7 +77,6 @@ struct HomeView: View {
                     .fullScreenCover(isPresented: $vm.showSearch) {
                         SearchRecipesView()
                     }
-                    
                     //                Recipes Categories
                     ScrollView(.horizontal, showsIndicators: false) {
                         HStack(alignment: .center, spacing: 16) {
@@ -98,8 +102,12 @@ struct HomeView: View {
                     //                Recipes
                     VStack(alignment: .center, spacing: 16) {
                         ForEach(vm.fullListRecipes, id: \.id) { recipe in
-                            RecipeCard(recipe: recipe) {
-                                vm.sendAction(actionType: .changeFromFavoritesRecipes(recipe: recipe))
+                            NavigationLink {
+                                RecipeView(id: recipe.id)
+                            } label: {
+                                RecipeCard(recipe: recipe) {
+                                    vm.sendAction(actionType: .changeFromFavoritesRecipes(recipe: recipe))
+                                }
                             }
                         }
                         Button {

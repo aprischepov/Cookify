@@ -11,22 +11,32 @@ import Combine
 struct FavoritesView: View {
     @StateObject var vm: FavoritesViewModel
     var body: some View {
-        VStack(alignment: .leading, spacing: 8) {
-            Text("Favorites")
-                .font(.jost(.semiBold, size: .title))
-                .padding(.horizontal, 16)
-            List {
-                ForEach(vm.favoriteRecipes, id: \.id) { recipe in
-                    FavoriteRecipeCard(recipe: recipe)
+        NavigationView {
+            VStack(alignment: .leading, spacing: 8) {
+                Text("Favorites")
+                    .font(.jost(.semiBold, size: .title))
+                    .padding(.horizontal, 16)
+                List {
+                    ForEach(vm.favoriteRecipes, id: \.id) { recipe in
+                        ZStack(alignment: .top) {
+                            NavigationLink {
+                                RecipeView(id: recipe.id)
+                            } label: {
+                                FavoriteRecipeCard(recipe: recipe)
+                            }
+                            .opacity(0)
+                            FavoriteRecipeCard(recipe: recipe)
+                        }
+                    }
+                    .onDelete { indexSet in
+                        vm.removeFavriteRecipe(indexSet: indexSet)
+                    }
                 }
-                .onDelete { indexSet in
-                    vm.removeFavriteRecipe(indexSet: indexSet)
-                }
+                .listStyle(.inset)
             }
-            .listStyle(.inset)
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
+            .padding(.vertical, 8)
         }
-        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
-        .padding(.vertical, 8)
     }
 }
 

@@ -61,7 +61,8 @@ enum RecipeType: String, CaseIterable {
 enum SpoonacularApiProvider {
     case getRecipesByType(type: RecipeType, count: Int, offset: Int)
     case getRecipeByQuery(query: String)
-    //    case getRecipeInformationById
+    case getRecipeInformationById(id: Int)
+    case getRandomRecipe
     //    case searchByIngredients
 }
 
@@ -79,6 +80,10 @@ extension SpoonacularApiProvider: TargetType {
             return "recipes/complexSearch"
         case .getRecipeByQuery:
             return "recipes/autocomplete"
+        case .getRecipeInformationById(id: let id):
+            return "recipes/\(id)/information"
+        case .getRandomRecipe:
+            return "recipes/random"
         }
     }
     
@@ -100,6 +105,10 @@ extension SpoonacularApiProvider: TargetType {
         case .getRecipeByQuery(query: let query):
             params["number"] = 25
             params["query"] = query
+        case .getRecipeInformationById(id: _):
+            params["includeNutrition"] = true.description
+        case .getRandomRecipe:
+            params["number"] = 10
         }
         return params
     }

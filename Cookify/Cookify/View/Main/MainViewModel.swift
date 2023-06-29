@@ -118,7 +118,7 @@ final class MainViewModel: ObservableObject {
     private func getFullListRecipes(type: RecipeType) async {
         do {
             let recipesFromApi = try await moyaManager.getRecipesByType(type: type, count: countLoadingRecipes, offset: countRecipesOffset)
-            let recipes = recipesFromApi.results.map{ $0.transfromToRecipe(isFavorite: isFavoriteRecipe(id: $0.id)) }
+            let recipes = recipesFromApi.results.map{ $0.transformToRecipe(isFavorite: isFavoriteRecipe(id: $0.id)) }
             await MainActor.run(body: {
                 countRecipes = recipes.count
                 fullListRecipes.append(contentsOf: recipes)
