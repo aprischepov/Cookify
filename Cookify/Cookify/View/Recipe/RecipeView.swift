@@ -125,7 +125,7 @@ struct RecipeView: View {
     }
 }
 
-struct IngredientsView: View {
+private struct IngredientsView: View {
     var ingredients: [IngredientModel]
     var body: some View {
         VStack(alignment: .center, spacing: 4) {
@@ -152,7 +152,7 @@ struct IngredientsView: View {
     }
 }
 
-struct InstructionView: View {
+private struct InstructionView: View {
     var instruction: [Step]
     var body: some View {
         VStack(alignment: .center, spacing: 8) {

@@ -19,7 +19,7 @@ struct MainView: View {
                 .tabItem {
                     Image(systemName: "person.3.fill")
                 }
-            SearchView()
+            SearchByIngredientsView()
                 .tabItem {
                     Image(systemName: "magnifyingglass")
                 }

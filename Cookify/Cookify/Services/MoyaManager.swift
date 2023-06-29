@@ -13,6 +13,7 @@ protocol MoyaManagerProtocol {
     func getRecipeByQuery(query: String) async throws -> [RecipesByQuery]
     func getRecipeInformationById(id: Int) async throws -> RecipeById
     func getRecipeRandom() async throws -> RecipeRandom
+    func getRecipesByIngredient(ingredients: [String]) async throws -> [RecipeByIngredients]
 }
 
 final class MoyaManager: MoyaManagerProtocol {
@@ -81,7 +82,7 @@ final class MoyaManager: MoyaManagerProtocol {
         })
     }
     
-//    Get Recipe Random
+//    Get Recipes Random
     func getRecipeRandom() async throws -> RecipeRandom {
         return try await withCheckedThrowingContinuation({ continuation in
             providerSpoonacular.request(.getRandomRecipe) { result in
@@ -90,6 +91,25 @@ final class MoyaManager: MoyaManagerProtocol {
                     do {
                         let recipeRandom = try response.map(RecipeRandom.self)
                         continuation.resume(returning: recipeRandom)
+                    } catch {
+                        continuation.resume(throwing: error)
+                    }
+                case .failure(let error):
+                    continuation.resume(throwing: error)
+                }
+            }
+        })
+    }
+    
+//    Get Recipes by Ingredients
+    func getRecipesByIngredient(ingredients: [String]) async throws -> [RecipeByIngredients] {
+        return try await withCheckedThrowingContinuation({ continuation in
+            providerSpoonacular.request(.searchByIngredients(ingredients: ingredients)) { result in
+                switch result {
+                case .success(let response):
+                    do {
+                        let recipes = try response.map([RecipeByIngredients].self)
+                        continuation.resume(returning: recipes)
                     } catch {
                         continuation.resume(throwing: error)
                     }
