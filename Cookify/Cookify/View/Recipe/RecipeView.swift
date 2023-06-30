@@ -130,7 +130,7 @@ private struct IngredientsView: View {
     var body: some View {
         VStack(alignment: .center, spacing: 4) {
             ForEach(ingredients, id: \.id) { ingredient in
-                HStack(spacing: 8) {
+                HStack(spacing: 16) {
                     Text(ingredient.text)
                         .frame(maxWidth: 128, alignment: .leading)
                         .foregroundColor(.customColor(.darkGray))
@@ -138,7 +138,6 @@ private struct IngredientsView: View {
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
             }
-            Spacer(minLength: 16)
             Button {
                 //                                add to shopping list action
             } label: {
@@ -171,7 +170,6 @@ private struct InstructionView: View {
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
             }
-            Spacer(minLength: 16)
             Button {
                 //                                Share to Community
             } label: {

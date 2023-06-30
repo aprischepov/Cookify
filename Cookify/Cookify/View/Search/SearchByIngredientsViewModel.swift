@@ -8,13 +8,18 @@
 import Foundation
 import Combine
 
+struct TextfieldModel: Identifiable {
+    let id = UUID()
+    var text: String
+}
+
 final class SearchByIngredientsViewModel: ObservableObject {
 //    MARK: Properties
     private var cancellable = Set<AnyCancellable>()
     private var moyaManager: MoyaManagerProtocol = MoyaManager()
     @Published var searchResultsList: [RecipeByIngredients] = []
 //    View Properties
-    @Published var texfieldsList: [String] = [""]
+    @Published var textfieldModels: [TextfieldModel] = [TextfieldModel(text: "")]
     @Published var isButtonActivated: Bool = false
     @Published var errorMessage: String = "" {
         didSet {
@@ -22,47 +27,59 @@ final class SearchByIngredientsViewModel: ObservableObject {
         }
     }
     @Published var showError: Bool = false
+    @Published var dataCondition: DataCondition = .loaded
     
 //    MARK: Init
+    
     init() {
-//        $texfieldsList
-//            .sink { [weak self] _ in
-//                guard let self else { return }
-//                self.isButtonActivated
-//            }.store(in: &cancellable)
+        $textfieldModels
+            .sink { [weak self] _ in
+                guard let self else { return }
+                Task {
+                    await self.buttonActivate()
+                }
+            }.store(in: &cancellable)
     }
     
 //    MARK: Properties
 //    Add textfield
-    func addTextfield() {
-        texfieldsList.append("")
+    func addTextfield() async {
+        await MainActor.run {
+            textfieldModels.append(TextfieldModel(text: ""))
+        }
     }
     
-//    Action Textfield
-    func actionTextfield() {
-        if texfieldsList.count != 1 {
-            texfieldsList.removeLast()
-        } 
+    func findRecipesButtonAction() async {
+        let emptytext = textfieldModels.filter{ $0.text.isEmpty }
+        await MainActor.run(body: {
+            textfieldModels.removeAll(where: { $0.id == emptytext.first?.id })
+            dataCondition = .loading
+        })
+        let ingredients = textfieldModels.map{ $0.text }
+        await getSearchByIngredients(ingredients: ingredients)
     }
     
 //    Button Activate
-    private func buttonActivate() {
-        guard let text = texfieldsList.first else { return }
+    private func buttonActivate() async {
+        guard let text = textfieldModels.first?.text else { return }
+        await MainActor.run(body: {
         isButtonActivated = !text.isEmpty
+        })
     }
     
 //    Get Search Results
-    private func getSearchByIngredients() async {
-        Task {
+    private func getSearchByIngredients(ingredients: [String]) async {
+//        Task {
             do {
-                let recipes = try await moyaManager.getRecipesByIngredient(ingredients: texfieldsList)
+                let recipes = try await moyaManager.getRecipesByIngredient(ingredients: ingredients)
                 await MainActor.run(body: {
                     searchResultsList = recipes
+                    dataCondition = .loaded
                 })
             } catch {
                 await errorHandling(error)
             }
-        }
+//        }
     }
     
 //    Error Handling
@@ -70,5 +87,9 @@ final class SearchByIngredientsViewModel: ObservableObject {
         await MainActor.run(body: {
             errorMessage = error.localizedDescription
         })
+    }
+    
+    deinit {
+        cancellable.removeAll()
     }
 }

@@ -112,6 +112,7 @@ extension SpoonacularApiProvider: TargetType {
         case .getRandomRecipe:
             params["number"] = 10
         case .searchByIngredients(ingredients: let ingredients):
+            params["number"] = 20
             params["ingredients"] = ingredients.joined(separator: ", ")
         }
         return params

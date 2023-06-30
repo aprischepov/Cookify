@@ -79,7 +79,7 @@ final class RecipeViewModel: ObservableObject {
     
 //    Search Ingredient Info
     func searchIngredients(recipe: RecipeById) async {
-        let recipeIngredients = recipe.extendedIngredients.compactMap { IngredientModel(name: $0.name, text: "\(Int($0.measures.metric.amount)) \($0.measures.metric.unitShort)")}
+        let recipeIngredients = recipe.extendedIngredients.compactMap { IngredientModel(name: $0.name, text: "\($0.measures.metric.amount.rounded()) \($0.measures.metric.unitShort)")}
         await MainActor.run(body: {
             ingredients = recipeIngredients
         })
