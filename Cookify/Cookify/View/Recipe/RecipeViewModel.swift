@@ -55,10 +55,8 @@ final class RecipeViewModel: ObservableObject {
                 steps = recipeInstructions
                 dataCondition = .loaded
             })
-//            return recipe
         } catch {
             await errorHandling(error)
-//            return nil
         }
     }
     
@@ -79,7 +77,9 @@ final class RecipeViewModel: ObservableObject {
     
 //    Search Ingredient Info
     func searchIngredients(recipe: RecipeById) async {
-        let recipeIngredients = recipe.extendedIngredients.compactMap { IngredientModel(name: $0.name, text: "\($0.measures.metric.amount.rounded()) \($0.measures.metric.unitShort)")}
+        let recipeIngredients = recipe.extendedIngredients.compactMap{IngredientModel(name: $0.name,
+                                                                                       amount: $0.measures.metric.amount,
+                                                                                       unitShort: $0.measures.metric.unitShort)}
         await MainActor.run(body: {
             ingredients = recipeIngredients
         })
@@ -158,5 +158,9 @@ struct NutrientModel {
 struct IngredientModel {
     var id = UUID()
     var name: String
-    var text: String
+    var amount: Double
+    var unitShort: String
+    var text: String {
+        "\(amount.rounded()) \(unitShort)"
+    }
 }

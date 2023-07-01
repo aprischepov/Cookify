@@ -176,6 +176,7 @@ private struct InstructionView: View {
                 CustomButton(title: "Share to community", style: .filledButton)
             }
         }
+        .frame(maxHeight: .infinity)
         .padding(.horizontal, 16)
     }
 }

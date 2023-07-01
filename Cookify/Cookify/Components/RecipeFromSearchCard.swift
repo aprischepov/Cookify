@@ -23,7 +23,6 @@ struct RecipeFromSearchCard: View {
             }
             .resizable()
             .scaledToFit()
-            .frame(maxWidth: .infinity)
             .layoutPriority(1)
 //            Recipe Title
             Text(recipe.title)

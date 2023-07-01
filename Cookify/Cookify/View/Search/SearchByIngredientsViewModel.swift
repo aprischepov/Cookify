@@ -14,11 +14,11 @@ struct TextfieldModel: Identifiable {
 }
 
 final class SearchByIngredientsViewModel: ObservableObject {
-//    MARK: Properties
+    //    MARK: Properties
     private var cancellable = Set<AnyCancellable>()
     private var moyaManager: MoyaManagerProtocol = MoyaManager()
     @Published var searchResultsList: [RecipeByIngredients] = []
-//    View Properties
+    //    View Properties
     @Published var textfieldModels: [TextfieldModel] = [TextfieldModel(text: "")]
     @Published var isButtonActivated: Bool = false
     @Published var errorMessage: String = "" {
@@ -29,7 +29,7 @@ final class SearchByIngredientsViewModel: ObservableObject {
     @Published var showError: Bool = false
     @Published var dataCondition: DataCondition = .loaded
     
-//    MARK: Init
+    //    MARK: Init
     
     init() {
         $textfieldModels
@@ -41,14 +41,15 @@ final class SearchByIngredientsViewModel: ObservableObject {
             }.store(in: &cancellable)
     }
     
-//    MARK: Properties
-//    Add textfield
+    //    MARK: Properties
+    //    Add textfield
     func addTextfield() async {
         await MainActor.run {
             textfieldModels.append(TextfieldModel(text: ""))
         }
     }
     
+    //    Send response and Check Textfields
     func findRecipesButtonAction() async {
         let emptytext = textfieldModels.filter{ $0.text.isEmpty }
         await MainActor.run(body: {
@@ -59,30 +60,30 @@ final class SearchByIngredientsViewModel: ObservableObject {
         await getSearchByIngredients(ingredients: ingredients)
     }
     
-//    Button Activate
+    //    Button Activate
     private func buttonActivate() async {
         guard let text = textfieldModels.first?.text else { return }
         await MainActor.run(body: {
-        isButtonActivated = !text.isEmpty
+            isButtonActivated = !text.isEmpty
         })
     }
     
-//    Get Search Results
+    //    Get Search Results
     private func getSearchByIngredients(ingredients: [String]) async {
-//        Task {
-            do {
-                let recipes = try await moyaManager.getRecipesByIngredient(ingredients: ingredients)
-                await MainActor.run(body: {
-                    searchResultsList = recipes
-                    dataCondition = .loaded
-                })
-            } catch {
-                await errorHandling(error)
-            }
-//        }
+        //        Task {
+        do {
+            let recipes = try await moyaManager.getRecipesByIngredient(ingredients: ingredients)
+            await MainActor.run(body: {
+                searchResultsList = recipes
+                dataCondition = .loaded
+            })
+        } catch {
+            await errorHandling(error)
+        }
+        //        }
     }
     
-//    Error Handling
+    //    Error Handling
     private func errorHandling(_ error: Error) async {
         await MainActor.run(body: {
             errorMessage = error.localizedDescription

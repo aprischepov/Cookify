@@ -43,7 +43,7 @@ struct SearchByIngredientsView: View {
                     //            Recipes
                     switch vm.dataCondition {
                     case .loaded:
-                        VStack(alignment: .center, spacing: 8) {
+                        VStack(alignment: .center, spacing: 16) {
                             ForEach(vm.searchResultsList, id: \.id) { recipe in
                                 NavigationLink {
                                     RecipeView(id: recipe.id)
@@ -59,7 +59,6 @@ struct SearchByIngredientsView: View {
                         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
                     }
                 }
-                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
                 .padding(.horizontal, 16)
                 .padding(.vertical, 8)
                 .alert(vm.errorMessage, isPresented: $vm.showError) {}
