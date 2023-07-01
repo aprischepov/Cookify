@@ -68,6 +68,8 @@
 		19EE02B62A4AE175008B94E2 /* RecipeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19EE02B52A4AE175008B94E2 /* RecipeView.swift */; };
 		19EE02B92A4AE714008B94E2 /* RecipeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19EE02B82A4AE714008B94E2 /* RecipeViewModel.swift */; };
 		19EE51CE2A3E3514006A423A /* EditProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19EE51CD2A3E3514006A423A /* EditProfileView.swift */; };
+		19F007702A50680000B7F0AC /* ShoppingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19F0076F2A50680000B7F0AC /* ShoppingViewModel.swift */; };
+		19F007732A5076E800B7F0AC /* IngredientsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19F007722A5076E800B7F0AC /* IngredientsListView.swift */; };
 		19F23FD32A3782EE003A4FC5 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19F23FD22A3782EE003A4FC5 /* HomeView.swift */; };
 		19F23FD92A3783E2003A4FC5 /* CommunityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19F23FD82A3783E2003A4FC5 /* CommunityView.swift */; };
 		19F31A662A3C905D003529C7 /* RecipeCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19F31A652A3C905D003529C7 /* RecipeCard.swift */; };
@@ -134,6 +136,8 @@
 		19EE02B52A4AE175008B94E2 /* RecipeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeView.swift; sourceTree = "<group>"; };
 		19EE02B82A4AE714008B94E2 /* RecipeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeViewModel.swift; sourceTree = "<group>"; };
 		19EE51CD2A3E3514006A423A /* EditProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileView.swift; sourceTree = "<group>"; };
+		19F0076F2A50680000B7F0AC /* ShoppingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingViewModel.swift; sourceTree = "<group>"; };
+		19F007722A5076E800B7F0AC /* IngredientsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientsListView.swift; sourceTree = "<group>"; };
 		19F23FD22A3782EE003A4FC5 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		19F23FD82A3783E2003A4FC5 /* CommunityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityView.swift; sourceTree = "<group>"; };
 		19F31A652A3C905D003529C7 /* RecipeCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeCard.swift; sourceTree = "<group>"; };
@@ -392,6 +396,14 @@
 			path = EditProfile;
 			sourceTree = "<group>";
 		};
+		19F007712A5076AD00B7F0AC /* IngredientsList */ = {
+			isa = PBXGroup;
+			children = (
+				19F007722A5076E800B7F0AC /* IngredientsListView.swift */,
+			);
+			path = IngredientsList;
+			sourceTree = "<group>";
+		};
 		19F23FD12A3782BF003A4FC5 /* Home */ = {
 			isa = PBXGroup;
 			children = (
@@ -422,7 +434,9 @@
 		19F23FD62A378393003A4FC5 /* Shopping */ = {
 			isa = PBXGroup;
 			children = (
+				19F007712A5076AD00B7F0AC /* IngredientsList */,
 				1903DF132A37878800478DFE /* ShoppingView.swift */,
+				19F0076F2A50680000B7F0AC /* ShoppingViewModel.swift */,
 			);
 			path = Shopping;
 			sourceTree = "<group>";
@@ -554,6 +568,7 @@
 				191564932A3B7D11000B9F97 /* Extension + String.swift in Sources */,
 				1903DF162A37879800478DFE /* ProfileView.swift in Sources */,
 				197D132A2A433B190039F66B /* FavoritesView.swift in Sources */,
+				19F007732A5076E800B7F0AC /* IngredientsListView.swift in Sources */,
 				199747422A31EE44004D657C /* SignInView.swift in Sources */,
 				198C9B0D2A35028F008285A3 /* RegisterViewModel.swift in Sources */,
 				19EE02B62A4AE175008B94E2 /* RecipeView.swift in Sources */,
@@ -565,6 +580,7 @@
 				19EE51CE2A3E3514006A423A /* EditProfileView.swift in Sources */,
 				193B82172A49AA4600657409 /* Extension + RecipeByType.swift in Sources */,
 				19F31A662A3C905D003529C7 /* RecipeCard.swift in Sources */,
+				19F007702A50680000B7F0AC /* ShoppingViewModel.swift in Sources */,
 				19E89AC12A3EDDBA00B05868 /* EditProfileViewModel.swift in Sources */,
 				19D8B4632A4E1CB0002F109D /* RecipeFromSearchCard.swift in Sources */,
 				19DB92302A39F66100757733 /* RecipesModels.swift in Sources */,
