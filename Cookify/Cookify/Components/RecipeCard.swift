@@ -13,32 +13,32 @@ struct RecipeCard: View {
     var favoriteTapped: () -> Void
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
-//            Main Recipe Image - Upper Half of Card
-                WebImage(url: URL(string: recipe.image)).placeholder {
-                    ZStack {
-                        Image("cookifyIcon")
-                            .opacity(0.3)
-                    }
-                    .frame(maxWidth: .infinity, maxHeight: 240, alignment: .center)
+            //            Main Recipe Image - Upper Half of Card
+            WebImage(url: URL(string: recipe.image)).placeholder {
+                ZStack {
+                    Image("cookifyIcon")
+                        .opacity(0.3)
                 }
-                    .resizable()
-                    .scaledToFill()
-                    .frame(maxHeight: 240)
-                    .clipped()
-                    .overlay {
-                        HStack(spacing: 4) {
-                            Image(systemName: "clock")
-                            Text("\(recipe.readyInMinutes.description) min")
-                        }
-                        .font(.jost(.medium, size: .body))
-                        .foregroundColor(.customColor(.white))
-                        .padding(.vertical, 8)
-                        .padding(.horizontal, 16)
-                        .background(Color.customColor(.black).opacity(0.5))
-                        .roundedCorner(10, corners: .bottomRight)
-                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
-                    }
-//            Stack bottom half of card
+                .frame(maxWidth: .infinity, maxHeight: 240, alignment: .center)
+            }
+            .resizable()
+            .scaledToFill()
+            .frame(maxHeight: 240)
+            .clipped()
+            .overlay {
+                HStack(spacing: 4) {
+                    Image(systemName: "clock")
+                    Text("\(recipe.readyInMinutes.description) min")
+                }
+                .font(.jost(.medium, size: .body))
+                .foregroundColor(.customColor(.white))
+                .padding(.vertical, 8)
+                .padding(.horizontal, 16)
+                .background(Color.customColor(.black).opacity(0.5))
+                .roundedCorner(10, corners: .bottomRight)
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+            }
+            //            Stack bottom half of card
             VStack(alignment: .leading, spacing: 4) {
                 Text(recipe.title)
                     .font(.jost(.bold, size: .title))

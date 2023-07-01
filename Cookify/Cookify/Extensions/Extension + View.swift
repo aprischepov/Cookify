@@ -12,4 +12,8 @@ extension View {
     func roundedCorner(_ radius: CGFloat, corners: UIRectCorner) -> some View {
         clipShape(RoundedCorner(radius: radius, corners: corners) )
     }
+    
+    func clearButton(text: Binding<String>) -> some View {
+        modifier(ClearButton(text: text))
+    }
 }

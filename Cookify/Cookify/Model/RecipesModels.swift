@@ -90,3 +90,19 @@ struct Step: Decodable {
 struct RecipeRandom: Decodable {
     let recipes: [RecipeByType]
 }
+
+struct RecipeByIngredients: Decodable {
+    let id: Int
+    let title: String
+    let image: String
+    let missedIngredientCount: Int
+    let missedIngredients:[MissedIngredient]
+}
+
+struct MissedIngredient: Decodable {
+    let id: Int
+    let amount: Double
+    let unit: String
+    let name: String
+    
+}
