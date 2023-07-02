@@ -109,24 +109,29 @@ struct RecipeView: View {
                             .padding(.horizontal, 16)
                             switch vm.currentType {
                             case .ingredients:
-                                IngredientsView(ingredients: vm.ingredients)
+                                IngredientsView(ingredients: vm.ingredients, action: {
+                                    vm.addToShoppingList(recipe: recipeInfo)
+                                })
                             case .instructions:
-                                InstructionView(instruction: vm.steps)
+                                InstructionView(instruction: vm.steps, action: {
+                                    
+                                })
                             }
                         }
                         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
                     }
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
                 }
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
             .edgesIgnoringSafeArea(.top)
+            .alert(vm.errorMessage, isPresented: $vm.showError) {}
         }
     }
 }
 
 private struct IngredientsView: View {
     var ingredients: [IngredientModel]
+    var action: () -> Void
     var body: some View {
         VStack(alignment: .center, spacing: 4) {
             ForEach(ingredients, id: \.id) { ingredient in
@@ -139,7 +144,7 @@ private struct IngredientsView: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
             }
             Button {
-                //                                add to shopping list action
+                action()
             } label: {
                 CustomButton(title: "Add to shopping list", style: .filledButton)
             }
@@ -153,6 +158,7 @@ private struct IngredientsView: View {
 
 private struct InstructionView: View {
     var instruction: [Step]
+    var action: () -> Void
     var body: some View {
         VStack(alignment: .center, spacing: 8) {
             ForEach(instruction, id: \.number) { step in
@@ -171,7 +177,7 @@ private struct InstructionView: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
             }
             Button {
-                //                                Share to Community
+                action()
             } label: {
                 CustomButton(title: "Share to community", style: .filledButton)
             }

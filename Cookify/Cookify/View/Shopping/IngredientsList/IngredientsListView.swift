@@ -9,11 +9,15 @@ import SwiftUI
 import SDWebImageSwiftUI
 
 struct IngredientsListView: View {
-    var recipe: RecipeForShopping
+    @StateObject var vm: IngredientsListViewModel
+    
+    init(recipe: RecipeForShopping) {
+        _vm = StateObject(wrappedValue: IngredientsListViewModel(recipe: recipe))
+    }
     var body: some View {
         ScrollView(.vertical, showsIndicators: false) {
             VStack(spacing: 0) {
-                WebImage(url: URL(string: recipe.image)).placeholder{
+                WebImage(url: URL(string: vm.recipe.image)).placeholder{
                     Image("cookifyIcon")
                         .opacity(0.3)
                         .frame(maxWidth: .infinity, maxHeight: 320, alignment: .center)
@@ -24,9 +28,9 @@ struct IngredientsListView: View {
                 VStack(alignment: .leading) {
                     Text("Ingredients")
                         .font(.jost(.bold, size: .title))
-                    ForEach(recipe.ingredients, id: \.id) { ingredient in
+                    ForEach(vm.recipe.ingredients, id: \.id) { ingredient in
                         HStack(alignment: .center) {
-                            VStack(spacing: 0) {
+                            VStack(alignment: .leading, spacing: 0) {
                                 Text(ingredient.name)
                                     .foregroundColor(.customColor(.black))
                                 Text(ingredient.amountWithUnits)
@@ -53,7 +57,7 @@ struct IngredientsListView: View {
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
         .edgesIgnoringSafeArea(.top)
-        .navigationTitle(recipe.title)
+        .navigationTitle(vm.recipe.title)
     }
 }
 

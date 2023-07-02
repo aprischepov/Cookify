@@ -7,9 +7,10 @@
 
 import SwiftUI
 import SDWebImageSwiftUI
+import Combine
 
 struct ShoppingView: View {
-    @StateObject private var vm = ShoppingViewModel()
+    @StateObject var vm: ShoppingViewModel = ShoppingViewModel()
     var body: some View {
         NavigationView {
             VStack(alignment: .leading, spacing: 16) {
@@ -28,6 +29,7 @@ struct ShoppingView: View {
                                         .opacity(0.3)
                                 }
                                 .resizable()
+                                .scaledToFill()
                                 .frame(width: 120, height: 120)
                                 .cornerRadius(10)
                                 VStack(alignment: .leading) {
@@ -37,7 +39,7 @@ struct ShoppingView: View {
                                         .font(.jost(.medium, size: .body))
                                         .foregroundColor(.customColor(.black))
                                     //                                    Missing Ingredients
-                                    Text("\(recipe.ingredients.count) missing ingredients")
+                                    Text("\(recipe.ingredients.filter({ $0.selected == false }).count) missing ingredients")
                                         .font(.jost(.regular, size: .callout))
                                         .foregroundColor(.customColor(.gray))
                                 }
@@ -45,13 +47,17 @@ struct ShoppingView: View {
                         }
                     }
                     .onDelete { indexSet in
-                        vm.removeRecipe(indexSet: indexSet)
+                        vm.removeFromShoppingList(indexSet: indexSet)
                     }
                 }
                 .listStyle(.inset)
             }
             
             .padding(.vertical, 8)
+        }
+        .alert(vm.errorMessage, isPresented: $vm.showError) {}
+        .task {
+            await vm.fetchShoppingList()
         }
     }
 }

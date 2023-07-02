@@ -6,29 +6,51 @@
 //
 
 import Foundation
+import Combine
 
 final class ShoppingViewModel: ObservableObject {
-//    MARK: Properties
-    @Published var shoppingList: [RecipeForShopping] = [RecipeForShopping(id: 1234, image: "https://spoonacular.com/recipeImages/782585-312x231.jpg", title: "Cannellini Bean", ingredients: [IngredientShopping(id: 1, name: "Pasta", amountWithUnits: "1 kg", selected: false), IngredientShopping(id: 2, name: "Garlic", amountWithUnits: "0.5 kg", selected: false)]), RecipeForShopping(id: 12345, image: "https://spoonacular.com/recipeImages/782585-312x231.jpg", title: "Cannellini Bean and fry popatoes with srimps and garlic", ingredients: [IngredientShopping(id: 1, name: "Pasta", amountWithUnits: "1 kg", selected: false)])]
-//    MARK: Init
-    
-//    MARK: Methods
-//    Remove Recipe from Shopping List
-    func removeRecipe(indexSet: IndexSet) {
-        shoppingList.remove(atOffsets: indexSet)
+    //    MARK: Properties
+    private var firebaseManager: FirebaseProtocol = FirebaseManager()
+    @Published var shoppingList: [RecipeForShopping] = []
+    //    View Properties
+    @Published var errorMessage: String = "" {
+        didSet {
+            showError.toggle()
+        }
     }
-}
-
-struct RecipeForShopping {
-    var id: Int
-    var image: String
-    var title: String
-    var ingredients: [IngredientShopping]
-}
-
-struct IngredientShopping {
-    var id: Int
-    var name: String
-    var amountWithUnits: String
-    var selected: Bool
+    @Published var showError: Bool = false
+    
+    //    MARK: Methods
+    //    Get to Shopping List
+    func fetchShoppingList() async {
+        Task {
+            do {
+                let fetchedRecipes = try await firebaseManager.fetchShoppingList()
+                await MainActor.run {
+                    shoppingList = fetchedRecipes
+                }
+            } catch {
+                await errorHandling(error)
+            }
+        }
+    }
+    
+    //    Remove From Shopping List
+    func removeFromShoppingList(indexSet: IndexSet) {
+        guard let index = indexSet.first else { return }
+        Task {
+            do {
+                try await firebaseManager.removeFromShoppingList(recipe: shoppingList[index])
+            } catch {
+                await errorHandling(error)
+            }
+        }
+    }
+    
+    //    Error Handling
+    private func errorHandling(_ error: Error) async {
+        await MainActor.run(body: {
+            errorMessage = error.localizedDescription
+        })
+    }
 }
