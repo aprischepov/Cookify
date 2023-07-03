@@ -27,6 +27,9 @@ struct RecipeForShopping: Codable {
     var image: String
     var title: String
     var ingredients: [IngredientShopping]
+    var ingredientsCount: Int {
+        ingredients.filter({$0.selected == false}).count
+    }
 }
 
 struct IngredientShopping: Codable {

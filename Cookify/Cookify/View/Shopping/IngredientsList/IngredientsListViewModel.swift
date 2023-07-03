@@ -34,7 +34,6 @@ final class IngredientsListViewModel: ObservableObject {
                     var changedIngredient = recipe.ingredients.remove(at: index)
                     changedIngredient.selected.toggle()
                     recipe.ingredients.insert(changedIngredient, at: index)
-                    recipe.ingredients.sort(by: { !$0.selected && $1.selected })
                 }
                 try await firebaseManager.updateShoppingList(recipe: recipe)
             } catch {

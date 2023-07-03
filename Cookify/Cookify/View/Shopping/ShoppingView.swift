@@ -39,7 +39,7 @@ struct ShoppingView: View {
                                         .font(.jost(.medium, size: .body))
                                         .foregroundColor(.customColor(.black))
                                     //                                    Missing Ingredients
-                                    Text("\(recipe.ingredients.filter({ $0.selected == false }).count) missing ingredients")
+                                    Text("\(recipe.ingredientsCount) missing ingredients")
                                         .font(.jost(.regular, size: .callout))
                                         .foregroundColor(.customColor(.gray))
                                 }
