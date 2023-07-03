@@ -6,10 +6,59 @@
 //
 
 import SwiftUI
+import SDWebImageSwiftUI
+import Combine
 
 struct ShoppingView: View {
+    @StateObject var vm: ShoppingViewModel = ShoppingViewModel()
     var body: some View {
-        Text("Shopping View")
+        NavigationView {
+            VStack(alignment: .leading, spacing: 16) {
+                Text("It’s your shopping list")
+                    .font(.jost(.medium, size: .title))
+                    .padding(.horizontal, 16)
+                List {
+                    ForEach(vm.shoppingList, id: \.id) { recipe in
+                        NavigationLink {
+                            IngredientsListView(recipe: recipe)
+                        } label: {
+                            HStack(spacing: 8) {
+                                //                                Image
+                                WebImage(url: URL(string: recipe.image)).placeholder{
+                                    Image("cookifyIcon")
+                                        .opacity(0.3)
+                                }
+                                .resizable()
+                                .scaledToFill()
+                                .frame(width: 120, height: 120)
+                                .cornerRadius(10)
+                                VStack(alignment: .leading) {
+                                    //                                Title
+                                    Text(recipe.title)
+                                        .lineLimit(1)
+                                        .font(.jost(.medium, size: .body))
+                                        .foregroundColor(.customColor(.black))
+                                    //                                    Missing Ingredients
+                                    Text("\(recipe.ingredientsCount) missing ingredients")
+                                        .font(.jost(.regular, size: .callout))
+                                        .foregroundColor(.customColor(.gray))
+                                }
+                            }
+                        }
+                    }
+                    .onDelete { indexSet in
+                        vm.removeFromShoppingList(indexSet: indexSet)
+                    }
+                }
+                .listStyle(.inset)
+            }
+            
+            .padding(.vertical, 8)
+        }
+        .alert(vm.errorMessage, isPresented: $vm.showError) {}
+        .task {
+            await vm.fetchShoppingList()
+        }
     }
 }
 

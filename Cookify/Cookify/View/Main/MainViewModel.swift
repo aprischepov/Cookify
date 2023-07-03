@@ -137,6 +137,7 @@ final class MainViewModel: ObservableObject {
         }
     }
     
+//    Remove / Add to Favorites Recipe
     private func changeRecipeFromFavorites(recipe: Recipe) {
         guard let index = fullListRecipes.firstIndex(where: { $0.id == recipe.id }) else { return }
         let isFavoriteRecipe = isFavoriteRecipe(id: recipe.id)
@@ -170,7 +171,7 @@ final class MainViewModel: ObservableObject {
     }
     
     //    Remove Recipe from Favorites
-    func removeFromFavorites(recipe: Recipe) {
+    private func removeFromFavorites(recipe: Recipe) {
         let selectedRecipe = favoriteRecipes.first{ $0.id == recipe.id }
         guard let selectedRecipe = selectedRecipe else { return }
         Task {
@@ -184,7 +185,7 @@ final class MainViewModel: ObservableObject {
             }
         }
     }
-    
+
     //    Compare Recipe Id and Favorite Recipe
     private func isFavoriteRecipe(id: Int) -> Bool {
         favoriteRecipes.contains { $0.id == id }

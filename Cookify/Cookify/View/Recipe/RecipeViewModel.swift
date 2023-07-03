@@ -6,16 +6,19 @@
 //
 
 import Foundation
+//import Combine
 
 final class RecipeViewModel: ObservableObject {
     //    MARK: Properties
     @Published var id: Int
     private let moyaManager: MoyaManagerProtocol = MoyaManager()
+    private let firebaseManager: FirebaseProtocol = FirebaseManager()
     @Published var recipeInfo: RecipeById?
     @Published var summary: String = ""
     @Published var nutrients: [NutrientModel] = []
     @Published var ingredients: [IngredientModel] = []
     @Published var steps: [Step] = []
+    @Published var shoppingList: [RecipeForShopping] = []
     //    View Properties
     @Published var errorMessage: String = "" {
         didSet {
@@ -32,22 +35,57 @@ final class RecipeViewModel: ObservableObject {
         Task {
             if !ProcessInfo.isPreviewMode {
                 await getRecipeInfo()
+                await fetchShoppingList()
             }
         }
     }
     
     //  MARK: Methods
+    //    Add to Shopping List
+    func addToShoppingList(recipe: RecipeById) {
+        Task {
+            if !shoppingList.contains(where: { $0.id == recipe.id }) {
+                let ingredients = recipe.extendedIngredients.map{ IngredientShopping(id: $0.id, name: $0.name, amountWithUnits: "\($0.measures.metric.amount.rounded()) \($0.measures.metric.unitShort)", selected: false) }
+                let shoppingRecipe = RecipeForShopping(id: recipe.id, image: recipe.image, title: recipe.title, ingredients: ingredients)
+                await MainActor.run(body: {
+                    shoppingList.append(shoppingRecipe)
+                })
+                do {
+                    try await firebaseManager.addToShoppingList(recipe: shoppingRecipe)
+                } catch {
+                    await errorHandling(error)
+                }
+            } else {
+                await errorHandling(Errors.duplicateRecipe)
+            }
+        }
+    }
+    
+    //    Get Shopping List
+    private func fetchShoppingList() async {
+        Task {
+            do {
+                let fetchedRecipes = try await firebaseManager.fetchShoppingList()
+                await MainActor.run {
+                    shoppingList = fetchedRecipes
+                }
+            } catch {
+                await errorHandling(error)
+            }
+        }
+    }
+    
     //    Get Recipe Info
     private func getRecipeInfo() async {
         do {
             let recipe = try await moyaManager.getRecipeInformationById(id: id)
-//            Remove Tags
+            //            Remove Tags
             let recipeSummary = recipe.summary.replacingOccurrences(of: "<[^>]+>", with: "", options: .regularExpression, range: nil)
-//            Nutrients
+            //            Nutrients
             await searchNutrients(recipe: recipe)
-//            Ingredients
+            //            Ingredients
             await searchIngredients(recipe: recipe)
-//            Steps
+            //            Steps
             guard let recipeInstructions = recipe.analyzedInstructions.first?.steps else { return }
             await MainActor.run(body: {
                 recipeInfo = recipe
@@ -75,11 +113,11 @@ final class RecipeViewModel: ObservableObject {
         })
     }
     
-//    Search Ingredient Info
+    //    Search Ingredient Info
     func searchIngredients(recipe: RecipeById) async {
         let recipeIngredients = recipe.extendedIngredients.compactMap{IngredientModel(name: $0.name,
-                                                                                       amount: $0.measures.metric.amount,
-                                                                                       unitShort: $0.measures.metric.unitShort)}
+                                                                                      amount: $0.measures.metric.amount,
+                                                                                      unitShort: $0.measures.metric.unitShort)}
         await MainActor.run(body: {
             ingredients = recipeIngredients
         })

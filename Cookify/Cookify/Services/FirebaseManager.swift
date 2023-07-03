@@ -24,6 +24,10 @@ protocol FirebaseProtocol {
     func addToFavorites(recipe: Recipe) async throws -> String
     func fetchFavoritesRecipes() async throws -> [Recipe]
     func deleteFromFavorites(recipe: Recipe) async throws
+    func addToShoppingList(recipe: RecipeForShopping) async throws
+    func fetchShoppingList() async throws -> [RecipeForShopping]
+    func removeFromShoppingList(recipe: RecipeForShopping) async throws
+    func updateShoppingList(recipe: RecipeForShopping) async throws
 }
 
 final class FirebaseManager: FirebaseProtocol {
@@ -72,7 +76,7 @@ final class FirebaseManager: FirebaseProtocol {
         let _ = try await storageRef.putDataAsync(imageData)
         let downloadURL = try await storageRef.downloadURL()
         let updatedUser = User(firstName: firstName, lastName: lastName, emailAddress: email, image: downloadURL)
-        try Firestore.firestore().collection("Users").document(userId).setData(from: updatedUser)
+        try await Firestore.firestore().collection("Users").document(userId).setData(from: updatedUser)
         await MainActor.run(body: {
             authorizedUser.firstName = firstName
             authorizedUser.lastName = lastName
@@ -152,11 +156,37 @@ final class FirebaseManager: FirebaseProtocol {
               let recipeUid = recipe.uid else { return }
         try await Firestore.firestore().collection("Users").document(userId).collection("Liked").document(recipeUid).delete()
     }
+//    Add to Shopping List
+    func addToShoppingList(recipe: RecipeForShopping) async throws {
+        guard let userId = Auth.auth().currentUser?.uid else { return }
+        let _ = try Firestore.firestore().collection("Users").document(userId).collection("ShoppingList").addDocument(from: recipe)
+    }
+//    Fetch Shopping List
+    func fetchShoppingList() async throws -> [RecipeForShopping] {
+        guard let userId = Auth.auth().currentUser?.uid else { return [] }
+        return try await Firestore.firestore().collection("Users").document(userId).collection("ShoppingList").getDocuments().documents.compactMap({ recipe -> RecipeForShopping? in
+            try recipe.data(as: RecipeForShopping.self)
+        })
+    }
+//    Update Shopping List
+    func updateShoppingList(recipe: RecipeForShopping) async throws {
+        guard let userId = Auth.auth().currentUser?.uid,
+              let shopListUid = recipe.uid else { return }
+        try await Firestore.firestore().collection("Users").document(userId).collection("ShoppingList").document(shopListUid).setData(from: recipe)
+    }
+//    Delete From Shopping List
+    func removeFromShoppingList(recipe: RecipeForShopping) async throws {
+        guard let userId = Auth.auth().currentUser?.uid,
+              let recipeUid = recipe.uid else { return }
+        try await Firestore.firestore().collection("Users").document(userId).collection("ShoppingList").document(recipeUid).delete()
+    }
+    
 }
 
 enum Errors: Error {
     case errorAuthorization
     case notFoundRecipe
+    case duplicateRecipe
 
     var description: String {
         switch self {
@@ -164,6 +194,8 @@ enum Errors: Error {
             return "Error with authorization"
         case .notFoundRecipe:
             return "Sorry! Recipe not found"
+        case .duplicateRecipe:
+            return "This recipe has already been added to your shopping list"
         }
     }
 }

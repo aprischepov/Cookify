@@ -21,6 +21,24 @@ struct Recipe: Codable {
     let pricePerServing: Double
 }
 
+struct RecipeForShopping: Codable {
+    @DocumentID var uid: String?
+    var id: Int
+    var image: String
+    var title: String
+    var ingredients: [IngredientShopping]
+    var ingredientsCount: Int {
+        ingredients.filter({$0.selected == false}).count
+    }
+}
+
+struct IngredientShopping: Codable {
+    var id: Int
+    var name: String
+    var amountWithUnits: String
+    var selected: Bool
+}
+
 struct RecipesByTypeData: Decodable {
     let results: [RecipeByType]
     let totalResults: Int
