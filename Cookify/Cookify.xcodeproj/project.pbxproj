@@ -23,10 +23,10 @@
 		195AA8DE2A35E65700F7E6CF /* Cookie-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 195AA8D82A35E65600F7E6CF /* Cookie-Regular.ttf */; };
 		195AA8DF2A35E65700F7E6CF /* Jost-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 195AA8D92A35E65600F7E6CF /* Jost-Medium.ttf */; };
 		195AA8E12A35E9C100F7E6CF /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 195AA8E02A35E9C100F7E6CF /* CustomButton.swift */; };
-		19798A122A36038200D73BE4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 19798A112A36038100D73BE4 /* GoogleService-Info.plist */; };
 		19798A152A36059900D73BE4 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 19798A142A36059900D73BE4 /* FirebaseAuth */; };
 		19798A172A36059900D73BE4 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 19798A162A36059900D73BE4 /* FirebaseFirestore */; };
 		19798A192A36059900D73BE4 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 19798A182A36059900D73BE4 /* FirebaseStorage */; };
+		197B29442A52BEBB00518D68 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 197B29432A52BEBA00518D68 /* GoogleService-Info.plist */; };
 		197C50DF2A3E243600E898B5 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 197C50DE2A3E243600E898B5 /* ProfileViewModel.swift */; };
 		197D132A2A433B190039F66B /* FavoritesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 197D13292A433B190039F66B /* FavoritesView.swift */; };
 		197D132C2A433B340039F66B /* FavoritesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 197D132B2A433B340039F66B /* FavoritesViewModel.swift */; };
@@ -94,7 +94,7 @@
 		195AA8D82A35E65600F7E6CF /* Cookie-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Cookie-Regular.ttf"; sourceTree = "<group>"; };
 		195AA8D92A35E65600F7E6CF /* Jost-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Jost-Medium.ttf"; sourceTree = "<group>"; };
 		195AA8E02A35E9C100F7E6CF /* CustomButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
-		19798A112A36038100D73BE4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		197B29432A52BEBA00518D68 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		197C50DE2A3E243600E898B5 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		197D13292A433B190039F66B /* FavoritesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesView.swift; sourceTree = "<group>"; };
 		197D132B2A433B340039F66B /* FavoritesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewModel.swift; sourceTree = "<group>"; };
@@ -279,7 +279,7 @@
 		19AF33422A30F28400DD252D /* SupportingFiles */ = {
 			isa = PBXGroup;
 			children = (
-				19798A112A36038100D73BE4 /* GoogleService-Info.plist */,
+				197B29432A52BEBA00518D68 /* GoogleService-Info.plist */,
 				1993F0152A2F6DFF00207E14 /* Info.plist */,
 				1993F0162A2F753600207E14 /* Launch Screen.storyboard */,
 				19AF8A7A2A06768100388F8F /* CookifyApp.swift */,
@@ -518,7 +518,7 @@
 				19AF8A7F2A06768500388F8F /* Assets.xcassets in Resources */,
 				195AA8DA2A35E65600F7E6CF /* Jost-Light.ttf in Resources */,
 				195AA8DB2A35E65600F7E6CF /* Jost-Regular.ttf in Resources */,
-				19798A122A36038200D73BE4 /* GoogleService-Info.plist in Resources */,
+				197B29442A52BEBB00518D68 /* GoogleService-Info.plist in Resources */,
 				195AA8DC2A35E65700F7E6CF /* Jost-SemiBold.ttf in Resources */,
 				195AA8DE2A35E65700F7E6CF /* Cookie-Regular.ttf in Resources */,
 			);
