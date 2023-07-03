@@ -39,7 +39,7 @@ struct IngredientsListView: View {
                             .font(.jost(.regular, size: .body))
                             Spacer()
                             Button {
-//                                ingredient.selected.toggle()
+                                vm.changeMissingIngredients(ingredient: ingredient)
                             } label: {
                                 Image(systemName: ingredient.selected ? "checkmark.circle.fill" : "circle")
                                     .resizable()

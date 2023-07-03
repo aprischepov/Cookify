@@ -170,21 +170,6 @@ final class MainViewModel: ObservableObject {
         }
     }
     
-//    Add Recipe to Shopping List
-//    private func addToShoppingList(recipe: RecipeForShopping) {
-//        Task {
-//            do {
-//                let uid = try await firebaseManager.addToShoppingList(recipe: recipe)
-//                let shoppingRecipe = RecipeForShopping(uid: uid, id: recipe.id, image: recipe.image, title: recipe.title, ingredients: recipe.ingredients)
-//                await MainActor.run(body: {
-//                    shoppingList.append(shoppingRecipe)
-//                })
-//            } catch {
-//                await errorHandling(error)
-//            }
-//        }
-//    }
-    
     //    Remove Recipe from Favorites
     private func removeFromFavorites(recipe: Recipe) {
         let selectedRecipe = favoriteRecipes.first{ $0.id == recipe.id }
@@ -200,23 +185,7 @@ final class MainViewModel: ObservableObject {
             }
         }
     }
-    
-//    Remove Recipe from Shopping List
-//    private func removeFromShoppingList(recipe: RecipeForShopping) {
-//        let selectedRecipe = shoppingList.first{ $0.id == recipe.id }
-//        guard let selectedRecipe = selectedRecipe else { return }
-//        Task {
-//            do {
-//                try await firebaseManager.deleteFromShoppingList(recipe: selectedRecipe)
-//                await MainActor.run(body: {
-//                    shoppingList.removeAll{ $0.id == selectedRecipe.id }
-//                })
-//            } catch {
-//                await errorHandling(error)
-//            }
-//        }
-//    }
-//    
+
     //    Compare Recipe Id and Favorite Recipe
     private func isFavoriteRecipe(id: Int) -> Bool {
         favoriteRecipes.contains { $0.id == id }
