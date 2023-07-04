@@ -57,6 +57,8 @@ struct SearchByIngredientsView: View {
                             ProgressView()
                         }
                         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
+                    case .empty:
+                        EmptyListView(type: .emptySearchList)
                     }
                 }
                 .padding(.horizontal, 16)

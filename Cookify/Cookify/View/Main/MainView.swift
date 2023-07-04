@@ -13,23 +13,23 @@ struct MainView: View {
         TabView {
             HomeView(vm: vm.homeViewModel)
                 .tabItem {
-                    Image(systemName: "house")
+                    Image("homeIcon")
                 }
             CommunityView()
                 .tabItem {
-                    Image(systemName: "person.3.fill")
+                    Image("reviewIcon")
                 }
             SearchByIngredientsView()
                 .tabItem {
-                    Image(systemName: "magnifyingglass")
+                    Image("searchIcon")
                 }
             ShoppingView()
                 .tabItem {
-                    Image(systemName: "list.bullet")
+                    Image("bagIcon")
                 }
             FavoritesView(vm: vm.favoritesViewModel)
                 .tabItem {
-                    Image(systemName: "heart")
+                    Image("favoritesIcon")
                 }
         }
         .task {

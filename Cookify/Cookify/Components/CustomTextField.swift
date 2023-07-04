@@ -65,7 +65,7 @@ struct CustomTextField: View {
                 Button {
                     isHiddenPassword.toggle()
                 } label: {
-                    Image(systemName: isHiddenPassword ? "eye.fill" : "eye.slash")
+                    Image(systemName: isHiddenPassword ? "eye.slash" : "eye.fill")
                         .foregroundColor(.customColor(.orange))
                 }
                 

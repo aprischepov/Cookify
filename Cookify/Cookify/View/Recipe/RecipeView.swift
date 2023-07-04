@@ -23,14 +23,14 @@ struct RecipeView: View {
                 if let recipeInfo = vm.recipeInfo {
                     VStack(spacing: 0) {
                         //                Image
-                        WebImage(url: URL(string: recipeInfo.image)).placeholder {
-                            Image("cookifyIcon")
-                                .opacity(0.3)
-                                .frame(maxWidth: .infinity, maxHeight: 320, alignment: .center)
-                        }
-                        .resizable()
-                        .scaledToFit()
-                        .frame(height: 320)
+                            WebImage(url: URL(string: recipeInfo.image)).placeholder {
+                                Image("cookifyIcon")
+                                    .opacity(0.3)
+                                    .frame(maxWidth: .infinity, maxHeight: 320, alignment: .center)
+                            }
+                            .resizable()
+                            .scaledToFit()
+                            .frame(height: 320)
                         VStack(alignment: .center, spacing: 8) {
                             //                    Title and Ready in Minutes
                             HStack(alignment: .center, spacing: 4) {
@@ -96,7 +96,6 @@ struct RecipeView: View {
                                         Text(type.rawValue)
                                             .foregroundColor(.customColor(vm.currentType == type ? .white : .orange))
                                             .font(.jost(.regular, size: .body))
-                                        
                                         Spacer()
                                     }
                                     .padding(.vertical, 12)
@@ -124,7 +123,10 @@ struct RecipeView: View {
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
             .edgesIgnoringSafeArea(.top)
+            .navigationTitle(vm.recipeInfo.title)
             .alert(vm.errorMessage, isPresented: $vm.showError) {}
+        case .empty:
+            EmptyListView(type: .emptyNotFound)
         }
     }
 }
@@ -140,6 +142,7 @@ private struct IngredientsView: View {
                         .frame(maxWidth: 128, alignment: .leading)
                         .foregroundColor(.customColor(.darkGray))
                     Text(ingredient.name)
+                        .fixedSize(horizontal: false, vertical: true)
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
             }
@@ -151,7 +154,6 @@ private struct IngredientsView: View {
             
         }
         .font(.jost(.regular, size: .body))
-        .frame(maxWidth: .infinity, alignment: .leading)
         .padding(.horizontal, 16)
     }
 }
@@ -182,7 +184,6 @@ private struct InstructionView: View {
                 CustomButton(title: "Share to community", style: .filledButton)
             }
         }
-        .frame(maxHeight: .infinity)
         .padding(.horizontal, 16)
     }
 }

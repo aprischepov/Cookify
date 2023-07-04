@@ -21,6 +21,7 @@ final class SearchRecipesViewModel: ObservableObject {
         }
     }
     @Published var showError: Bool = false
+    @Published var dataCondition: DataCondition = .loaded
     
     //    MARK: Init
     init() {
@@ -58,6 +59,7 @@ final class SearchRecipesViewModel: ObservableObject {
         })
     }
     
+//    Recipe Image Url
     func getImageUrl(id: Int, typeImage: String) -> URL? {
         URL(string: "https://spoonacular.com/recipeImages/\(id)-312x231.\(typeImage)")
     }

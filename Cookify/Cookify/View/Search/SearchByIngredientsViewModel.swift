@@ -74,8 +74,12 @@ final class SearchByIngredientsViewModel: ObservableObject {
         do {
             let recipes = try await moyaManager.getRecipesByIngredient(ingredients: ingredients)
             await MainActor.run(body: {
-                searchResultsList = recipes
-                dataCondition = .loaded
+                if recipes.isEmpty {
+                    dataCondition = .empty
+                } else {
+                    searchResultsList = recipes
+                    dataCondition = .loaded
+                }
             })
         } catch {
             await errorHandling(error)

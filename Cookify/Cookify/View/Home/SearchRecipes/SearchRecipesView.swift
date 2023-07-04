@@ -11,60 +11,66 @@ import SDWebImageSwiftUI
 struct SearchRecipesView: View {
     @Environment(\.dismiss) private var dismiss
     @StateObject private var vm = SearchRecipesViewModel()
+    @FocusState var searchFocused: Bool
     var body: some View {
         NavigationView {
             VStack(alignment: .center, spacing: 16) {
                 HStack(alignment: .center, spacing: 8) {
-                    Button {
-                        dismiss()
-                    } label: {
-                        Image(systemName: "chevron.left")
-                            .foregroundColor(.customColor(.orange))
-                            .bold()
-                    }
                     ZStack {
                         RoundedRectangle(cornerRadius: 10)
                             .frame(height: 48)
                             .foregroundColor(.customColor(.lightGray))
                         HStack(alignment: .center, spacing: 8) {
-                            Image(systemName: "magnifyingglass")
+                            Image("searchIcon")
                                 .foregroundColor(.customColor(.gray))
-                            TextField("Hungry? ", text: $vm.inputSearchText)
+                            TextField("Hungry?", text: $vm.inputSearchText)
                                 .font(.jost(.regular, size: .body))
-                            Button {
-                                vm.inputSearchText = ""
-                            } label: {
-                                Image(systemName: "xmark.circle.fill")
-                                    .foregroundColor(.customColor(.darkGray))
-                            }
-                            .opacity(vm.inputSearchText.isEmpty ? 0 : 1)
+                                .clearButton(text: $vm.inputSearchText)
+                                .focused($searchFocused)
                         }
                         .padding(.horizontal, 8)
                     }
-                }
-                List(vm.recipesList, id: \.id) { recipe in
-                    NavigationLink {
-                        RecipeView(id: recipe.id)
-                    } label: {
-                        HStack(alignment: .center, spacing: 8) {
-                            WebImage(url: vm.getImageUrl(id: recipe.id, typeImage: recipe.imageType)).placeholder{
-                                ZStack {
-                                    Image("cookifyIcon")
-                                        .resizable()
-                                        .scaledToFit()
-                                        .opacity(0.3)
-                                }
-                                .frame(height: 40)
-                            }
-                            .resizable()
-                            .scaledToFit()
-                            .frame(height: 40)
-                            Text(recipe.title)
-                                .font(.jost(.medium, size: .body))
+                    .onAppear{
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5){
+                            searchFocused = true
                         }
                     }
+                    Button {
+                        dismiss()
+                    } label: {
+                        Image(systemName: "xmark")
+                            .foregroundColor(.customColor(.orange))
+                            .bold()
+                    }
                 }
-                .listStyle(.plain)
+                switch vm.dataCondition {
+                case .empty:
+                    EmptyListView(type: .emptySearchList)
+                default:
+                    List(vm.recipesList, id: \.id) { recipe in
+                        NavigationLink {
+                            RecipeView(id: recipe.id)
+                        } label: {
+                            HStack(alignment: .center, spacing: 8) {
+                                WebImage(url: vm.getImageUrl(id: recipe.id, typeImage: recipe.imageType)).placeholder{
+                                    ZStack {
+                                        Image("cookifyIcon")
+                                            .resizable()
+                                            .scaledToFit()
+                                            .opacity(0.3)
+                                    }
+                                    .frame(height: 40)
+                                }
+                                .resizable()
+                                .scaledToFit()
+                                .frame(height: 40)
+                                Text(recipe.title)
+                                    .font(.jost(.medium, size: .body))
+                            }
+                        }
+                    }
+                    .listStyle(.plain)
+                }
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
             .padding(.horizontal, 16)
