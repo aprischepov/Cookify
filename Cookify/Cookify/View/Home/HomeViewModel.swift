@@ -44,4 +44,5 @@ final class HomeViewModel: ObservableObject {
 enum DataCondition {
     case loading
     case loaded
+    case empty
 }

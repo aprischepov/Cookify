@@ -42,15 +42,15 @@ struct RegisterView: View {
                                 isHiddenPassword: $vm.isHiddenConfirmedPassword,
                                 keyboardType: .default)
             }
+            Spacer()
             Button {
-//                sign up button
+                //                sign up button
                 vm.registerUser()
             } label: {
                 CustomButton(title: "Sign Up", style: .filledButton)
             }
             .opacity(vm.isButtonActivated ? 1 : 0.7)
             .disabled(!vm.isButtonActivated)
-            Spacer()
             HStack(alignment: .top, spacing: 4) {
                 Text("Already have an account?")
                     .foregroundColor(.customColor(.black))
@@ -60,10 +60,9 @@ struct RegisterView: View {
                     Text("Sign In")
                         .foregroundColor(.customColor(.orange))
                 }
-
+                
             }
             .font(.jost(.medium, size: .footnote))
-
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
         .padding(.horizontal, 16)
@@ -72,7 +71,7 @@ struct RegisterView: View {
         .overlay(content: {
             LoadingView(show: $vm.isLoading)
         })
-//        Alert with firebase error
+        //        Alert with firebase error
         .alert(vm.errorMessage, isPresented: $vm.showError) {}
     }
 }

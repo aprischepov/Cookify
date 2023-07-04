@@ -65,7 +65,7 @@ struct HomeView: View {
                                 .frame(height: 48)
                                 .foregroundColor(.customColor(.lightGray))
                             HStack(alignment: .center, spacing: 8) {
-                                Image(systemName: "magnifyingglass")
+                                Image("searchIcon")
                                 Text("Search Recipes")
                                     .font(.jost(.regular, size: .body))
                             }
