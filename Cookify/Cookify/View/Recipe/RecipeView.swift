@@ -113,8 +113,13 @@ struct RecipeView: View {
                                 })
                             case .instructions:
                                 InstructionView(instruction: vm.steps, action: {
-                                    
+                                    vm.showReviewView.toggle()
                                 })
+                                .fullScreenCover(isPresented: $vm.showReviewView) {
+                                    CreateReviewView(onReview: { review in
+                                        
+                                    }, recipe: recipeInfo)
+                                }
                             }
                         }
                         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
@@ -123,7 +128,7 @@ struct RecipeView: View {
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
             .edgesIgnoringSafeArea(.top)
-            .navigationTitle(vm.recipeInfo.title)
+            .navigationTitle(vm.recipeInfo?.title ?? "")
             .alert(vm.errorMessage, isPresented: $vm.showError) {}
         case .empty:
             EmptyListView(type: .emptyNotFound)

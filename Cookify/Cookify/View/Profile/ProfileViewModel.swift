@@ -12,7 +12,6 @@ final class ProfileViewModel: ObservableObject {
 //    MARK: - Properties
 //    User Properties
     private let firebaseManager: FirebaseProtocol = FirebaseManager()
-    var authorizedUser = AuthorizedUser.shared
 //    View Properties
     @Published var editProfile: Bool = false
     @Published var errorMessage: String = "" {

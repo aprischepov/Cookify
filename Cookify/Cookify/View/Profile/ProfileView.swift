@@ -10,6 +10,7 @@ import SDWebImageSwiftUI
 
 struct ProfileView: View {
     @StateObject private var vm = ProfileViewModel()
+    @StateObject private var user = AuthorizedUser.shared
     var body: some View {
         NavigationView {
             List {
@@ -19,23 +20,23 @@ struct ProfileView: View {
                         vm.editProfile.toggle()
                     } label: {
                         HStack(alignment: .center, spacing: 16) {
-                            WebImage(url: vm.authorizedUser.imageUrl).placeholder {
+                            WebImage(url: user.imageUrl).placeholder {
                                 Image("avatar")
                                     .resizable()
                                     .frame(width: 56, height: 56)
                             }
                             .resizable()
-                            .aspectRatio(contentMode: .fill)
+                            .scaledToFill()
                             .frame(width: 56, height: 56)
                             .clipShape(Circle())
                             .overlay {
                                 Circle().stroke(Color.customColor(.orange))
                             }
                             VStack(alignment: .leading, spacing: 0) {
-                                Text("\(vm.authorizedUser.firstName ?? "Unkrnown") \(vm.authorizedUser.lastName ?? "User")")
+                                Text("\(user.firstName ?? "Unkrnown") \(user.lastName ?? "User")")
                                     .font(.jost(.regular, size: .body))
                                     .foregroundColor(.customColor(.black))
-                                Text(vm.authorizedUser.emailAddress ?? "Email")
+                                Text(user.emailAddress ?? "Email")
                                     .font(.jost(.regular, size: .footnote))
                                     .foregroundColor(.customColor(.gray))
                             }

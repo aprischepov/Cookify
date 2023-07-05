@@ -11,7 +11,6 @@ import Combine
 final class HomeViewModel: ObservableObject {
     //    MARK: - Properties
     let subject: PassthroughSubject<ActionsWithRecipes, Never>
-    @Published var user: AuthorizedUser
 //    Recipe Properties
     @Published var fullListRecipes: [Recipe] = []
     @Published var currentTypeRecipes: RecipeType = RecipeType.mainCourse
@@ -21,9 +20,8 @@ final class HomeViewModel: ObservableObject {
     @Published var showRandomRecipe: Bool = false
     
     //    MARK: - Init
-    init(subject: PassthroughSubject<ActionsWithRecipes, Never>, user: AuthorizedUser) {
+    init(subject: PassthroughSubject<ActionsWithRecipes, Never>) {
         self.subject = subject
-        self.user = user
     }
     //    MARK: - Methods
     func sendAction(actionType: ActionsWithRecipes) {
