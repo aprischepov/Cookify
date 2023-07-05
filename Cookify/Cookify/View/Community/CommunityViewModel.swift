@@ -30,11 +30,7 @@ final class CommunityViewModel: ObservableObject {
                 let fetchedReviws = try await firebaseManager.fetchReviews()
                 await MainActor.run(body: {
                     reviews = fetchedReviws
-                    if reviews.isEmpty {
-                        dataCondition = .empty
-                    } else {
-                        dataCondition = .loaded
-                    }
+                    dataCondition = reviews.isEmpty ? .empty : .loaded
                 })
             } catch {
                 await errorHandling(error)

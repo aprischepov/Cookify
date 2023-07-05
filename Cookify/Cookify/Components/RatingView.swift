@@ -23,11 +23,7 @@ struct RatingView: View {
     }
     
     func showStar(for number: Int) -> Image {
-        if number > rating {
-            return Image("starIcon")
-        } else {
-            return Image("starFillIcon")
-        }
+        number > rating ? Image("starIcon") : Image("starFillIcon")
     }
 }
 
