@@ -128,7 +128,7 @@ struct RecipeView: View {
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
             .edgesIgnoringSafeArea(.top)
-            .navigationTitle(vm.recipeInfo.title)
+            .navigationTitle(vm.recipeInfo?.title ?? "")
             .alert(vm.errorMessage, isPresented: $vm.showError) {}
         case .empty:
             EmptyListView(type: .emptyNotFound)

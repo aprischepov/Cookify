@@ -28,7 +28,7 @@ protocol FirebaseProtocol {
     func fetchShoppingList() async throws -> [RecipeForShopping]
     func removeFromShoppingList(recipe: RecipeForShopping) async throws
     func updateShoppingList(recipe: RecipeForShopping) async throws
-    func createReview(imageData: Data?, text: String) async throws
+    func createReview(images: [Data], text: String) async throws
 }
 
 final class FirebaseManager: FirebaseProtocol {
@@ -182,27 +182,43 @@ final class FirebaseManager: FirebaseProtocol {
         try await Firestore.firestore().collection("Users").document(userId).collection("ShoppingList").document(recipeUid).delete()
     }
 //    Create Review
-    func createReview(imageData: Data?, text: String) async throws {
+    func createReview(images: [Data], text: String) async throws {
         guard let userId = Auth.auth().currentUser?.uid else { return }
-        var review: Review
-        let imageReferenceId = "\(userId)\(Date())"
-        let storageRef = Storage.storage().reference().child("ReviewsImages").child(imageReferenceId)
-        if let imageData = imageData {
-            let _ = try await storageRef.putDataAsync(imageData)
+//        var review: Review
+//        let imageReferenceId = "\(userId)\(Date())"
+//        let storageRef = Storage.storage().reference().child("ReviewsImages").child(imageReferenceId)
+        var downloadUrls: [String] = []
+//        images.enumerated().forEach { (index, imageData) in
+//            let storageRef = Storage.storage().reference().child("ReviewsImages").child("images\(userId)\(index)")
+//            let _ = try await storageRef.putDataAsync(imageData)
+//            let downloadUrl = try await storageRef.downloadURL(completion: { url, error in
+//                guard let downloadUrl = url else { return }
+//                downloadUrls.append(downloadUrl.absoluteString)
+//            })
+//        }
+        for image in images {
+            let storageRef = Storage.storage().reference().child("RevieImages").child("images\(userId)\(UUID().uuidString)")
+            let _ = try await storageRef.putDataAsync(image)
             let downloadUrl = try await storageRef.downloadURL()
-            review = Review(text: text,
-                                imageURL: downloadUrl,
-                                imageReferenceId: imageReferenceId,
-                                firstName: authorizedUser.firstName ?? "",
-                                lastName: authorizedUser.lastName ?? "",
-                                userUID: userId)
-        } else {
-            review = Review(text: text,
-                                firstName: authorizedUser.firstName ?? "",
-                                lastName: authorizedUser.lastName ?? "",
-                                userUID: userId)
+            downloadUrls.append(downloadUrl.absoluteString)
         }
-        
+        let review = Review(text: text, images: downloadUrls, firstName: authorizedUser.firstName ?? "", lastName: authorizedUser.lastName ?? "", userUID: userId)
+//        if let imageData = imageData {
+//            let _ = try await storageRef.putDataAsync(imageData)
+//            let downloadUrl = try await storageRef.downloadURL()
+//            review = Review(text: text,
+//                                imageURL: downloadUrl,
+//                                imageReferenceId: imageReferenceId,
+//                                firstName: authorizedUser.firstName ?? "",
+//                                lastName: authorizedUser.lastName ?? "",
+//                                userUID: userId)
+//        } else {
+//            review = Review(text: text,
+//                                firstName: authorizedUser.firstName ?? "",
+//                                lastName: authorizedUser.lastName ?? "",
+//                                userUID: userId)
+//        }
+//
         let _ = try await Firestore.firestore().collection("Reviews").addDocument(from: review)
     }
     

@@ -11,8 +11,8 @@ import FirebaseFirestoreSwift
 struct Review: Codable {
     @DocumentID var uid: String?
     var text: String
-    var imageURL: URL?
-    var imageReferenceId: String = ""
+    var images: [String] = []
+//    var imageReferenceId: String = ""
     var publishedDate: Date = Date()
     var likedIds: [String] = []
     var firstName: String

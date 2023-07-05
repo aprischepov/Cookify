@@ -13,7 +13,9 @@ final class CreateReviewViewModel: ObservableObject {
 //    MARK: Properties
     private var firebaseManager: FirebaseProtocol = FirebaseManager()
     @Published var reviewText: String = ""
-    @Published var imageData: Data?
+    @Published var imagesData: [Data] = []
+    @Published var selectedImages: [Image] = [Image]()
+    @Published var selectedItems: [PhotosPickerItem] = [PhotosPickerItem]()
 //    View Properties
     @Published var isLoading: Bool = false
     @Published var errorMessage: String = "" {
@@ -22,26 +24,8 @@ final class CreateReviewViewModel: ObservableObject {
         }
     }
     @Published var showError: Bool = false
-    @Published var selectedImages: [Image] = [Image]()
-    @Published var selectedItems: [PhotosPickerItem] = [PhotosPickerItem]()
     
 //    MARK: Methods
-//    Choise Image
-//    func uploadImage(image: PhotosPickerItem?) async {
-//        guard let image = image else { return }
-//        do {
-//            if let newImageData = try await image.loadTransferable(type: Data.self),
-//               let image = UIImage(data: newImageData),
-//               let compressedImageData = image.jpegData(compressionQuality: 0.7) {
-//                await MainActor.run(body: {
-//                    imageData = compressedImageData
-//                })
-//            }
-//        } catch {
-//            await errorHandling(error)
-//        }
-//    }
-    
 //    Did Choise Images
     func choisedImages() async {
         await MainActor.run(body: {
@@ -54,6 +38,7 @@ final class CreateReviewViewModel: ObservableObject {
                 let image = Image(uiImage: uiImage)
                 await MainActor.run(body: {
                     selectedImages.append(image)
+                    imagesData.append(data)
                 })
             }
         } catch {
@@ -63,9 +48,11 @@ final class CreateReviewViewModel: ObservableObject {
     
 //    Send Review to Firebase
     func sendReview() async {
-        isLoading = true
+        await MainActor.run {
+            isLoading = true
+        }
         do {
-            try await firebaseManager.createReview(imageData: imageData, text: reviewText)
+            try await firebaseManager.createReview(images: imagesData, text: reviewText)
             await MainActor.run(body: {
                 isLoading = false
             })

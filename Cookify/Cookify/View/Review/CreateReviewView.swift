@@ -18,7 +18,7 @@ struct CreateReviewView: View {
     var body: some View {
         VStack {
             HStack {
-//                Close Review Screen
+                //                Close Review Screen
                 Button("Close") {
                     dismiss()
                 }
@@ -26,7 +26,7 @@ struct CreateReviewView: View {
                 .foregroundColor(.customColor(.black))
                 Spacer()
                 Button {
-//                    Send Review
+                    //                    Send Review
                     showKeyboard = false
                     Task {
                         await vm.sendReview()
@@ -49,7 +49,7 @@ struct CreateReviewView: View {
             .padding(.horizontal, 16)
             ScrollView(.vertical, showsIndicators: true) {
                 VStack(alignment: .leading, spacing: 16) {
-//                    Recipe Title
+                    //                    Recipe Title
                     HStack(alignment: .center, spacing: 8) {
                         Text("Recipe title:")
                             .font(.jost(.bold, size: .body))
@@ -57,7 +57,7 @@ struct CreateReviewView: View {
                             .font(.jost(.regular, size: .body))
                     }
                     .padding(.horizontal, 16)
-//                    Review Text
+                    //                    Review Text
                     TextField("Writing review", text: $vm.reviewText, axis: .vertical)
                         .padding(8)
                         .frame(minHeight: 180, alignment: .top)
@@ -67,7 +67,7 @@ struct CreateReviewView: View {
                         }
                         .focused($showKeyboard)
                         .padding(.horizontal, 16)
-//                    Images
+                    //                    Images
                     ScrollView(.horizontal, showsIndicators: false) {
                         LazyHStack {
                             ForEach(0..<vm.selectedImages.count, id: \.self) { index in
