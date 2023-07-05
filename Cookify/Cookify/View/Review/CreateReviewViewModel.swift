@@ -13,6 +13,7 @@ final class CreateReviewViewModel: ObservableObject {
 //    MARK: Properties
     private var firebaseManager: FirebaseProtocol = FirebaseManager()
     @Published var reviewText: String = ""
+    @Published var rating: Int = 0
     @Published var imagesData: [Data] = []
     @Published var selectedImages: [Image] = [Image]()
     @Published var selectedItems: [PhotosPickerItem] = [PhotosPickerItem]()
@@ -47,12 +48,12 @@ final class CreateReviewViewModel: ObservableObject {
     }
     
 //    Send Review to Firebase
-    func sendReview() async {
+    func sendReview(recipeTitle: String, recipeId: Int) async {
         await MainActor.run {
             isLoading = true
         }
         do {
-            try await firebaseManager.createReview(images: imagesData, text: reviewText)
+            try await firebaseManager.createReview(images: imagesData, text: reviewText, recipeTitle: recipeTitle, recipeId: recipeId, rating: rating)
             await MainActor.run(body: {
                 isLoading = false
             })

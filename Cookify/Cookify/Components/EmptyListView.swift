@@ -27,6 +27,7 @@ enum EmptyList: String {
     case emptyFavoritesList = "emptyFavoritesList"
     case emptySearchList = "emptySearchList"
     case emptyNotFound = "emptyNotFound"
+    case emptyReviews = "emptyReviews"
     
     var title: String {
         switch self {
@@ -38,6 +39,8 @@ enum EmptyList: String {
             return "We're sorry!"
         case .emptyNotFound:
             return "Oops!"
+        case .emptyReviews:
+            return "Here it is empty..."
         }
     }
     
@@ -51,6 +54,8 @@ enum EmptyList: String {
             return "We could not find any results for your search. Please try a different search term!"
         case .emptyNotFound:
             return "Before, there was something here..."
+        case .emptyReviews:
+            return "But you can write the first review."
         }
     }
 }

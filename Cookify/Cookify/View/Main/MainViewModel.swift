@@ -17,7 +17,6 @@ enum ActionsWithRecipes {
 final class MainViewModel: ObservableObject {
     //    MARK: - Properties
     var subject = PassthroughSubject<ActionsWithRecipes, Never>()
-    var user = AuthorizedUser.shared
     var cancellable = Set<AnyCancellable>()
     private var firebaseManager: FirebaseProtocol = FirebaseManager()
     private var moyaManager: MoyaManagerProtocol = MoyaManager()
@@ -51,7 +50,7 @@ final class MainViewModel: ObservableObject {
     //    MARK: Init
     init() {
         
-        self.homeViewModel = HomeViewModel(subject: subject, user: user)
+        self.homeViewModel = HomeViewModel(subject: subject)
         self.favoritesViewModel = FavoritesViewModel(subject: subject)
         
         $fullListRecipes

@@ -29,7 +29,7 @@ struct CreateReviewView: View {
                     //                    Send Review
                     showKeyboard = false
                     Task {
-                        await vm.sendReview()
+                        await vm.sendReview(recipeTitle: recipe.title, recipeId: recipe.id)
                     }
                     dismiss()
                 } label: {
@@ -55,6 +55,12 @@ struct CreateReviewView: View {
                             .font(.jost(.bold, size: .body))
                         Text(recipe.title)
                             .font(.jost(.regular, size: .body))
+                    }
+                    .padding(.horizontal, 16)
+                    HStack {
+                        Text("Rating:")
+                            .font(.jost(.bold, size: .body))
+                        RatingView(rating: $vm.rating)
                     }
                     .padding(.horizontal, 16)
                     //                    Review Text
@@ -110,7 +116,7 @@ struct CreateReviewView: View {
     }
 }
 
-struct ReviewView_Previews: PreviewProvider {
+struct CreateReviewView_Previews: PreviewProvider {
     static var previews: some View {
         CreateReviewView(onReview: { _ in
             

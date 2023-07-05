@@ -28,7 +28,8 @@ protocol FirebaseProtocol {
     func fetchShoppingList() async throws -> [RecipeForShopping]
     func removeFromShoppingList(recipe: RecipeForShopping) async throws
     func updateShoppingList(recipe: RecipeForShopping) async throws
-    func createReview(images: [Data], text: String) async throws
+    func createReview(images: [Data], text: String, recipeTitle: String, recipeId: Int, rating: Int) async throws
+    func fetchReviews() async throws -> [Review]
 }
 
 final class FirebaseManager: FirebaseProtocol {
@@ -157,78 +158,66 @@ final class FirebaseManager: FirebaseProtocol {
               let recipeUid = recipe.uid else { return }
         try await Firestore.firestore().collection("Users").document(userId).collection("Liked").document(recipeUid).delete()
     }
-//    Add to Shopping List
+    //    Add to Shopping List
     func addToShoppingList(recipe: RecipeForShopping) async throws {
         guard let userId = Auth.auth().currentUser?.uid else { return }
         let _ = try Firestore.firestore().collection("Users").document(userId).collection("ShoppingList").addDocument(from: recipe)
     }
-//    Fetch Shopping List
+    //    Fetch Shopping List
     func fetchShoppingList() async throws -> [RecipeForShopping] {
         guard let userId = Auth.auth().currentUser?.uid else { return [] }
         return try await Firestore.firestore().collection("Users").document(userId).collection("ShoppingList").getDocuments().documents.compactMap({ recipe -> RecipeForShopping? in
             try recipe.data(as: RecipeForShopping.self)
         })
     }
-//    Update Shopping List
+    //    Update Shopping List
     func updateShoppingList(recipe: RecipeForShopping) async throws {
         guard let userId = Auth.auth().currentUser?.uid,
               let shopListUid = recipe.uid else { return }
         try await Firestore.firestore().collection("Users").document(userId).collection("ShoppingList").document(shopListUid).setData(from: recipe)
     }
-//    Delete From Shopping List
+    //    Delete From Shopping List
     func removeFromShoppingList(recipe: RecipeForShopping) async throws {
         guard let userId = Auth.auth().currentUser?.uid,
               let recipeUid = recipe.uid else { return }
         try await Firestore.firestore().collection("Users").document(userId).collection("ShoppingList").document(recipeUid).delete()
     }
-//    Create Review
-    func createReview(images: [Data], text: String) async throws {
+    //    Create Review
+    func createReview(images: [Data], text: String, recipeTitle: String, recipeId: Int, rating: Int) async throws {
         guard let userId = Auth.auth().currentUser?.uid else { return }
-//        var review: Review
-//        let imageReferenceId = "\(userId)\(Date())"
-//        let storageRef = Storage.storage().reference().child("ReviewsImages").child(imageReferenceId)
         var downloadUrls: [String] = []
-//        images.enumerated().forEach { (index, imageData) in
-//            let storageRef = Storage.storage().reference().child("ReviewsImages").child("images\(userId)\(index)")
-//            let _ = try await storageRef.putDataAsync(imageData)
-//            let downloadUrl = try await storageRef.downloadURL(completion: { url, error in
-//                guard let downloadUrl = url else { return }
-//                downloadUrls.append(downloadUrl.absoluteString)
-//            })
-//        }
         for image in images {
-            let storageRef = Storage.storage().reference().child("RevieImages").child("images\(userId)\(UUID().uuidString)")
+            let storageRef = Storage.storage().reference().child("ReviewImages").child("images\(userId)\(UUID().uuidString)")
             let _ = try await storageRef.putDataAsync(image)
             let downloadUrl = try await storageRef.downloadURL()
             downloadUrls.append(downloadUrl.absoluteString)
         }
-        let review = Review(text: text, images: downloadUrls, firstName: authorizedUser.firstName ?? "", lastName: authorizedUser.lastName ?? "", userUID: userId)
-//        if let imageData = imageData {
-//            let _ = try await storageRef.putDataAsync(imageData)
-//            let downloadUrl = try await storageRef.downloadURL()
-//            review = Review(text: text,
-//                                imageURL: downloadUrl,
-//                                imageReferenceId: imageReferenceId,
-//                                firstName: authorizedUser.firstName ?? "",
-//                                lastName: authorizedUser.lastName ?? "",
-//                                userUID: userId)
-//        } else {
-//            review = Review(text: text,
-//                                firstName: authorizedUser.firstName ?? "",
-//                                lastName: authorizedUser.lastName ?? "",
-//                                userUID: userId)
-//        }
-//
+        let review = Review(text: text,
+                            recipeTitle: recipeTitle,
+                            recipeId: recipeId,
+                            images: downloadUrls,
+                            rating: rating,
+                            firstName: authorizedUser.firstName ?? "",
+                            lastName: authorizedUser.lastName ?? "",
+                            userUID: userId,
+                            userImage: authorizedUser.imageUrl?.description ?? "")
         let _ = try await Firestore.firestore().collection("Reviews").addDocument(from: review)
     }
-    
+    //    Fetch Reviews
+    func fetchReviews() async throws -> [Review] {
+        var query: Query
+        query = Firestore.firestore().collection("Reviews").order(by: "publishedDate", descending: true).limit(to: 20)
+        return try await query.getDocuments().documents.compactMap({ review -> Review in
+            try review.data(as: Review.self)
+        })
+    }
 }
 
 enum Errors: Error {
     case errorAuthorization
     case notFoundRecipe
     case duplicateRecipe
-
+    
     var description: String {
         switch self {
         case .errorAuthorization:

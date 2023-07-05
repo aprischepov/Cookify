@@ -11,6 +11,7 @@ import Combine
 
 struct HomeView: View {
     @StateObject var vm: HomeViewModel
+    @StateObject private var user = AuthorizedUser.shared
     var body: some View {
         NavigationView {
             ScrollView(.vertical, showsIndicators: false) {
@@ -33,7 +34,7 @@ struct HomeView: View {
                                 //                    profile screen
                                 ProfileView()
                             } label: {
-                                WebImage(url: vm.user.imageUrl).placeholder {
+                                WebImage(url: user.imageUrl).placeholder {
                                     Image("avatar")
                                         .resizable()
                                         .frame(width: 48, height: 48)
@@ -49,7 +50,7 @@ struct HomeView: View {
                         }
                         //                Title
                         VStack(alignment: .leading, spacing: 0) {
-                            Text("Hey \(vm.user.firstName ?? "") 👋")
+                            Text("Hey \(user.firstName ?? "") 👋")
                                 .font(.jost(.semiBold, size: .title))
                             Text("What are you cooking today")
                                 .font(.jost(.medium, size: .titleThree))
@@ -132,6 +133,6 @@ struct HomeView: View {
 
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
-        HomeView(vm: HomeViewModel(subject: PassthroughSubject<ActionsWithRecipes, Never>(), user: AuthorizedUser.shared))
+        HomeView(vm: HomeViewModel(subject: PassthroughSubject<ActionsWithRecipes, Never>()))
     }
 }
