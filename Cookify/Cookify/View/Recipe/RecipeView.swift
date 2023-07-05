@@ -113,8 +113,13 @@ struct RecipeView: View {
                                 })
                             case .instructions:
                                 InstructionView(instruction: vm.steps, action: {
-                                    
+                                    vm.showReviewView.toggle()
                                 })
+                                .fullScreenCover(isPresented: $vm.showReviewView) {
+                                    CreateReviewView(onReview: { review in
+                                        
+                                    }, recipe: recipeInfo)
+                                }
                             }
                         }
                         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
