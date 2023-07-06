@@ -12,6 +12,7 @@ enum ActionsWithRecipes {
     case changeFromFavoritesRecipes(recipe: Recipe)
     case getRecipes(type: RecipeType)
     case changedTypeGetNewRecipes(type: RecipeType)
+    case reloadReviwsList
 }
 
 final class MainViewModel: ObservableObject {
@@ -22,6 +23,7 @@ final class MainViewModel: ObservableObject {
     private var moyaManager: MoyaManagerProtocol = MoyaManager()
     @Published var homeViewModel: HomeViewModel
     @Published var favoritesViewModel: FavoritesViewModel
+    @Published var communityViewModel: CommunityViewModel
     //    Recipe Properties
     @Published var fullListRecipes: [Recipe] = [] {
         didSet {
@@ -46,12 +48,14 @@ final class MainViewModel: ObservableObject {
         }
     }
     @Published var showError: Bool = false
+    @Published var reviews: [Review] = []
     
     //    MARK: Init
     init() {
         
         self.homeViewModel = HomeViewModel(subject: subject)
         self.favoritesViewModel = FavoritesViewModel(subject: subject)
+        self.communityViewModel = CommunityViewModel(subject: subject)
         
         $fullListRecipes
             .dropFirst()
@@ -65,6 +69,12 @@ final class MainViewModel: ObservableObject {
             .assign(to: \.favoriteRecipes, on: favoritesViewModel)
             .store(in: &cancellable)
         
+        $reviews
+            .dropFirst()
+            .receive(on: RunLoop.main)
+            .assign(to: \.reviews, on: communityViewModel)
+            .store(in: &cancellable)
+        
         subject.sink { [weak self] action in
             guard let self else { return }
             switch action {
@@ -76,6 +86,10 @@ final class MainViewModel: ObservableObject {
                 }
             case .changedTypeGetNewRecipes(type: let type):
                 self.getNewRecipes(type: type)
+            case .reloadReviwsList:
+                Task {
+                    await self.fetchReviews()
+                }
             }
         }.store(in: &cancellable)
     }
@@ -87,6 +101,7 @@ final class MainViewModel: ObservableObject {
         await fetchUserData()
         await getFavoritesRecipes()
         await getFullListRecipes(type: .mainCourse)
+        await fetchReviews()
         await MainActor.run(body: {
             homeViewModel.dataCondition = .loaded
         })
@@ -96,6 +111,18 @@ final class MainViewModel: ObservableObject {
     private func fetchUserData() async {
         do {
             try await firebaseManager.fetchUser()
+        } catch {
+            await errorHandling(error)
+        }
+    }
+    
+    //    Fetch Reviews
+    private func fetchReviews() async {
+        do {
+            let fetchedReviews = try await firebaseManager.fetchReviews()
+            await MainActor.run(body: {
+                reviews = fetchedReviews
+            })
         } catch {
             await errorHandling(error)
         }
@@ -131,6 +158,7 @@ final class MainViewModel: ObservableObject {
     //    Get Recipes With Another Type
     private func getNewRecipes(type: RecipeType) {
         fullListRecipes.removeAll()
+        countLoadingRecipes = 20
         Task {
             await getFullListRecipes(type: type)
         }
@@ -155,7 +183,6 @@ final class MainViewModel: ObservableObject {
     private func addRecipeToFavorites(recipe: Recipe) {
         Task {
             do {
-                //                Think about this !!!!!!!!!
                 var changedRecipe = recipe
                 changedRecipe.isFavorite.toggle()
                 let uid = try await firebaseManager.addToFavorites(recipe: changedRecipe)

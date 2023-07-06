@@ -13,6 +13,7 @@ import Firebase
 struct CookifyApp: App {
     @AppStorage("appCondition") var appCondition: AppCondition?
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+    @StateObject var preloadManager = PreloadScreenManager()
     
     init() {
         FirebaseApp.configure()
@@ -24,7 +25,13 @@ struct CookifyApp: App {
             case .onboarding:
                 OnboardingView()
             case .signIn:
-                MainView()
+                ZStack {
+                    MainView()
+                    if preloadManager.state != .completed {
+                        PreloadView()
+                    }
+                }
+                .environmentObject(preloadManager)
             case .signOut:
                 SignInView()
             case .none:

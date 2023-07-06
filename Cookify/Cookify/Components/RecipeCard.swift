@@ -58,7 +58,7 @@ struct RecipeCard: View {
                 Divider()
                     .padding(.top, 4)
                 HStack(spacing: 8) {
-                    Text("$ \(recipe.pricePerServing, specifier: "%.2f")")
+                    Text("$ \(recipe.pricePerServing / 10, specifier: "%.2f")")
                         .font(.jost(.semiBold, size: .titleThree))
                     Text("for \(recipe.servings) people")
                         .font(.jost(.regular, size: .body))

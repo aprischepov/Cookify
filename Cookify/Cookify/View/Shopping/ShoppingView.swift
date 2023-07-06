@@ -38,7 +38,7 @@ struct ShoppingView: View {
                                     VStack(alignment: .leading) {
                                         //                                Title
                                         Text(recipe.title)
-                                            .lineLimit(1)
+                                            .lineLimit(2)
                                             .font(.jost(.medium, size: .body))
                                             .foregroundColor(.customColor(.black))
                                         //                                    Missing Ingredients
