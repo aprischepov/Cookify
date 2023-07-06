@@ -12,7 +12,6 @@ final class CommunityViewModel: ObservableObject {
     private var firebaseManager: FirebaseProtocol = FirebaseManager()
     @Published var reviews: [Review] = []
 //    View Properties
-    @Published var dataCondition: DataCondition = .loaded
     @Published var errorMessage: String = "" {
         didSet {
             showError.toggle()
@@ -23,14 +22,10 @@ final class CommunityViewModel: ObservableObject {
 //    MARK: Methods
 //    Fetch Review
     func fetchReviews() async {
-        await MainActor.run(body: {
-            dataCondition = .loading
-        })
             do {
                 let fetchedReviws = try await firebaseManager.fetchReviews()
                 await MainActor.run(body: {
                     reviews = fetchedReviws
-                    dataCondition = reviews.isEmpty ? .empty : .loaded
                 })
             } catch {
                 await errorHandling(error)

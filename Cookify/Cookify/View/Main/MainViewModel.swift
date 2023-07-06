@@ -131,6 +131,7 @@ final class MainViewModel: ObservableObject {
     //    Get Recipes With Another Type
     private func getNewRecipes(type: RecipeType) {
         fullListRecipes.removeAll()
+        countLoadingRecipes = 20
         Task {
             await getFullListRecipes(type: type)
         }
@@ -155,7 +156,6 @@ final class MainViewModel: ObservableObject {
     private func addRecipeToFavorites(recipe: Recipe) {
         Task {
             do {
-                //                Think about this !!!!!!!!!
                 var changedRecipe = recipe
                 changedRecipe.isFavorite.toggle()
                 let uid = try await firebaseManager.addToFavorites(recipe: changedRecipe)
