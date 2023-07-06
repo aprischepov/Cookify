@@ -35,6 +35,7 @@ final class HomeViewModel: ObservableObject {
             subject.send(.changedTypeGetNewRecipes(type: type))
             currentTypeRecipes = type
             dataCondition = .loading
+        case .reloadReviwsList: break
         }
     }
 }

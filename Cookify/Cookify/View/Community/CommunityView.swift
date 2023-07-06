@@ -6,9 +6,10 @@
 //
 
 import SwiftUI
+import Combine
 
 struct CommunityView: View {
-    @StateObject private var vm = CommunityViewModel()
+    @StateObject var vm: CommunityViewModel
     var body: some View {
         NavigationView {
             VStack(alignment: .leading) {
@@ -32,10 +33,7 @@ struct CommunityView: View {
             .padding(.vertical, 8)
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
             .refreshable {
-                await vm.fetchReviews()
-            }
-            .task {
-                await vm.fetchReviews()
+                vm.sendAction(actionType: .reloadReviwsList)
             }
         }
     }
@@ -43,6 +41,6 @@ struct CommunityView: View {
 
 struct CommunityView_Previews: PreviewProvider {
     static var previews: some View {
-        CommunityView()
+        CommunityView(vm: CommunityViewModel(subject: PassthroughSubject<ActionsWithRecipes, Never>()))
     }
 }

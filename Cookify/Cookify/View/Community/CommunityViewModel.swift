@@ -6,36 +6,24 @@
 //
 
 import Foundation
+import Combine
 
 final class CommunityViewModel: ObservableObject {
-//    MARK: Proeprties
-    private var firebaseManager: FirebaseProtocol = FirebaseManager()
+    //    MARK: Proeprties
+    let subject: PassthroughSubject<ActionsWithRecipes, Never>
     @Published var reviews: [Review] = []
-//    View Properties
-    @Published var errorMessage: String = "" {
-        didSet {
-            showError.toggle()
+    
+    //    MARK: Init
+    init(subject: PassthroughSubject<ActionsWithRecipes, Never>) {
+        self.subject = subject
+    }
+    
+    //    MARK: Methods
+    func sendAction(actionType: ActionsWithRecipes) {
+        switch actionType {
+        case .reloadReviwsList:
+            subject.send(.reloadReviwsList)
+        default: break
         }
-    }
-    @Published var showError: Bool = false
-    
-//    MARK: Methods
-//    Fetch Review
-    func fetchReviews() async {
-            do {
-                let fetchedReviws = try await firebaseManager.fetchReviews()
-                await MainActor.run(body: {
-                    reviews = fetchedReviws
-                })
-            } catch {
-                await errorHandling(error)
-            }
-    }
-    
-//    Error Handling
-    private func errorHandling(_ error: Error) async {
-        await MainActor.run(body: {
-            errorMessage = error.localizedDescription
-        })
     }
 }

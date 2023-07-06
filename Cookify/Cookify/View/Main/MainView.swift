@@ -16,7 +16,7 @@ struct MainView: View {
                 .tabItem {
                     Image("homeIcon")
                 }
-            CommunityView()
+            CommunityView(vm: vm.communityViewModel)
                 .tabItem {
                     Image("reviewIcon")
                 }
