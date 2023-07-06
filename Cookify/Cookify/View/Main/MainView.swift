@@ -9,6 +9,7 @@ import SwiftUI
 
 struct MainView: View {
     @StateObject var vm = MainViewModel()
+    @EnvironmentObject var preloadManager: PreloadScreenManager
     var body: some View {
         TabView {
             HomeView(vm: vm.homeViewModel)
@@ -34,6 +35,9 @@ struct MainView: View {
         }
         .task {
             await vm.getAllData()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                preloadManager.dismiss()
+            }
         }
     }
 }
@@ -41,5 +45,6 @@ struct MainView: View {
 struct MainView_Previews: PreviewProvider {
     static var previews: some View {
         MainView()
+            .environmentObject(PreloadScreenManager())
     }
 }
