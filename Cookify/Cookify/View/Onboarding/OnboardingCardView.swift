@@ -65,9 +65,5 @@ struct OnboardingView_Previews: PreviewProvider {
     static var previews: some View {
         OnboardingCardView(data: OnboardingCards.firstPage, shouldOnboardingHidden: .constant(false))
             .previewDevice(PreviewDevice(rawValue: "iPhone SE (3rd generation)"))
-        //            .previewDisplayName("iPhonew 14 Pro Max")
-        //        OnboardingView(data: OnboardingData.list.first!)
-        //            .previewDevice(PreviewDevice(rawValue: "iPhone SE (3rd generation)"))
-        //            .previewDisplayName("iPhone SE")
     }
 }

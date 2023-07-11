@@ -9,7 +9,7 @@ import SwiftUI
 import Combine
 
 struct CommunityView: View {
-    @StateObject var vm: CommunityViewModel
+    @ObservedObject var vm: CommunityViewModel
     var body: some View {
         NavigationView {
             VStack(alignment: .leading) {

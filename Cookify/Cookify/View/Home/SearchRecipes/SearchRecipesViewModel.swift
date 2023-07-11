@@ -46,6 +46,9 @@ final class SearchRecipesViewModel: ObservableObject {
             let recipes = try await moyaManager.getRecipeByQuery(query: query)
             await MainActor.run(body: {
                 recipesList = recipes
+                if recipes.isEmpty {
+                    dataCondition = .empty
+                }
             })
         } catch {
             await errorHandling(error)

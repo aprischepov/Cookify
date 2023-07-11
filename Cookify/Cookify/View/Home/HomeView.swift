@@ -10,7 +10,7 @@ import SDWebImageSwiftUI
 import Combine
 
 struct HomeView: View {
-    @StateObject var vm: HomeViewModel
+    @ObservedObject var vm: HomeViewModel
     @StateObject private var user = AuthorizedUser.shared
     var body: some View {
         NavigationView {

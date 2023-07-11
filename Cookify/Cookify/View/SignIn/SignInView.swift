@@ -11,6 +11,7 @@ import GoogleSignInSwift
 
 struct SignInView: View {
     @StateObject var vm = SignInViewModel()
+    @EnvironmentObject var preloadManager: PreloadScreenManager
     var body: some View {
             NavigationView {
                 VStack(alignment: .leading, spacing: 0) {
@@ -96,6 +97,13 @@ struct SignInView: View {
                 LoadingView(show: $vm.isLoading)
             })
         .alert(vm.errorMessage, isPresented: $vm.showError) {}
+        .onAppear {
+            if preloadManager.state != .completed {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                    preloadManager.dismiss()
+                }
+            }
+        }
     }
 }
 

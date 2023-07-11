@@ -9,7 +9,7 @@ import SwiftUI
 import Combine
 
 struct FavoritesView: View {
-    @StateObject var vm: FavoritesViewModel
+    @ObservedObject var vm: FavoritesViewModel
     var body: some View {
         NavigationView {
                 VStack(alignment: .leading, spacing: 8) {

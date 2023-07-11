@@ -8,7 +8,7 @@
 import Foundation
 import Combine
 
-struct TextfieldModel: Identifiable {
+struct TextfieldModel: Identifiable, Hashable {
     let id = UUID()
     var text: String
 }
@@ -53,7 +53,8 @@ final class SearchByIngredientsViewModel: ObservableObject {
     func findRecipesButtonAction() async {
         let emptytext = textfieldModels.filter{ $0.text.isEmpty }
         await MainActor.run(body: {
-            textfieldModels.removeAll(where: { $0.id == emptytext.first?.id })
+//            textfieldModels.removeAll(where: { $0.id == emptytext.first?.id })
+            textfieldModels = Array(Set(textfieldModels).subtracting(emptytext))
             dataCondition = .loading
         })
         let ingredients = textfieldModels.map{ $0.text }
@@ -70,7 +71,6 @@ final class SearchByIngredientsViewModel: ObservableObject {
     
     //    Get Search Results
     private func getSearchByIngredients(ingredients: [String]) async {
-        //        Task {
         do {
             let recipes = try await moyaManager.getRecipesByIngredient(ingredients: ingredients)
             await MainActor.run(body: {
@@ -84,7 +84,6 @@ final class SearchByIngredientsViewModel: ObservableObject {
         } catch {
             await errorHandling(error)
         }
-        //        }
     }
     
     //    Error Handling

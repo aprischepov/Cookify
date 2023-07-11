@@ -35,8 +35,10 @@ struct MainView: View {
         }
         .task {
             await vm.getAllData()
-            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-                preloadManager.dismiss()
+            if preloadManager.state != .completed {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                    preloadManager.dismiss()
+                }
             }
         }
     }

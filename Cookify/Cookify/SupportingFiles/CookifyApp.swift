@@ -21,22 +21,22 @@ struct CookifyApp: App {
     
     var body: some Scene {
         WindowGroup {
-            switch appCondition {
-            case .onboarding:
-                OnboardingView()
-            case .signIn:
-                ZStack {
+            ZStack {
+                switch appCondition {
+                case .onboarding:
+                    OnboardingView()
+                case .signIn:
                     MainView()
-                    if preloadManager.state != .completed {
-                        PreloadView()
-                    }
+                case .signOut:
+                    SignInView()
+                case .none:
+                    OnboardingView()
                 }
-                .environmentObject(preloadManager)
-            case .signOut:
-                SignInView()
-            case .none:
-                OnboardingView()
+                if preloadManager.state != .completed {
+                    PreloadView()
+                }
             }
+            .environmentObject(preloadManager)
         }
     }
 }

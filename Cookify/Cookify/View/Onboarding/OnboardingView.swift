@@ -9,6 +9,7 @@ import SwiftUI
 
 struct OnboardingView: View {
     @StateObject private var vm = OnboardingCardViewModel()
+    @EnvironmentObject var preloadManager: PreloadScreenManager
     var body: some View {
         TabView(selection: $vm.selectedPage) {
             ForEach(OnboardingCards.allCases) { viewData in
@@ -18,6 +19,11 @@ struct OnboardingView: View {
         }
         .tabViewStyle(PageTabViewStyle())
         .ignoresSafeArea()
+        .onAppear {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                preloadManager.dismiss()
+            }
+        }
     }
 }
 
